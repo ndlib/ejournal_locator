@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411181557) do
+ActiveRecord::Schema.define(:version => 20120411185005) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -19,6 +19,19 @@ ActiveRecord::Schema.define(:version => 20120411181557) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "user_type"
+  end
+
+  create_table "journals", :force => true do |t|
+    t.integer  "sfx_id",          :limit => 20
+    t.string   "issn",            :limit => 8
+    t.string   "alternate_issn",  :limit => 8
+    t.string   "title"
+    t.string   "alternate_title"
+    t.string   "display_title"
+    t.string   "publisher_name"
+    t.string   "publisher_place"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "searches", :force => true do |t|
