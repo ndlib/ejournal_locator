@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(:version => 20120411185005) do
     t.datetime "updated_at",                    :null => false
   end
 
+  add_index "journals", ["sfx_id"], :name => "index_journals_on_sfx_id"
+
   create_table "searches", :force => true do |t|
     t.text     "query_params"
     t.integer  "user_id"

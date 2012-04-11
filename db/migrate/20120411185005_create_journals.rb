@@ -11,5 +11,7 @@ class CreateJournals < ActiveRecord::Migration
       t.string :publisher_place
       t.timestamps
     end
+
+    add_index :journals, :sfx_id
   end
 end

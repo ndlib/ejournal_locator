@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'json'
 
 gem 'blacklight'
+gem 'libxml-ruby'
 
 # Gems used only for assets and not required
 # in production environments by default.

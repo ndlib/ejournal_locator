@@ -1,3 +1,6 @@
 class Journal < ActiveRecord::Base
-  # attr_accessible :title, :body
+  
+  def self.import
+  	
+  end
 end
