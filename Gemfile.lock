@@ -137,6 +137,8 @@ PLATFORMS
 DEPENDENCIES
   blacklight
   coffee-rails (~> 3.2.1)
+  compass-rails (~> 1.0.0)
+  compass-susy-plugin (~> 0.9.0)
   jquery-rails
   json
   rails (= 3.2.3)
