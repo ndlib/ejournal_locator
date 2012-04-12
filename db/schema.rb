@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120412212707) do
   end
 
   add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
+  add_index "categories", ["title"], :name => "index_categories_on_title"
 
   create_table "journal_categories", :force => true do |t|
     t.integer  "journal_id"
@@ -41,14 +42,14 @@ ActiveRecord::Schema.define(:version => 20120412212707) do
   add_index "journal_categories", ["journal_id"], :name => "index_journal_categories_on_journal_id"
 
   create_table "journal_imports", :force => true do |t|
-    t.integer  "journal_count"
-    t.integer  "holdings_count"
-    t.integer  "provider_count"
-    t.integer  "category_count"
+    t.integer  "journal_count",    :default => 0
+    t.integer  "holdings_count",   :default => 0
+    t.integer  "provider_count",   :default => 0
+    t.integer  "category_count",   :default => 0
     t.boolean  "complete",         :default => false
-    t.integer  "import_file_size"
+    t.integer  "import_file_size", :default => 0
     t.string   "import_file_path"
-    t.text     "error"
+    t.text     "error_text"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end
