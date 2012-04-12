@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20120411185005) do
   end
 
   create_table "journals", :force => true do |t|
-    t.integer  "sfx_id",          :limit => 20
+    t.integer  "sfx_id"
     t.string   "issn",            :limit => 8
     t.string   "alternate_issn",  :limit => 8
     t.string   "title"
@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(:version => 20120411185005) do
     t.string   "display_title"
     t.string   "publisher_name"
     t.string   "publisher_place"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   add_index "journals", ["sfx_id"], :name => "index_journals_on_sfx_id"
