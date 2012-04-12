@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412191815) do
+ActiveRecord::Schema.define(:version => 20120412212707) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -40,6 +40,19 @@ ActiveRecord::Schema.define(:version => 20120412191815) do
   add_index "journal_categories", ["category_id"], :name => "index_journal_categories_on_category_id"
   add_index "journal_categories", ["journal_id"], :name => "index_journal_categories_on_journal_id"
 
+  create_table "journal_imports", :force => true do |t|
+    t.integer  "journal_count"
+    t.integer  "holdings_count"
+    t.integer  "provider_count"
+    t.integer  "category_count"
+    t.boolean  "complete",         :default => false
+    t.integer  "import_file_size"
+    t.string   "import_file_path"
+    t.text     "error"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
   create_table "journals", :force => true do |t|
     t.string   "sfx_id",          :limit => 20
     t.string   "issn",            :limit => 8
@@ -51,9 +64,21 @@ ActiveRecord::Schema.define(:version => 20120412191815) do
     t.string   "publisher_place"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.integer  "first_import_id"
+    t.integer  "last_import_id"
   end
 
+  add_index "journals", ["first_import_id"], :name => "index_journals_on_first_import_id"
+  add_index "journals", ["last_import_id"], :name => "index_journals_on_last_import_id"
   add_index "journals", ["sfx_id"], :name => "index_journals_on_sfx_id"
+
+  create_table "providers", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "providers", ["title"], :name => "index_providers_on_title"
 
   create_table "searches", :force => true do |t|
     t.text     "query_params"

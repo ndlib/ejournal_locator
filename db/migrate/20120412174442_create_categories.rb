@@ -7,5 +7,6 @@ class CreateCategories < ActiveRecord::Migration
     end
 
     add_index :categories, :parent_id
+    #add_index :categories, :title
   end
 end
