@@ -5,5 +5,7 @@ class CreateCategories < ActiveRecord::Migration
       t.integer :parent_id
       t.timestamps
     end
+
+    add_index :categories, :parent_id
   end
 end

@@ -1,5 +1,10 @@
 class Journal < ActiveRecord::Base
+
+  has_many :journal_categories, :dependent => :destroy
+  has_many :categories, :through => :journal_categories
+
   validates_presence_of :title, :sfx_id
+  validates_uniqueness_of :sfx_id
 
 
   def self.import
@@ -27,6 +32,8 @@ class Journal < ActiveRecord::Base
           journal.alternate_issn = alt_issn.content.gsub(/[^0-9]/,"")
         end
 
+        category_ids = []
+
         record.xpath("//datafield[@tag=650]").each do |datafield|
           parent_category_name = datafield.xpath("subfield[@code='a']").first.content
           parent_category = Category.where(:title => parent_category_name, :parent_id => nil).first
@@ -43,9 +50,37 @@ class Journal < ActiveRecord::Base
             child_category.parent = parent_category
             child_category.save!
           end
+
+          category_ids << parent_category.id
+          category_ids << child_category.id
+        end
+
+        category_ids.uniq!
+
+        existing_category_ids = []
+
+        journal.journal_categories.each do |jc|
+          if !category_ids.include?(jc.category_id)
+            jc.destroy
+          else
+            existing_category_ids << jc.category_id
+          end
         end
 
         journal.save
+
+        new_category_ids = category_ids - existing_category_ids
+        new_category_ids.each do |category_id|
+          jc = JournalCategory.new(:journal_id => journal.id, :category_id => category_id)
+          jc.save!
+        end
+      end
+    end
+
+    # Clean out unused categories
+    Category.all.each do |category|
+      if category.journal_categories.count == 0
+        category.destroy
       end
     end
   end

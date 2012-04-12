@@ -1,7 +1,7 @@
 class CreateJournals < ActiveRecord::Migration
   def change
     create_table :journals do |t|
-      t.integer :sfx_id, :limit => 20
+      t.string :sfx_id, :limit => 20
       t.string :issn, :limit => 8
       t.string :alternate_issn, :limit => 8
       t.string :title

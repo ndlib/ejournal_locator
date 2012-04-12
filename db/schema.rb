@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412174442) do
+ActiveRecord::Schema.define(:version => 20120412191815) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -28,8 +28,20 @@ ActiveRecord::Schema.define(:version => 20120412174442) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
+
+  create_table "journal_categories", :force => true do |t|
+    t.integer  "journal_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "journal_categories", ["category_id"], :name => "index_journal_categories_on_category_id"
+  add_index "journal_categories", ["journal_id"], :name => "index_journal_categories_on_journal_id"
+
   create_table "journals", :force => true do |t|
-    t.integer  "sfx_id"
+    t.string   "sfx_id",          :limit => 20
     t.string   "issn",            :limit => 8
     t.string   "alternate_issn",  :limit => 8
     t.string   "title"
@@ -37,8 +49,8 @@ ActiveRecord::Schema.define(:version => 20120412174442) do
     t.string   "display_title"
     t.string   "publisher_name"
     t.string   "publisher_place"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "journals", ["sfx_id"], :name => "index_journals_on_sfx_id"
