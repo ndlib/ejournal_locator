@@ -10,9 +10,10 @@ class Holdings < ActiveRecord::Base
       self.original_availability = availability_string
       cleaned_availability_string = availability_string.strip.gsub(/  +/, " ")
       volume_fragment = "(?: volume: [0-9]+)?(?: issue: [0-9]+(?:\\/[0-9]+)?)?"
-      recent_fragment = "(?: Most recent(?: ([0-9]+) year\\(s\\))?(?: [0-9] month\\(s\\))? not available\\.)?"
-      availability_regex = /^Available (from|in) ([0-9]{4})#{volume_fragment}(?: (?:until) ([0-9]{4})#{volume_fragment})?\.#{recent_fragment}$/
-      recent_regex = /^Most recent ([0-9]+) year\(s\) available\.$/
+      recent_not_available_fragment = "(?: Most recent(?: ([0-9]+) year\\(s\\))?(?: [0-9]+ month\\(s\\))? not available\\.)?"
+      availability_regex = /^Available (from|in) ([0-9]{4})#{volume_fragment}(?: (?:until) ([0-9]{4})#{volume_fragment})?\.#{recent_not_available_fragment}$/
+      recent_available_regex = /^Most recent ([0-9]+) year\(s\) available\.$/
+      recent_not_available_regex = /^Most recent ([0-9]+) year\(s\) not available\.$/
       if match = cleaned_availability_string.match(availability_regex)
         from_or_in = match[1]
         self.start_year = match[2]
@@ -25,10 +26,14 @@ class Holdings < ActiveRecord::Base
         elsif from_or_in == "in"
           self.end_year = self.start_year
         end
-      elsif match = cleaned_availability_string.match(recent_regex)
-        years = match[1]
+      elsif match = cleaned_availability_string.match(recent_available_regex)
+        years = match[1].to_i
         self.end_year = Date.today.year
-        self.start_year = self.end_year - years.to_i
+        self.start_year = self.end_year - years
+      elsif match = cleaned_availability_string.match(recent_not_available_regex)
+        years = match[1].to_i
+        self.end_year = Date.today.year - years
+        self.start_year = 0
       else
         raise "Unable to parse availability: \"#{self.original_availability}\""
       end

@@ -86,10 +86,16 @@ describe Holdings do
       holdings.end_year.should == 2000
     end
 
-    it "should parse 'Most recent [number] year(s) available. " do
+    it "should parse 'Most recent [number] year(s) available. '" do
       holdings = Holdings.build_from_availability("Most recent 2 year(s) available. ")
       holdings.start_year.should == Date.today.year - 2
       holdings.end_year.should == Date.today.year
+    end
+
+    it "should parse 'Most recent [number] year(s) not available. '" do
+      holdings = Holdings.build_from_availability("Most recent 1 year(s) not available. ")
+      holdings.start_year.should == 0
+      holdings.end_year.should == Date.today.year - 1
     end
   end
 end
