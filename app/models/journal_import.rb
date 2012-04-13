@@ -45,9 +45,9 @@ class JournalImport < ActiveRecord::Base
           journal.last_import_id = import.id
           
           journal.title = record.xpath("//datafield[@tag=245]").xpath("subfield[@code='a']").first.content
-          journal.publisher_place = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='a']").first.content rescue ""
-          journal.publisher_name = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='b']").first.content
-          journal.issn = record.xpath("//datafield[@tag=22]").xpath("subfield[@code='a']").first.content.gsub(/[^0-9]/,"")
+          journal.publisher_place = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='a']").first.content rescue nil
+          journal.publisher_name = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='b']").first.content rescue nil
+          journal.issn = record.xpath("//datafield[@tag=22]").xpath("subfield[@code='a']").first.content.gsub(/[^0-9]/,"") rescue nil
           if alt_issn = record.xpath("//datafield[@tag=776]").xpath("subfield[@code='x']").first
             journal.alternate_issn = alt_issn.content.gsub(/[^0-9]/,"")
           end
@@ -98,9 +98,6 @@ class JournalImport < ActiveRecord::Base
           record.xpath("//datafield[@tag=866]").each do |datafield|
             target_name = datafield.xpath("subfield[@code='x']").first.content
             provider = Provider.find_or_create_by_sfx_name(target_name)
-            if datafield.xpath("subfield[@code='a']").first.nil?
-              puts "\n"+record.to_xml
-            end
 
             if availability_subfield = datafield.xpath("subfield[@code='a']").first
               availability_string = availability_subfield.content
@@ -108,7 +105,7 @@ class JournalImport < ActiveRecord::Base
             else
               availability_array = [nil]
             end
-            
+
             availability_array.each do |availability|
               holdings = Holdings.build_from_availability(availability)
             end
