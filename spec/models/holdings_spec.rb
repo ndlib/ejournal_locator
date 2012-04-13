@@ -8,6 +8,18 @@ describe Holdings do
       holdings.end_year.should == Date.today.year
     end
 
+    it "should parse availability without a space at the end" do
+      holdings = Holdings.build_from_availability("Available from 1993.")
+      holdings.start_year.should == 1993
+      holdings.end_year.should == Date.today.year
+    end
+
+    it "should parse 'Available in [year]. '" do
+      holdings = Holdings.build_from_availability("Available in 1998. ")
+      holdings.start_year.should == 1998
+      holdings.end_year.should == 1998
+    end
+
     it "should parse 'Available from [year] until [year]. '" do
       holdings = Holdings.build_from_availability("Available from 1969 until 2004. ")
       holdings.start_year.should == 1969
@@ -35,6 +47,18 @@ describe Holdings do
     it "should parse availability that contains issue information without a volume number." do
       holdings = Holdings.build_from_availability("Available from 1995 issue: 48. ")
       holdings.start_year.should == 1995
+      holdings.end_year.should == Date.today.year
+    end
+
+    it "should parse availability that mentions most recent information not being available." do 
+      holdings = Holdings.build_from_availability("Available from 1965. Most recent 1 year(s) not available. ")
+      holdings.start_year.should == 1965
+      holdings.end_year.should == Date.today.year
+    end
+
+    it "should assume availability information if none is given" do
+      holdings = Holdings.build_from_availability(nil)
+      holdings.start_year.should == 0
       holdings.end_year.should == Date.today.year
     end
   end
