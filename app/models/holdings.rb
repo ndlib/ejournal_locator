@@ -14,7 +14,7 @@ class Holdings < ActiveRecord::Base
         from_or_in = match[1]
         self.start_year = match[2]
         if from_or_in == "from"
-          self.end_year = match[3] || Date.year
+          self.end_year = match[3] || Date.today.year
         elsif from_or_in == "in"
           self.end_year = self.start_year
         end
