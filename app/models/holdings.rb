@@ -8,10 +8,11 @@ class Holdings < ActiveRecord::Base
       self.end_year = Date.today.year
     else
       self.original_availability = availability_string
+      cleaned_availability_string = availability_string.strip.gsub(/  +/, " ")
       volume_regex = "(?: volume: [0-9]+)?(?: issue: [0-9]+(?:\/[0-9]+)?)?"
-      recent_regex = "(?:Most recent.*not available\. )?"
-      availability_regex = /^Available (from|in) ([0-9]{4})#{volume_regex}(?: (?:until) ([0-9]{4})#{volume_regex})?\. ?#{recent_regex}$/
-      if match = self.original_availability.match(availability_regex)
+      recent_regex = "(?: Most recent.*not available\.)?"
+      availability_regex = /^Available (from|in) ([0-9]{4})#{volume_regex}(?: (?:until) ([0-9]{4})#{volume_regex})?\.#{recent_regex}$/
+      if match = cleaned_availability_string.match(availability_regex)
         from_or_in = match[1]
         self.start_year = match[2]
         if from_or_in == "from"

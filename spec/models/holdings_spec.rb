@@ -67,5 +67,11 @@ describe Holdings do
       holdings.start_year.should == 0
       holdings.end_year.should == Date.today.year
     end
+
+    it "should ignore extra spaces" do
+      holdings = Holdings.build_from_availability("Available from 1995 volume: 21 issue: 1  until 2000 volume: 26 issue: 1. ")
+      holdings.start_year.should == 1995
+      holdings.end_year.should == 2000
+    end
   end
 end
