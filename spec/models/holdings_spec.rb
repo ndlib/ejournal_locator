@@ -56,9 +56,15 @@ describe Holdings do
       holdings.end_year.should == Date.today.year
     end
 
-    it "should parse availability that mentions most recent information not being available." do 
+    it "should parse availability that mentions most recent years not being available." do 
       holdings = Holdings.build_from_availability("Available from 1965. Most recent 1 year(s) not available. ")
       holdings.start_year.should == 1965
+      holdings.end_year.should == Date.today.year - 1
+    end
+
+    it "should parse availability that mentions most recent months not being available." do 
+      holdings = Holdings.build_from_availability("Available from 2001. Most recent 1 month(s) not available. ")
+      holdings.start_year.should == 2001
       holdings.end_year.should == Date.today.year
     end
 
