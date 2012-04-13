@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412212707) do
+ActiveRecord::Schema.define(:version => 20120413124205) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(:version => 20120412212707) do
 
   add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
   add_index "categories", ["title"], :name => "index_categories_on_title"
+
+  create_table "holdings", :force => true do |t|
+    t.integer  "journal_id"
+    t.integer  "provider_id"
+    t.string   "additional_availability"
+    t.string   "original_availability"
+    t.integer  "start_year",              :limit => 2
+    t.integer  "end_year",                :limit => 2
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
 
   create_table "journal_categories", :force => true do |t|
     t.integer  "journal_id"
