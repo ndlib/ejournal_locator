@@ -12,20 +12,23 @@ class Holdings < ActiveRecord::Base
       volume_fragment = "(?: volume: [0-9]+)?(?: issue: [0-9]+(?:\\/[0-9]+)?)?"
       years_months_fragment = "(?: ([0-9]+) year\\(s\\))?(?: ([0-9]+) month\\(s\\))?"
       recent_not_available_fragment = "(?: Most recent#{years_months_fragment} not available\\.)?"
-      availability_regex = /^Available (from|in) ([0-9]{4})#{volume_fragment}(?: (?:until) ([0-9]{4})#{volume_fragment})?\.#{recent_not_available_fragment}$/
+      availability_regex = /^Available (from|in|until) ([0-9]{4})#{volume_fragment}(?: (?:until) ([0-9]{4})#{volume_fragment})?\.#{recent_not_available_fragment}$/
       recent_available_regex = /^Most recent#{years_months_fragment} available\.$/
       recent_not_available_regex = /^Most recent#{years_months_fragment} not available\.$/
       if match = cleaned_availability_string.match(availability_regex)
-        from_or_in = match[1]
-        self.start_year = match[2]
-        if from_or_in == "from"
+        available_type = match[1]
+        if available_type == "from"
+          self.start_year = match[2]
           self.end_year = match[3] || Date.today.year
           if recent_years_not_available = match[4].to_i
             self.end_year = self.end_year - recent_years_not_available
           end
-          
-        elsif from_or_in == "in"
+        elsif available_type == "in"
+          self.start_year = match[2]
           self.end_year = self.start_year
+        elsif available_type == "until"
+          self.start_year = 0
+          self.end_year = match[2]
         end
       elsif match = cleaned_availability_string.match(recent_available_regex)
         years = match[1].to_i.years

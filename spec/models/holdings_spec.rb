@@ -20,6 +20,12 @@ describe Holdings do
       holdings.end_year.should == 1998
     end
 
+    it "should parse 'Available until [year]. '" do
+      holdings = Holdings.build_from_availability("Available until 1998. ")
+      holdings.start_year.should == 0
+      holdings.end_year.should == 1998
+    end
+
     it "should parse 'Available from [year] until [year]. '" do
       holdings = Holdings.build_from_availability("Available from 1969 until 2004. ")
       holdings.start_year.should == 1969
