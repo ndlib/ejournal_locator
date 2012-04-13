@@ -92,10 +92,28 @@ describe Holdings do
       holdings.end_year.should == Date.today.year
     end
 
+    it "should parse 'Most recent [number] month(s) available. '" do
+      holdings = Holdings.build_from_availability("Most recent 6 month(s) available. ")
+      holdings.start_year.should == (Date.today - 6.months).year
+      holdings.end_year.should == Date.today.year
+    end
+
+    it "should parse 'Most recent [number] year(s) [number] month(s) available. '" do
+      holdings = Holdings.build_from_availability("Most recent 2 year(s) 6 month(s) available. ")
+      holdings.start_year.should == (Date.today - (2.years + 6.months)).year
+      holdings.end_year.should == Date.today.year
+    end
+
     it "should parse 'Most recent [number] year(s) not available. '" do
       holdings = Holdings.build_from_availability("Most recent 1 year(s) not available. ")
       holdings.start_year.should == 0
       holdings.end_year.should == Date.today.year - 1
+    end
+
+    it "should parse 'Most recent [number] year(s) [number] month(s) not available. '" do
+      holdings = Holdings.build_from_availability("Most recent 2 year(s) 6 month(s) not available. ")
+      holdings.start_year.should == 0
+      holdings.end_year.should == (Date.today - (2.years + 6.months)).year
     end
   end
 end
