@@ -25,5 +25,17 @@ describe Holdings do
       holdings.start_year.should == 1995
       holdings.end_year.should == 1998
     end
+
+    it "should parse availability that contains volume information without an issue number." do
+      holdings = Holdings.build_from_availability("Available from 1995 volume: 1 until 1998 volume: 4. ")
+      holdings.start_year.should == 1995
+      holdings.end_year.should == 1998
+    end
+
+    it "should parse availability that contains issue information without a volume number." do
+      holdings = Holdings.build_from_availability("Available from 1995 issue: 48. ")
+      holdings.start_year.should == 1995
+      holdings.end_year.should == Date.today.year
+    end
   end
 end
