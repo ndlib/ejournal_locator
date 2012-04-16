@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413124205) do
+ActiveRecord::Schema.define(:version => 20120416173541) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(:version => 20120413124205) do
 
   add_index "journal_categories", ["category_id"], :name => "index_journal_categories_on_category_id"
   add_index "journal_categories", ["journal_id"], :name => "index_journal_categories_on_journal_id"
+
+  create_table "journal_import_errors", :force => true do |t|
+    t.integer  "journal_import_id"
+    t.string   "error_type"
+    t.string   "exception_message"
+    t.text     "exception_backtrace"
+    t.text     "journal_xml"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "journal_imports", :force => true do |t|
     t.integer  "journal_count",    :default => 0
