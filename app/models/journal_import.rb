@@ -1,5 +1,6 @@
 class JournalImport < ActiveRecord::Base
-  
+  has_many :journal_import_errors
+
   def self.test
     original_logger = ActiveRecord::Base.logger
     ActiveRecord::Base.logger = nil
@@ -16,6 +17,10 @@ class JournalImport < ActiveRecord::Base
     result
   end
 
+  def self.import_message(message)
+    puts "#{Time.now.strftime("%F %T")}: #{message}"
+  end
+
   def self.run_sfx_import(file)
     import = self.new()
     import.save!
@@ -24,12 +29,34 @@ class JournalImport < ActiveRecord::Base
       import.import_file_path = file
       import.import_file_size = File.size(file)
 
+      import_message("Beginning SFX Journal Import from #{file} (#{(import.import_file_size.to_f/1.megabyte).round(2)} MB)")
+
+      # Quickly read the expected number of records.
+      expected_journal_count = 0
       reader = Nokogiri::XML::Reader(File.open(file))
       reader.each do |node|
         if node.name == "record" && node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
-          if import.journal_count % 1000 == 0
-            print '. '
-          end
+          expected_journal_count += 1
+        end
+      end
+
+
+      import_message("Found #{expected_journal_count} records in import file, starting import.")
+
+      if expected_journal_count < 500
+        percent_ticks = 4
+      elsif expected_journal_count < 5000
+        percent_ticks = 20
+      else
+        percent_ticks = 100
+      end
+      
+      percent_displays = (1..percent_ticks).collect{|a| ((a / percent_ticks.to_f) * expected_journal_count).round}
+
+      import_start_time = Time.now
+      reader = Nokogiri::XML::Reader(File.open(file))
+      reader.each do |node|
+        if node.name == "record" && node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
           record = Nokogiri::XML(node.outer_xml, nil, nil, Nokogiri::XML::ParseOptions::NOBLANKS)
           # We don't care about namespace for the context of this fragment
           record.remove_namespaces!
@@ -95,6 +122,8 @@ class JournalImport < ActiveRecord::Base
             jc.save!
           end
 
+          journal.holdings.delete_all
+
           record.xpath("//datafield[@tag=866]").each do |datafield|
             target_name = datafield.xpath("subfield[@code='x']").first.content
             provider = Provider.find_or_create_by_sfx_name(target_name)
@@ -108,10 +137,20 @@ class JournalImport < ActiveRecord::Base
 
             availability_array.each do |availability|
               holdings = Holdings.build_from_availability(availability)
+              holdings.provider = provider
+              holdings.journal = journal
+              holdings.save!
             end
           end
 
           import.journal_count += 1
+          if percent_displays.include?(import.journal_count)
+            elapsed_time = Time.now - import_start_time
+            progress_percent = import.journal_count / expected_journal_count.to_f
+            estimated_total_time = (elapsed_time / progress_percent)
+            estimated_remaining_time = estimated_total_time - elapsed_time
+            import_message("#{(progress_percent * 100).round}% (#{import.journal_count} records) Complete. #{(elapsed_time/60).round(2)} minutes elapsed, ~#{(estimated_remaining_time/60).round(2)} minutes remaining")
+          end
         end
       end
 
