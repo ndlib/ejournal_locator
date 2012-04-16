@@ -39,13 +39,15 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the 
     # facet bar
-    config.add_facet_field 'format', :label => 'Format' 
-    config.add_facet_field 'pub_date', :label => 'Publication Year' 
-    config.add_facet_field 'subject_topic_facet', :label => 'Topic', :limit => 20 
-    config.add_facet_field 'language_facet', :label => 'Language', :limit => true 
-    config.add_facet_field 'lc_1letter_facet', :label => 'Call Number' 
-    config.add_facet_field 'subject_geo_facet', :label => 'Region' 
-    config.add_facet_field 'subject_era_facet', :label => 'Era'  
+    # config.add_facet_field 'format', :label => 'Format' 
+    # config.add_facet_field 'pub_date', :label => 'Publication Year' 
+    # config.add_facet_field 'subject_topic_facet', :label => 'Topic', :limit => 20 
+    # config.add_facet_field 'language_facet', :label => 'Language', :limit => true 
+    # config.add_facet_field 'lc_1letter_facet', :label => 'Call Number' 
+    # config.add_facet_field 'subject_geo_facet', :label => 'Region' 
+    # config.add_facet_field 'subject_era_facet', :label => 'Era'  
+
+    config.add_facet_field 'provider_facet', :label => 'Provider'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -82,7 +84,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'published_display', :label => 'Published:'
     config.add_show_field 'published_vern_display', :label => 'Published:'
     config.add_show_field 'lc_callnum_display', :label => 'Call number:'
-    config.add_show_field 'isbn_t', :label => 'ISBN:'
+    config.add_show_field 'issn_t', :label => 'ISSN:'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
