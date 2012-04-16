@@ -2,6 +2,14 @@ class Holdings < ActiveRecord::Base
   belongs_to :journal
   belongs_to :provider
 
+  VOLUME_FRAGMENT = "(?: volume: [0-9]+)?(?: issue: [0-9]+(?:\\/[0-9]+)?)?"
+  YEARS_MONTHS_FRAGMENT = "(?: ([0-9]+) year\\(s\\))?(?: ([0-9]+) month\\(s\\))?"
+  RECENT_NOT_AVAILABLE_FRAGMENT = "(?: Most recent#{YEARS_MONTHS_FRAGMENT} not available\\.)?"
+  AVAILABILITY_REGEX = /^Available (from|in|until) ([0-9]{4})#{VOLUME_FRAGMENT}(?: (?:until) ([0-9]{4})#{VOLUME_FRAGMENT})?\.#{RECENT_NOT_AVAILABLE_FRAGMENT}$/
+  RECENT_AVAILABLE_REGEX = /^Most recent#{YEARS_MONTHS_FRAGMENT} available\.$/
+  RECENT_NOT_AVAILABLE_REGEX = /^Most recent#{YEARS_MONTHS_FRAGMENT} not available\.$/
+  RECENT_COMBINED_REGEX = /^Most recent#{YEARS_MONTHS_FRAGMENT} available\. Most recent#{YEARS_MONTHS_FRAGMENT} not available\.$/
+
   def parse_availability(availability_string)
     if availability_string.nil?
       self.start_year = 0
@@ -9,14 +17,8 @@ class Holdings < ActiveRecord::Base
     else
       self.original_availability = availability_string
       cleaned_availability_string = availability_string.strip.gsub(/  +/, " ")
-      volume_fragment = "(?: volume: [0-9]+)?(?: issue: [0-9]+(?:\\/[0-9]+)?)?"
-      years_months_fragment = "(?: ([0-9]+) year\\(s\\))?(?: ([0-9]+) month\\(s\\))?"
-      recent_not_available_fragment = "(?: Most recent#{years_months_fragment} not available\\.)?"
-      availability_regex = /^Available (from|in|until) ([0-9]{4})#{volume_fragment}(?: (?:until) ([0-9]{4})#{volume_fragment})?\.#{recent_not_available_fragment}$/
-      recent_available_regex = /^Most recent#{years_months_fragment} available\.$/
-      recent_not_available_regex = /^Most recent#{years_months_fragment} not available\.$/
-      recent_combined_regex = /^Most recent#{years_months_fragment} available\. Most recent#{years_months_fragment} not available\.$/
-      if match = cleaned_availability_string.match(availability_regex)
+      
+      if match = cleaned_availability_string.match(AVAILABILITY_REGEX)
         available_type = match[1]
         if available_type == "from"
           self.start_year = match[2]
@@ -34,17 +36,17 @@ class Holdings < ActiveRecord::Base
           self.start_year = 0
           self.end_year = match[2]
         end
-      elsif match = cleaned_availability_string.match(recent_available_regex)
+      elsif match = cleaned_availability_string.match(RECENT_AVAILABLE_REGEX)
         years = match[1].to_i.years
         months = match[2].to_i.months
         self.end_year = Date.today.year
         self.start_year = (Date.today - (years + months)).year
-      elsif match = cleaned_availability_string.match(recent_not_available_regex)
+      elsif match = cleaned_availability_string.match(RECENT_NOT_AVAILABLE_REGEX)
         years = match[1].to_i.years
         months = match[2].to_i.months
         self.end_year = (Date.today - (years + months)).year
         self.start_year = 0
-      elsif match = cleaned_availability_string.match(recent_combined_regex)
+      elsif match = cleaned_availability_string.match(RECENT_COMBINED_REGEX)
         available_years = match[1].to_i.years
         available_months = match[2].to_i.months
         self.start_year = (Date.today - (available_years + available_months)).year
