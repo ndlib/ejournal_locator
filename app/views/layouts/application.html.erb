@@ -1,14 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>EjournalLocator</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><%= "#{@page_title || application_name}".html_safe %> // Hesburgh Libraries // University of Notre Dame</title>
+    <meta name="description" content="Information resources and collections of the Hesburgh Libraries, University of Notre Dame." />
+    <link rel="shortcut icon" href="http://www.library.nd.edu/favicon.ico" />
+    <link href="<%= opensearch_catalog_path(:format => 'xml', :only_path => false) %>" title="<%= application_name%>" type="application/opensearchdescription+xml" rel="search"/>
+    <%= include_ssi("css") %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= include_ssi("js") %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= raw(render_head_content) %>
+  </head>
+  <% onload_text = "$('input#q').focus();" if params[:q].to_s.empty? and params[:f].to_s.empty? and params[:id].nil? %>
+  <body onload="<%= onload_text %>" class="<%= render_body_class.html_safe %>">
+    <div id="wrapper" class="outter">
+      <%= include_ssi("skip-links") %>
+      <div id="header" class="outter">
+        <%= include_ssi("header") %>
+      </div> <!-- End #header -->
+      <div id="main-menu" class="outter">
+        <%= include_ssi("main-menu") %>
+      </div><!-- End main-menu -->
+      <div id="content_wrapper" class="outter">
+        <div id="content" class="container">
+          <div id="crumbs" class="span-24 last"><!-- TemplateBeginEditable name="crumbs" --><a href="/">Hesburgh Libraries</a> &gt; <!-- TemplateEndEditable --></div>
 
-<%= yield %>
+          <div id="hd">
+            <div id="logo">
+              <h1 class="site_title"><%= link_to application_name, "/" %><%= (params[:controller] == "catalog" and !params[:id]) ? "<span id='results_text'>Search Results</span>".html_safe : "" %></h1>
+            </div>
+            <div id="user_util_links">
+              <%= render :partial=>'/user_util_links' %>
+            </div>
+          </div>
+          <div id="bd">
+            <div id="main">
+              <div id="main_container">
+                <%= render :partial=>'/flash_msg' %>
+                <%= yield %>
+              </div>
+            </div>
+            <div id="sidebar"><%= sidebar_items.join('').html_safe %></div>
+          </div>
 
-</body>
+        </div> <!-- end content-col -->
+      </div>
+      <%= include_ssi("footer") %>
+    </div><!-- End #wrapper -->
+  </body>
 </html>
