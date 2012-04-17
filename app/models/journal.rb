@@ -18,7 +18,7 @@ class Journal < ActiveRecord::Base
       :id => solr_id,
       :title_display => title,
       :title_t => title,
-      :issn_s => issn,
+      :issn_t => issn,
       :provider_facet => providers.collect{|p| p.title},
     }.reject{|key, value| value.blank?}
   end
