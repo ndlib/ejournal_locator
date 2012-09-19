@@ -32,7 +32,17 @@ Vagrant::Config.run do |config|
   # computers to access the VM, whereas host only networking does not.
   # config.vm.forward_port 80, 8080
 
-  config.vm.forward_port 3000, 3002
+  port_offset = 2
+
+  forward_ports = [
+    [3000, "Rails is accessible at http://localhost:#{3000 + port_offset}"],
+    [8983, "Solr is accessible at http://localhost:#{8983 + port_offset}/solr/"],
+  ]
+  
+  forward_ports.each do |port, message|
+    config.vm.forward_port port, port + port_offset
+    puts message
+  end
 
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the

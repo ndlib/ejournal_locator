@@ -13,13 +13,20 @@ class Journal < ActiveRecord::Base
     "journal-#{sfx_id}"
   end
 
+  def all_issns
+    [issn, alternate_issn].reject{|value| value.blank?}
+  end
+
   def as_solr
     {
       :id => solr_id,
       :title_display => title,
       :title_t => title,
-      :issn_t => issn,
+      :issn_t => all_issns,
       :provider_facet => providers.collect{|p| p.title},
+      :publisher_display => "#{publisher_name} #{publisher_place}",
+      :starts_with_facet => title[0,1],
+      :category_facet => categories.where(["parent_id IS NOT NULL"]).collect{|c| "#{c.parent.title} - #{c.title}"},
     }.reject{|key, value| value.blank?}
   end
 
@@ -29,6 +36,22 @@ class Journal < ActiveRecord::Base
 
   def update_solr
     to_solr
+    Blacklight.solr.commit
+  end
+
+  def self.quick_update_solr
+    self.includes(:providers).limit(1000).each do |journal|
+      journal.to_solr
+    end
+
+    Blacklight.solr.commit
+  end
+
+  def self.update_solr
+    self.includes(:providers).all.each do |journal|
+      journal.to_solr
+    end
+
     Blacklight.solr.commit
   end
 end

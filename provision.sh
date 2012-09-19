@@ -17,9 +17,9 @@ fi
 bundle install
 
 # If the databases have not been created yet, create them
-# if [ `mysql -e "SHOW DATABASES" -u root | grep -c '_development'` -eq 0 ]
-# then
-rake db:create
-# fi
+if [ `mysql -e "SHOW DATABASES" -u root | grep -c '_development'` -eq 0 ]
+then
+  rake db:create
+fi
 
 rake db:migrate

@@ -48,6 +48,8 @@ class CatalogController < ApplicationController
     # config.add_facet_field 'subject_era_facet', :label => 'Era'  
 
     config.add_facet_field 'provider_facet', :label => 'Provider'
+    config.add_facet_field 'category_facet', :label => 'Category'
+    config.add_facet_field 'starts_with_facet', :label => 'Title Starts With'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -59,9 +61,11 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display 
-    config.add_index_field 'title_display', :label => 'Title:' 
-    config.add_index_field 'title_vern_display', :label => 'Title:' 
+    #config.add_index_field 'title_display', :label => 'Title:' 
+    config.add_index_field 'title_vern_display', :label => 'Title:'
+    config.add_index_field 'category_facet', :label => 'Categories:'
     config.add_index_field 'issn_t', :label => 'ISSN:'
+    config.add_index_field 'publisher_display', :label => 'Publisher:'
     config.add_index_field 'author_display', :label => 'Author:' 
     config.add_index_field 'author_vern_display', :label => 'Author:' 
     config.add_index_field 'format', :label => 'Format:' 
@@ -72,7 +76,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display 
-    config.add_show_field 'title_display', :label => 'Title:' 
+    #config.add_show_field 'title_display', :label => 'Title:' 
     config.add_show_field 'title_vern_display', :label => 'Title:' 
     config.add_show_field 'subtitle_display', :label => 'Subtitle:' 
     config.add_show_field 'subtitle_vern_display', :label => 'Subtitle:' 
@@ -85,7 +89,9 @@ class CatalogController < ApplicationController
     config.add_show_field 'published_display', :label => 'Published:'
     config.add_show_field 'published_vern_display', :label => 'Published:'
     config.add_show_field 'lc_callnum_display', :label => 'Call number:'
+    config.add_show_field 'category_facet', :label => 'Categories:'
     config.add_show_field 'issn_t', :label => 'ISSN:'
+    config.add_show_field 'publisher_display', :label => 'Publisher:'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
