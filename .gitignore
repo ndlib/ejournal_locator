@@ -17,4 +17,3 @@
 # Custom Application ignores
 /config/database.yml
 /.vagrant
-/jetty
