@@ -1,0 +1,11 @@
+h1.site_title {
+  background: none;
+  height: auto;
+  width: auto;
+}
+
+h1.site_title a {
+  text-indent: 0;
+  height: auto;
+  width: auto;
+}

@@ -29,7 +29,7 @@
 
           <div id="hd">
             <div id="logo">
-              <h1 class="site_title"><%= link_to application_name, "/" %><%= (params[:controller] == "catalog" and !params[:id]) ? "<span id='results_text'>Search Results</span>".html_safe : "" %></h1>
+              <h1 class="site_title"><%= link_to "eJournal Locator", "/" %><%= (params[:controller] == "catalog" and !params[:id]) ? "<span id='results_text'>Search Results</span>".html_safe : "" %></h1>
             </div>
             <div id="user_util_links">
               <%= render :partial=>'/user_util_links' %>
