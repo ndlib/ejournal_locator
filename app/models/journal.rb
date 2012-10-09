@@ -26,7 +26,7 @@ class Journal < ActiveRecord::Base
       :provider_facet => providers.collect{|p| p.title},
       :publisher_display => "#{publisher_name} #{publisher_place}",
       :starts_with_facet => title[0,1],
-      :category_facet => categories.where(["parent_id IS NOT NULL"]).collect{|c| "#{c.parent.title} - #{c.title}"},
+      :category_facet => categories.collect{|c| c.title_with_parent},
     }.reject{|key, value| value.blank?}
   end
 
@@ -40,7 +40,7 @@ class Journal < ActiveRecord::Base
   end
 
   def self.quick_update_solr
-    self.includes(:providers).limit(1000).each do |journal|
+    self.order(:id).includes(:providers, :categories => [:parent]).limit(1000).each do |journal|
       journal.to_solr
     end
 
@@ -48,8 +48,13 @@ class Journal < ActiveRecord::Base
   end
 
   def self.update_solr
-    self.includes(:providers).all.each do |journal|
-      journal.to_solr
+    current_offset = 0
+    journal_count = self.count
+    while current_offset <= journal_count
+      self.order(:id).includes(:providers, :categories => [:parent]).limit(1000).offset(current_offset).each do |journal|
+        journal.to_solr
+      end
+      current_offset += 1000
     end
 
     Blacklight.solr.commit

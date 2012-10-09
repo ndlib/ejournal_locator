@@ -26,3 +26,12 @@ body {
   cursor: auto;
   border-bottom: none;
 }
+
+.child_facet {
+  font-size: 0.85em;
+  margin-left: 1em !important;
+}
+
+.hide_facet {
+  display:none;
+}

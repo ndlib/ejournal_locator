@@ -865,7 +865,8 @@
 
        <str name="facet">true</str>
        <str name="facet.mincount">1</str>
-       <str name="facet.limit">20</str>
+       <str name="facet.limit">-1</str>
+       <str name="facet.sort">index</str>
        <str name="facet.field">format</str>
        <str name="facet.field">lc_1letter_facet</str>
        <str name="facet.field">lc_alpha_facet</str>
@@ -875,6 +876,8 @@
        <str name="facet.field">subject_era_facet</str>
        <str name="facet.field">subject_geo_facet</str>
        <str name="facet.field">subject_topic_facet</str>
+       
+       <str name="f.provider_facet.facet.sort">count</str>
        
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>

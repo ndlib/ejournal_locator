@@ -11,6 +11,7 @@ gem 'mysql2'
 gem 'json'
 
 gem 'blacklight'
+gem "blacklight_facet_extras"
 
 gem "therubyracer", :require => 'v8'
 
