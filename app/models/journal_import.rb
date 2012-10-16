@@ -22,6 +22,14 @@ class JournalImport < ActiveRecord::Base
     result
   end
 
+  def self.test_full
+    original_logger = ActiveRecord::Base.logger
+    ActiveRecord::Base.logger = nil
+    result = self.run_sfx_import("/app/tmp/sfxfull.xml")
+    ActiveRecord::Base.logger = original_logger
+    result
+  end
+
   def self.import_message(message)
     puts "#{Time.now.strftime("%F %T")}: #{message}"
   end
@@ -52,8 +60,6 @@ class JournalImport < ActiveRecord::Base
         if alt_issn = record.xpath("//datafield[@tag=776]").xpath("subfield[@code='x']").first
           journal.alternate_issn = alt_issn.content.gsub(/[^0-9]/,"")
         end
-
-        puts "#{journal.title}: #{journal.sfx_id}"
 
         journal.save!
 
@@ -102,6 +108,7 @@ class JournalImport < ActiveRecord::Base
 
         record.xpath("//datafield[@tag=866]").each do |datafield|
           target_name = datafield.xpath("subfield[@code='x']").first.content
+          internal_id = datafield.xpath("subfield[@code='z']").first.content
           provider = Provider.find_or_create_by_sfx_name(target_name)
 
           if availability_subfield = datafield.xpath("subfield[@code='a']").first
@@ -114,6 +121,7 @@ class JournalImport < ActiveRecord::Base
           availability_array.each do |availability|
             begin
               holdings = Holdings.build_from_availability(availability)
+              holdings.internal_id = internal_id
               holdings.provider = provider
               holdings.journal = journal
               holdings.save!
@@ -135,9 +143,16 @@ class JournalImport < ActiveRecord::Base
     import.category_count = Category.count
     import.provider_count = Provider.count
 
-    Journal.update_solr
-    
-    import.save
+    import.save!
+
+    import_message("Updating SOLR")
+    begin
+      Journal.update_solr
+    rescue Exception => e
+      import.error_text = e.message
+      import.save!
+      raise e
+    end
   end
 
   def self.each_node(file, import = nil)

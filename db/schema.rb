@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20120416173541) do
   create_table "holdings", :force => true do |t|
     t.integer  "journal_id"
     t.integer  "provider_id"
+    t.integer  "internal_id"
     t.string   "additional_availability"
     t.string   "original_availability"
     t.integer  "start_year",              :limit => 2
@@ -42,6 +43,10 @@ ActiveRecord::Schema.define(:version => 20120416173541) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
+
+  add_index "holdings", ["internal_id"], :name => "index_holdings_on_internal_id"
+  add_index "holdings", ["journal_id"], :name => "index_holdings_on_journal_id"
+  add_index "holdings", ["provider_id"], :name => "index_holdings_on_provider_id"
 
   create_table "journal_categories", :force => true do |t|
     t.integer  "journal_id"
@@ -62,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20120416173541) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
+
+  add_index "journal_import_errors", ["journal_import_id"], :name => "index_journal_import_errors_on_journal_import_id"
 
   create_table "journal_imports", :force => true do |t|
     t.integer  "journal_count",    :default => 0

@@ -17,6 +17,10 @@ class Journal < ActiveRecord::Base
     [issn, alternate_issn].reject{|value| value.blank?}
   end
 
+  def first_character_a_z
+    title[0,1].upcase
+  end
+
   def as_solr
     {
       :id => solr_id,
@@ -25,7 +29,7 @@ class Journal < ActiveRecord::Base
       :issn_t => all_issns,
       :provider_facet => providers.collect{|p| p.title},
       :publisher_display => "#{publisher_name} #{publisher_place}",
-      :starts_with_facet => title[0,1],
+      :starts_with_facet => first_character_a_z,
       :category_facet => categories.collect{|c| c.title_with_parent},
     }.reject{|key, value| value.blank?}
   end

@@ -8,5 +8,7 @@ class CreateJournalImportErrors < ActiveRecord::Migration
       t.text :journal_xml
       t.timestamps
     end
+
+    add_index :journal_import_errors, :journal_import_id
   end
 end
