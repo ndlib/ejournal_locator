@@ -135,6 +135,8 @@ class JournalImport < ActiveRecord::Base
     import.category_count = Category.count
     import.provider_count = Provider.count
 
+    Journal.update_solr
+    
     import.save
   end
 
