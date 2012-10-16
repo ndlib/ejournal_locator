@@ -11,7 +11,7 @@ gem 'mysql2'
 gem 'json'
 
 gem 'blacklight'
-gem "blacklight_facet_extras"
+#gem "blacklight_facet_extras"
 
 gem "therubyracer", :require => 'v8'
 
@@ -49,5 +49,5 @@ gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
 
 group :test, :development do
   gem 'rspec-rails'
-  gem 'ruby-debug'
+  # gem 'ruby-debug'
 end

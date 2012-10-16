@@ -35,3 +35,7 @@ body {
 .hide_facet {
   display:none;
 }
+
+#appliedParams .label {
+  display:none;
+}
