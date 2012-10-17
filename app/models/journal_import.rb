@@ -6,28 +6,25 @@ class JournalImport < ActiveRecord::Base
     :jst_journal_archive => File.join(Rails.root, "test", "files", "jst_journal_archive_full.xml"),
   }
 
-  def self.test
+  def self.test(file = TEST_FILES[:psycarticles])
     original_logger = ActiveRecord::Base.logger
     ActiveRecord::Base.logger = nil
-    result = self.run_sfx_import(TEST_FILES[:psycarticles])
+    begin
+      result = self.run_sfx_import(file)
+    rescue Exception => e
+      ActiveRecord::Base.logger = original_logger
+      raise e
+    end
     ActiveRecord::Base.logger = original_logger
     result
   end
 
   def self.test_jst
-    original_logger = ActiveRecord::Base.logger
-    ActiveRecord::Base.logger = nil
-    result = self.run_sfx_import(TEST_FILES[:jst_journal_archive])
-    ActiveRecord::Base.logger = original_logger
-    result
+    self.test(TEST_FILES[:jst_journal_archive])
   end
 
   def self.test_full
-    original_logger = ActiveRecord::Base.logger
-    ActiveRecord::Base.logger = nil
-    result = self.run_sfx_import("/app/tmp/sfxfull.xml")
-    ActiveRecord::Base.logger = original_logger
-    result
+    self.test("/app/tmp/sfxfull.xml")
   end
 
   def self.import_message(message)
@@ -36,6 +33,16 @@ class JournalImport < ActiveRecord::Base
 
   def self.run_sfx_import(file)
     import = self.new
+
+    all_categories = {}
+    all_subcategories = {}
+    Category.where(:parent_id => nil).all.each do |category|
+      all_categories[category.title] = category
+      all_subcategories[category.title] = {}
+      category.subcategories.each do |subcategory|
+        all_subcategories[category.title][subcategory.title] = subcategory
+      end
+    end
 
     self.each_node(file, import) do |node|
       if node.name == "record" && node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
@@ -63,40 +70,46 @@ class JournalImport < ActiveRecord::Base
 
         journal.save!
 
-        category_ids = []
+        category_titles = {}
 
+        # Collect all of the category/subcategory names
         record.xpath("//datafield[@tag=650]").each do |datafield|
-          parent_category_name = datafield.xpath("subfield[@code='a']").first.content
-          parent_category = Category.where(:title => parent_category_name, :parent_id => nil).first
-          if parent_category.nil?
-            parent_category = Category.new
-            parent_category.title = parent_category_name
-            parent_category.save!
-          end
-          child_category_name = datafield.xpath("subfield[@code='x']").first.content
-          child_category = Category.where(:title => child_category_name, :parent_id => parent_category.id).first
-          if child_category.nil?
-            child_category = Category.new
-            child_category.title = child_category_name
-            child_category.parent = parent_category
-            child_category.save!
-          end
-
-          category_ids << parent_category.id
-          category_ids << child_category.id
+          category_name = datafield.xpath("subfield[@code='a']").first.content
+          subcategory_name = datafield.xpath("subfield[@code='x']").first.content
+          category_titles[category_name] ||= []
+          category_titles[category_name] << subcategory_name
         end
 
-        category_ids.uniq!
+        category_ids = []
+        # Create any Category records that do not yet exist
+        category_titles.each do |category_name, subcategory_names|
+          category = all_categories[category_name]
+          if category.nil?
+            category = Category.new
+            category.title = category_name
+            category.save!
+            all_categories[category.title] = category
+            all_subcategories[category.title] = {}
+          end
+          category_ids << category.id
 
-        existing_category_ids = []
-
-        journal.journal_categories.each do |jc|
-          if !category_ids.include?(jc.category_id)
-            jc.destroy
-          else
-            existing_category_ids << jc.category_id
+          subcategory_names.each do |subcategory_name|
+            subcategory = all_subcategories[category.title][subcategory_name]
+            if subcategory.nil?
+              subcategory = Category.new
+              subcategory.title = subcategory_name
+              subcategory.parent = category
+              subcategory.save!
+              all_subcategories[category.title][subcategory.title] = subcategory
+            end
+            category_ids << subcategory.id
           end
         end
+
+        # Delete any category associations that no longer exist
+        JournalCategory.delete_all(["journal_id = ? AND category_id NOT IN (?)", journal.id, category_ids])
+
+        existing_category_ids = journal.category_ids
 
         new_category_ids = category_ids - existing_category_ids
         new_category_ids.each do |category_id|
@@ -153,6 +166,7 @@ class JournalImport < ActiveRecord::Base
       import.save!
       raise e
     end
+    import_message("SOLR Update Complete")
   end
 
   def self.each_node(file, import = nil)
