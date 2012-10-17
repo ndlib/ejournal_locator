@@ -44,6 +44,11 @@ class JournalImport < ActiveRecord::Base
       end
     end
 
+    all_providers = {}
+    Provider.all.each do |provider|
+      all_providers[provider.title] = provider
+    end
+
     self.each_node(file, import) do |node|
       if node.name == "record" && node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
         record = Nokogiri::XML(node.outer_xml, nil, nil, Nokogiri::XML::ParseOptions::NOBLANKS)
@@ -117,12 +122,17 @@ class JournalImport < ActiveRecord::Base
           jc.save!
         end
 
-        Holdings.delete_all(:journal_id => journal.id)
+        journal.holdings.delete_all
 
         record.xpath("//datafield[@tag=866]").each do |datafield|
-          target_name = datafield.xpath("subfield[@code='x']").first.content
           internal_id = datafield.xpath("subfield[@code='z']").first.content
-          provider = Provider.find_or_create_by_sfx_name(target_name)
+
+          target_name = datafield.xpath("subfield[@code='x']").first.content
+          provider = all_providers[Provider.clean_title(target_name)]
+          if provider.nil?
+            provider = Provider.find_or_create_by_sfx_name(target_name)
+            all_providers[provider.title] = provider
+          end
 
           if availability_subfield = datafield.xpath("subfield[@code='a']").first
             availability_string = availability_subfield.content
