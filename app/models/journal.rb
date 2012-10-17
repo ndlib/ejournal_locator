@@ -18,7 +18,14 @@ class Journal < ActiveRecord::Base
   end
 
   def first_character_a_z
-    title.gsub(/["'()+:;]/,"").mb_chars[0,1].decompose[0,1].upcase
+    first_char = title.gsub(/["'()+:;\[\]<>]/,"").mb_chars[0,1].decompose[0,1].upcase
+    if first_char =~ /[A-Z]/
+      first_char
+    elsif first_char =~ /[0-9]/
+      "0-9"
+    else
+      nil
+    end
   end
 
   def as_solr
