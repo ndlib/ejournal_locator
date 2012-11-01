@@ -48,7 +48,7 @@ task :pre_production do
   set :ruby_bin,  '/shared/ruby_pprd/ruby/1.9.3/bin'
   set :ruby,      File.join(ruby_bin, 'ruby')
   set :bundler,   File.join(ruby_bin, 'bundle')
-  set :rake,      File.join(shared_path, 'vendor/bundle/ruby/1.8/bin/rake')
+  set :rake,      File.join(shared_path, 'vendor/bundle/ruby/1.9.1/bin/rake')
   set :user,      'rbpprd'
   set :domain,    'ejlpprd.library.nd.edu'
   set :site_url,  'ejlpprd.library.nd.edu'
