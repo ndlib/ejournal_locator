@@ -49,7 +49,7 @@ task :pre_production do
   set :ruby,      File.join(ruby_bin, 'ruby')
   set :bundler,   File.join(ruby_bin, 'bundle')
   set :rake,      File.join(shared_path, 'vendor/bundle/ruby/1.8/bin/rake')
-  set :user,      'rails'
+  set :user,      'rbpprd'
   set :domain,    'ejlpprd.library.nd.edu'
   set :site_url,  'ejlpprd.library.nd.edu'
 
