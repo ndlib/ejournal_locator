@@ -116,6 +116,13 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
 
+  desc "Fix gem executables"
+  task :fix_gems, :roles => :app do
+    sed_command = "sed -i 's/#!.*ruby/#!#{Regexp.escape(ruby)}/' #{release_path}/vendor/bundle/ruby/1.9.1/bin/*"
+    puts sed_command
+    # run sed_command
+  end
+
   desc "Spool up Passenger spawner to keep user experience speedy"
   task :kickstart, :roles => :app do
     run "curl -I http://#{site_url}"
@@ -147,5 +154,5 @@ namespace :bundle do
   end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'bundle:install', 'deploy:migrate'#, 'deploy:assets:precompile'
+after 'deploy:update_code', 'deploy:symlink_shared', 'bundle:install', 'deploy:fix_gems', 'deploy:migrate'#, 'deploy:assets:precompile'
 after 'deploy', 'deploy:cleanup', 'deploy:restart', 'deploy:kickstart'
