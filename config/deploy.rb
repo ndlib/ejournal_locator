@@ -119,8 +119,7 @@ namespace :deploy do
   desc "Fix gem executables"
   task :fix_gems, :roles => :app do
     sed_command = "sed -i 's/#!.*ruby/#!#{Regexp.escape(ruby).gsub('/','\/')}/' #{release_path}/vendor/bundle/ruby/1.9.1/bin/*"
-    puts sed_command
-    # run sed_command
+    run sed_command
   end
 
   desc "Spool up Passenger spawner to keep user experience speedy"
