@@ -38,10 +38,14 @@ Vagrant::Config.run do |config|
     [3000, "Rails is accessible at http://localhost:#{3000 + port_offset}"],
     [8983, "Solr is accessible at http://localhost:#{8983 + port_offset}/solr/"],
   ]
+
+  start_commands = ["up","resume","reload"]
   
   forward_ports.each do |port, message|
     config.vm.forward_port port, port + port_offset
-    puts message
+    if start_commands.include?(ARGV[0])
+      puts message
+    end
   end
 
   # Share an additional folder to the guest VM. The first argument is
