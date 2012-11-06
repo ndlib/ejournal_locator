@@ -20,6 +20,8 @@ if [[ "$java_version" < "1.7" ]]; then
   wget http://download.oracle.com/otn-pub/java/jdk/7u7-b10/jdk-7u7-linux-i586.rpm
   rpm -Uvh jdk-7u7-linux-i586.rpm
   rm jdk-7u7-linux-i586.rpm
+else
+  echo "Java version: $java_version"
 fi
 # End Java
 
@@ -37,7 +39,15 @@ then
   cp config/database.yml.example config/database.yml
 fi
 
-bundle install
+# First attempt bundle install using local cache to save time.
+bundle_local_result=$(bundle install --local)
+if (( $? )) ; then
+  # If the local install fails, try the regular bundle install
+  bundle install
+else
+  # The bundle is already installed correctly.
+  echo "Bundle already up to date."
+fi
 
 # If the databases have not been created yet, create them
 if [ `mysql -e "SHOW DATABASES" -u root | grep -c '_development'` -eq 0 ]
