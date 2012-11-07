@@ -16,6 +16,6 @@ development:
 test: &test
   url: http://127.0.0.1:8888/solr
 pre_production:
-  url: http://tcpprd.library.nd.edu:8983/repo_data/solr_pprd/ejournal-locator
+  url: http://tcpprd.library.nd.edu:8080/solr
 cucumber:
   <<: *test
