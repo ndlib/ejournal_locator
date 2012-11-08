@@ -33,6 +33,7 @@ class Journal < ActiveRecord::Base
       :id => solr_id,
       :title_display => title,
       :title_t => title,
+      :title_sort => title,
       :issn_t => all_issns,
       :provider_facet => providers.collect{|p| p.title},
       :publisher_display => "#{publisher_name} #{publisher_place}",

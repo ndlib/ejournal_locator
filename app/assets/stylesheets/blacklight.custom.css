@@ -39,3 +39,22 @@ body {
 #appliedParams .label {
   display:none;
 }
+
+#facets .twiddle {
+  background: url("/assets/icon_open_subMenu.png") no-repeat scroll right 12px transparent;
+}
+
+#facets .twiddle.twiddle-open {
+  background: url("/assets/icon_close_subMenu.png") no-repeat scroll right 12px transparent;
+}
+
+#facets h3 {
+  border-bottom: 1px solid #CCCCCC;
+  font-weight: bold;
+  margin: 0;
+  padding: 6px 0;
+}
+
+#facets a {
+  font-weight: normal;
+}

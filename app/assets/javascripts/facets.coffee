@@ -33,6 +33,5 @@ $ ->
         selected_span.append(count_span)
       if !selected_categories[parent_category]
         li.addClass("hide_facet")
-    console.log(split_titles[0])
 
 
