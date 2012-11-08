@@ -59,14 +59,16 @@ class Journal < ActiveRecord::Base
     Blacklight.solr.commit
   end
 
-  def self.update_solr
+  def self.update_solr(group_size = 1000)
     current_offset = 0
     journal_count = self.count
     while current_offset <= journal_count
-      self.order(:id).includes(:providers, :categories => [:parent]).limit(1000).offset(current_offset).each do |journal|
-        journal.to_solr
+      journal_hashes = []
+      self.order(:id).includes(:providers, :categories => [:parent]).limit(group_size).offset(current_offset).each do |journal|
+        journal_hashes << journal.as_solr
       end
-      current_offset += 1000
+      Blacklight.solr.add(journal_hashes)
+      current_offset += group_size
     end
 
     Blacklight.solr.commit
