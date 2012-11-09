@@ -63,8 +63,9 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display 
     #config.add_index_field 'title_display', :label => 'Title:' 
     config.add_index_field 'title_vern_display', :label => 'Title:'
-    config.add_index_field 'category_facet', :label => 'Categories:'
     config.add_index_field 'issn_t', :label => 'ISSN:'
+    config.add_index_field 'category_facet', :label => 'Categories:'
+    config.add_index_field 'provider_facet', :label => 'Provider:'
     config.add_index_field 'publisher_display', :label => 'Publisher:'
     config.add_index_field 'author_display', :label => 'Author:' 
     config.add_index_field 'author_vern_display', :label => 'Author:' 
@@ -89,8 +90,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'published_display', :label => 'Published:'
     config.add_show_field 'published_vern_display', :label => 'Published:'
     config.add_show_field 'lc_callnum_display', :label => 'Call number:'
-    config.add_show_field 'category_facet', :label => 'Categories:'
     config.add_show_field 'issn_t', :label => 'ISSN:'
+    config.add_show_field 'category_facet', :label => 'Categories:'
     config.add_show_field 'publisher_display', :label => 'Publisher:'
 
     # "fielded" search configuration. Used by pulldown among other places.
