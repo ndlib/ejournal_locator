@@ -68,7 +68,7 @@ def set_common_deploy_variables
 
   set :ruby,      File.join(ruby_bin, 'ruby')
   set :bundler,   File.join(ruby_bin, 'bundle')
-  set :rake,      File.join(shared_path, 'vendor/bundle/ruby/1.9.1/bin/rake')
+  set :rake,      File.join(shared_path, 'vendor/bundle/bin/rake')
 
   server "#{user}@#{domain}", :app, :web, :db, :primary => true
 end
@@ -143,9 +143,9 @@ end
 namespace :bundle do
   desc "Install gems in Gemfile"
   task :install, :roles => :app do
-    run "#{bundler} install --gemfile='#{release_path}/Gemfile' --deployment"
+    run "#{bundler} install --binstubs='#{release_path}/vendor/bundle/bin' --shebang '#{ruby}' --gemfile='#{release_path}/Gemfile' --deployment"
   end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'bundle:install', 'deploy:fix_gems', 'deploy:migrate'#, 'deploy:assets:precompile'
+after 'deploy:update_code', 'deploy:symlink_shared', 'bundle:install', 'deploy:migrate'#, 'deploy:assets:precompile'
 after 'deploy', 'deploy:cleanup', 'deploy:restart', 'deploy:kickstart'
