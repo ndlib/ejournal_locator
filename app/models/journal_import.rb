@@ -24,7 +24,7 @@ class JournalImport < ActiveRecord::Base
   end
 
   def self.test_full
-    self.test("/app/tmp/sfxfull.xml")
+    self.test("#{Rails.root}/tmp/sfxfull.xml")
   end
 
   def self.import_message(message)
