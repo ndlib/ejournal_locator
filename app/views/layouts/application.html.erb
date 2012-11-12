@@ -26,24 +26,28 @@
       <div id="content_wrapper" class="outter">
         <div id="content" class="container">
           <div id="crumbs" class="span-24 last"><!-- TemplateBeginEditable name="crumbs" --><a href="/">Hesburgh Libraries</a> &gt; <!-- TemplateEndEditable --> <%= application_name %></div>
-
-          <div id="hd">
-            <div id="logo">
-              <h1 class="site_title"><%= link_to "eJournal Locator", "/" %><%= (params[:controller] == "catalog" and !params[:id]) ? "<span id='results_text'>Search Results</span>".html_safe : "" %></h1>
-            </div>
-            <div id="user_util_links">
-              <%= render :partial=>'/user_util_links' %>
-            </div>
           </div>
-          <div id="bd">
-            <div id="main">
-              <div id="main_container">
-                <%= render :partial=>'/flash_msg' %>
-                <%= yield %>
+      </div>
+      <div class="row content">
+        <div class="twelve columns">
+          <div class="container">
+            <div id="hd">
+              <div id="logo">
+                <h1 class="site_title"><%= link_to "eJournal Locator", "/" %><%= (params[:controller] == "catalog" and !params[:id]) ? "<span id='results_text'>Search Results</span>".html_safe : "" %></h1>
+              </div>
+              <div id="user_util_links">
+                <%= render :partial=>'/user_util_links' %>
               </div>
             </div>
-            <div id="sidebar"><%= sidebar_items.join('').html_safe %></div>
-          </div>
+            <div id="bd">
+              <div id="main">
+                <div id="main_container">
+                  <%= render :partial=>'/flash_msg' %>
+                  <%= yield %>
+                </div>
+              </div>
+              <div id="sidebar"><%= sidebar_items.join('').html_safe %></div>
+            </div>
 
         </div> <!-- end content-col -->
       </div>

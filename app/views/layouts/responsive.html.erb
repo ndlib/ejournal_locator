@@ -3,50 +3,26 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!-- TemplateBeginEditable name="doctitle" -->
-    <title>This Page // Hesburgh Libraries // University of Notre Dame</title>
+    <title><%= "#{@page_title || application_name}".html_safe %> // Hesburgh Libraries // University of Notre Dame</title>
     <!-- TemplateEndEditable -->
     <meta name="description" content="Information resources and collections of the Hesburgh Libraries, University of Notre Dame." />
     <meta name="viewport" content="width=device-width" />
     <link rel="shortcut icon" href="/favicon.ico" />
       <!-- Included CSS Files -->
-  <link rel="stylesheet" href="/css/responsive/foundation.css">
-  <link rel="stylesheet" href="/css/responsive/bootstrap.css">
-  <link rel="stylesheet" href="/css/responsive/hesburgh.css">
-  <link rel="stylesheet" href="/css/responsive/prettify.css">
-  <link rel="stylesheet" href="/css/superfish.css">
-  <link href="/css/colorbox.css" media="screen,projection" rel="stylesheet" type="text/css" />
-  <!--[if lte IE 9]>
-    <link rel="stylesheet" href="/css/responsive/ie.css">
-  <![endif]-->
-        <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
-
-    <script type="text/javascript" src="/js/superfish.js"></script>
-    <script type="text/javascript" src="/js/jquery.colorbox-min.js"></script>
-    <script type="text/javascript" src="/js/hoverIntent.js"></script>
-    <script type="text/javascript" src="/js/simplegallery.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script>
-    <script type="text/javascript" src="/local_js/local.js"></script>
-      <script type="text/javascript" src="/styleguide/js/modernizr.foundation.js"></script>
-  <script type="text/javascript" src="/js/superfish.js"></script>
-  <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
-  <script type="text/javascript" src="/js/jquery.colorbox-min.js"></script>
-  <script type="text/javascript" src="/js/hoverIntent.js"></script>
-  <script type="text/javascript" src="/js/simplegallery.js"></script>
-  <script type="text/javascript" src="/js/main.js"></script>
-  <script type="text/javascript" src="/local_js/local.js"></script>
-  <script type="text/javascript" src="/styleguide/js/jquery.min.js"></script>
-  <script type="text/javascript" src="/styleguide/js/foundation.js"></script>
-  <script type="text/javascript" src="/styleguide/js/app.js"></script>
-  <script type="text/javascript" src="/styleguide/js/libraries.js"></script>
-  <script type="text/javascript" src="/styleguide/js/prettify.js"></script>
-   
-
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-  <script type="text/javascript" src="/styleguide/js/jquery.mobilemenu.min.js"></script>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag "https://www.library.nd.edu/css/superfish.css" %>
+    <%= stylesheet_link_tag "https://www.library.nd.edu/css/colorbox.css", :media => "screen,projection" %>
+    <!--[if lte IE 9]>
+      <%= stylesheet_link_tag "responsive/ie" %>
+    <![endif]-->
+    <%= javascript_include_tag "application" %>
+    <%= include_ssi("js") %>
+    <%= csrf_meta_tags %>
+    <%= raw(render_head_content) %>
 
   <script>
-    $(document).ready(function(){
-        $('#nav').mobileMenu({combine:false, prependTo:'.menu'});
+    jQuery(document).ready(function(){
+        jQuery('#nav').mobileMenu({combine:false, prependTo:'.menu'});
     });
   </script>
   <!-- IE Fix for HTML5 Tags -->
@@ -58,248 +34,43 @@
     <div class="container">
       <div class="row header">
         <div class="twelve columns">
-        <h4>
-          <a href="/">Hesburgh Libraries</a>
-        </h4>
-        <h3 class="hide-on-phones">
-            <a href="http://nd.edu/">University of Notre Dame</a>
-        </h3>
-        <a href="#" class="show-on-phones search-toggle btn">&#76;</a>
-        <div class="header_search closed">
-<form id="myform" name="myform" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" method="get" action="http://search.nd.edu/search">
-      <fieldset>
-        <span class="legend">Website search</span>
-        <input type="text" accesskey="s" onkeydown="" value="" name="q" id="search_field" class="srch-box long" tabindex="11" style="width: 143px; opacity: 0.7;">
-      <input type="hidden" value="lib_site_srch" name="proxystylesheet" id="proxystylesheet">
-        <input type="hidden" value="xml_no_dtd" name="output" id="output">
-        <input type="hidden" value="lib_site_srch" name="client" id="client">
-        <input type="hidden" value="library" name="site" id="site">
-        <button class=" btn" type="submit"><!--Search--> »</button>
-</fieldset>
-  </form>
-</div>
+          <%= responsive_header() %>
         </div>
       </div> <!-- End #header -->
       <div class="row menu">
         <div class="twelve columns">
-        <ul id="nav" class="sf-menu">
-  <li class="left"><a href="http://www.library.nd.edu/srch-find/" title="Information resources">Search & Find</a>
-<ul>
-      <li><a href="#">Books</a>
-      <ul>
-        <li><a href="http://primo.library.nd.edu:1701/primo_library/libweb/action/search.do?vid=NDU&tab=nd_campus&mode=Advanced&reset_config=true">CatalogPlus</a></li>
-        <li><a href="http://eresources.library.nd.edu/databases/worldcat">WorldCat</a></li>
-        <li class="last"><a href="http://www.library.nd.edu/srch-find/catalogs.shtml">More library catalogs</a></li>
-      </ul></li>
-
-    <li><a href="#">Articles</a>
-      <ul><li><a href="http://www.library.nd.edu/eresources/quicksearch/quicksearch.cgi?interface=advanced&subject=genmul&search_type=subject">Article QuickSearch</a></li>
-          <li><a href="http://www.library.nd.edu/find_articles/index.shtml#tab_tad">Selected article databases</a></li>
-          <li><a href="http://www.library.nd.edu/find_articles/index.shtml#tab_dbsub">Article databases by subject</a></li>
-      <li class="last"><a href="http://eresources.library.nd.edu/databases/googlescholar">Google Scholar</a></li>
-      </ul></li>
-
-      <li><a href="#">Journals</a>
-      <ul>
-          <li><a href="http://www.library.nd.edu/find_journals/ejournals.php">e-Journal locator</a></li>
-          <li><a href="http://www.library.nd.edu/find_journals/ejournal_subjects.php">e-Journals by category</a></li>
-      <li><a href="http://www.library.nd.edu/find_journals/all_journals.shtml">All journals (print, electronic, microform)</a></li>
-      <li class="last"><a href="http://www.library.nd.edu/find_journals/all_collections.shtml">e-Journal collections</a></li>
-      </ul></li>
-
-    <li><a href="http://www.library.nd.edu/help/find-ebooks.shtml">e-Books</a></li>
-    <li><a class="tab_sel" href="http://www.library.nd.edu/find_articles/index.shtml#tab_news">Newspapers</a></li>
-    <li><a href="http://guides.library.nd.edu/subject-guide/18-Datasets-Statistics">Datasets &amp; Statistics</a></li>
-    <li><a href="https://www.library.nd.edu/reserves/ereserves/">Reserves</a></li>
-
-    <li><a href="https://nd.illiad.oclc.org/illiad/IND/logon.html">Interlibrary loan</a></li>
-
-    <li><a href="https://nd.illiad.oclc.org/illiad/IND/logon.html">Document delivery</a></li>
-
-    <li><a href="#">e-Reference shelf</a>
-      <ul>
-          <li><a href="http://guides.library.nd.edu/subject-guide/81-e-Reference-Shelf?tab=830">Dictionaries</a></li>
-          <li><a href="http://guides.library.nd.edu/subject-guide/81-e-Reference-Shelf?tab=829">Encyclopedias</a></li>
-          <li><a href="http://guides.library.nd.edu/subject-guide/81-e-Reference-Shelf?tab=831">Biographies</a></li>
-      <li class="last"><a href="http://guides.library.nd.edu/subject-guide/81-e-Reference-Shelf">more...</a></li>
-      </ul></li>
-
-      
-  <li><a href="#">Subjects A-Z</a>
-        <ul>
-          <li><a href="http://www.library.nd.edu/subjects/psychology">Psychology</a></li>
-          <li><a href="http://www.library.nd.edu/subjects/theology_and_religion">Theology &amp; Religion</a></li>
-          <li><a href="http://www.library.nd.edu/subjects/music">Music</a></li>
-          <li><a href="http://www.library.nd.edu/subjects/philosophy">Philosophy</a></li>
-          <li><a href="http://www.library.nd.edu/subjects/medieval_studies">Medieval Studies</a></li>
-          <li class="last"><a href="http://www.library.nd.edu/subjects/">[more]</a></li>
-        </ul>
-      </li>
-      <li id="dbsaz"><a href="#">Resources A-Z</a>
-        
-        <p class="list" >
-          <a href="http://www.library.nd.edu/alpha/a">A</a>
-          <a href="http://www.library.nd.edu/alpha/b">B</a>
-          <a href="http://www.library.nd.edu/alpha/c">C</a>
-          <a href="http://www.library.nd.edu/alpha/d">D</a>
-          <a href="http://www.library.nd.edu/alpha/e">E</a>
-          <a href="http://www.library.nd.edu/alpha/f">F</a>
-          <a href="http://www.library.nd.edu/alpha/g">G</a>
-          <a href="http://www.library.nd.edu/alpha/h">H</a>
-          <a href="http://www.library.nd.edu/alpha/i">I</a>
-          <a href="http://www.library.nd.edu/alpha/j">J</a>
-          <a href="http://www.library.nd.edu/alpha/k">K</a>
-          <a href="http://www.library.nd.edu/alpha/l">L</a>
-          <a href="http://www.library.nd.edu/alpha/m">M</a>
-          <a href="http://www.library.nd.edu/alpha/n">N</a>
-          <a href="http://www.library.nd.edu/alpha/o">O</a>
-          <a href="http://www.library.nd.edu/alpha/p">P</a>
-          <a href="http://www.library.nd.edu/alpha/q">Q</a>
-          <a href="http://www.library.nd.edu/alpha/r">R</a>
-          <a href="http://www.library.nd.edu/alpha/s">S</a>
-          <a href="http://www.library.nd.edu/alpha/t">T</a>
-          <a href="http://www.library.nd.edu/alpha/u">U</a>
-          <a href="http://www.library.nd.edu/alpha/v">V</a>
-          <a href="http://www.library.nd.edu/alpha/w">W</a>
-          <a href="http://www.library.nd.edu/alpha/x">X</a>
-          <a href="http://www.library.nd.edu/alpha/y">Y</a>
-          <a href="http://www.library.nd.edu/alpha/z">Z</a>
-          <a href="http://www.library.nd.edu/alpha/0">0-9</a>
-        </p>
-      </li>
-    <li class="last"><a href="http://www.library.nd.edu/srch-find/">more...</a></li>
-    </ul>
-  </li>
-    <li><a href="/help/" title="Get answers to questions, library instruction, tips to get you started">Help &amp; Guides</a>
-  <ul>
-      <li><a href="/fys/">Starting your research</a></li>
-      <li><a href="/reference/faq/">How do I / FAQ</a></li>
-    <li><a href="/instruction/potofgold/"><em class="gold">Pot of Gold</em> &mdash; Information Literacy Tutorial</a></li>
-      <li><a href="/directory/subjects">Contact a subject librarian</a></li>
-      <li><a href="http://guides.library.nd.edu/">Course pages &amp; Research guides</a></li>
-    <li><a href="#">I need to find...</a>
-      <ul>
-        <li><a href="/help/find-articles.shtml">Articles</a></li>
-        <li><a href="/help/find-books.shtml">Books</a></li>
-        <li><a href="/help/find-dvds.shtml">DVDs &amp; videorecordings</a></li>
-        <li><a href="/help/find-ebooks.shtml">e-Books</a></li>
-        <li><a href="/help/find-ejournals.shtml">e-Journals</a></li>
-        <li><a href="/help/find-gov-info.shtml">Government information</a></li>
-        <li><a href="/help/find-images.shtml">Images</a></li>
-        <li><a href="/colldev/subject_home_pages/english/leisurereading/">Leisure reading materials</a></li>
-        <li><a href="/help/find-maps.shtml">Maps</a></li>
-        <li><a href="/help/find-new.shtml">New acquisitions</a></li>
-        <li><a href="/help/find-theses.shtml">Theses &amp; dissertations</a></li>
-      </ul></li>
-    <li><a href="/help/plagiarism.shtml">Avoiding plagiarism</a></li>
-      <li><a href="http://guides.library.nd.edu/subject-guide/81-e-Reference-Shelf?tab=832">Citing sources</a></li>
-    <li><a href="http://eresources.library.nd.edu/databases/refworks">RefWorks</a></li>
-      <li><a href="/reference/asklib/tab-asklib3.shtml#meet">Schedule a research consultation</a></li>
-      <!-- li><a href="/forms/instructions/consultation/">Schedule a research consultation</a></li -->
-    <li><a href="#">Services for...</a>
-      <ul>
-        <li><a href="/help/undergrads.shtml">Undergraduate students</a></li>
-        <li><a href="/help/grads.shtml">Graduate students</a></li>
-        <li><a href="/help/faculty.shtml">Faculty</a></li>
-        <li><a href="/help/study-abroad">ND students studying abroad</a></li>
-        <li><a href="/help/disabilities.shtml">Students with disabilities</a></li>
-        <li><a href="/help/visitors.shtml">Visitors</a></li>
-      </ul></li>
-      <li><a href="/reference/ask/forms.shtml">Ask a Librarian</a></li>
-    <li class="last"><a href="/help/">more...</a></li>
-  </ul>
-  </li>
-      <li><a href="http://wwwdev.library.nd.edu/lib-colls/" title="What the library can do for you">Libraries & Collections</a>
-    <ul>
-        <li><a href="http://architecture.library.nd.edu/">Architecture Library</a>  </li>
-        <li><a href="http://vrc.library.nd.edu/">Visual Resources Center</a>  </li>
-        <li><a href="http://bic.library.nd.edu/">Business Information Center</a>  </li>
-        <li><a href="http://chemistry.library.nd.edu/">Chemistry - Physics Library</a>  </li>
-        <li><a href="http://engineering.library.nd.edu/">Engineering Library</a>  </li>
-      <li><a href="http://www.library.nd.edu/">Hesburgh Libraries</a></li>
-        <li><a href="http://kkic.library.nd.edu/">Kellogg/Kroc Library Information Center</a>  </li>
-        <li><a href="http://mathematics.library.nd.edu/">O'Meara Mathematics Library</a>  </li>
-        <li><a href="http://medieval.library.nd.edu/">Medieval Institute</a>  </li>
-      <li><a href="http://www.library.nd.edu/media/">Music and Media Services Unit</a></li>
-        <li><a href="http://radlab.library.nd.edu/">Radiation Chemistry Reading Room</a>  </li>
-        <li><a href="http://www.library.nd.edu/rarebooks/">Rare Books &amp; Special Collections</a></li>
-  <li><a href="http://archives.nd.edu/">Archives, University of Notre Dame</a></li>
-  <li class="last"><a href="http://www.library.nd.edu/lib-colls/">more...</a></li>
-    </ul>
-  </li>
-    <li><a href="/about/index.shtml" title="Information about the Libraries">About the Libraries</a>
-    <ul>
-    <li><a href="/about/hours/">Hours</a></li>
-  <li><a href="/about/maps/index.shtml">Maps &amp; locations</a>
-      <ul>
-          <li><a href="/about/maps/locations.shtml">Locations of the libraries of ND</a></li>
-          <li><a href="/about/maps/lclist.shtml">Hesburgh Library call number locations</a></li>
-          <li><a href="http://bic.library.nd.edu/about/documents/biclayout.pdf">Business Information Center floor plan</a></li>
-          <li><a href="http://engineering.library.nd.edu/about/library_map.shtml">Engineering Library floor plan</a></li>
-        <li><a href="/about/maps/campus.shtml">ND map and surrounding area</a></li>
-          <li><a href="http://www.nd.edu/~ndspd/parkrules2007.pdf">Campus parking map (pdf)</a></li>
-        <li class="last"><a href="http://cce.nd.edu/travelers.shtml">Directions to campus</a></li>
-      </ul></li>
-      <li><a href="/circulation/">Borrow, Renew, Recall</a></li>
-      <li><a href="/about/employment/">Employment</a></li>
-      <li><a href="/directory/employees">Staff directory</a></li>
-    <li><a href="/directory/departments">Department directory</a></li>
-    <li><a href="/about/myaccount.shtml">My Accounts</a></li>
-      <li><a href="/instruction/">Instruction, workshops, tours</a></li>
-      <li><a href="/about/computing.shtml">Computers, scanners, study rooms</a></li>
-      <li><a href="/advancement/">Library Advancement</a></li>
-      <li><a href="/ucl/">University Committee on Libraries</a></li>
-    <li class="last"><a href="/about/">more...</a></li>
-  </ul>
-  </li>
-     <li><a href="http://asklib.nd.edu/" title="Options for getting help from a librarian" class="icon-person">Ask a Librarian</a></li>
-</ul>
-
+          <%= include_ssi("main-menu") %>
         </div>
       </div><!-- End #main-menu -->
       <div class="row breadcrumb hide-on-phones">
         <div class="twelve columns">
-          <p><!-- TemplateBeginEditable name="crumbs" --><a href="/">Hesburgh Libraries</a> &gt; This Page<!-- TemplateEndEditable --></p>
+          <p><!-- TemplateBeginEditable name="crumbs" --><a href="/">Hesburgh Libraries</a> &gt; <%= application_name %><!-- TemplateEndEditable --></p>
         </div>
       </div>
       <div class="row content">
         <div class="twelve columns">
           <div class="container">
-          <!-- TemplateBeginEditable name="pg-title" --><h2>Page Title</h2><!-- TemplateEndEditable -->
-
-          
-          <!-- TemplateBeginEditable name="single-column-content" -->           
-            Single Column Content Here
-          <!-- TemplateEndEditable -->
+            <div id="hd">
+              <div id="logo">
+                <h1 class="site_title"><%= link_to "eJournal Locator", "/" %><%= (params[:controller] == "catalog" and !params[:id]) ? "<span id='results_text'>Search Results</span>".html_safe : "" %></h1>
+              </div>
+              <div id="user_util_links">
+                <%= render :partial=>'/user_util_links' %>
+              </div>
+            </div>
+            <div id="bd">
+              <div id="main">
+                <div id="main_container">
+                  <%= render :partial=>'/flash_msg' %>
+                  <%= yield %>
+                </div>
+              </div>
+              <div id="sidebar"><%= sidebar_items.join('').html_safe %></div>
+            </div>
           </div><!-- End .container -->
         </div> 
-      </div> <!-- End #content --> 
-        
-      
-      <div class="row footer">
-      <div class="three columns">
-  <a href="http://www.library.nd.edu"><img src="/images/hesburgh_mark.png" alt="Hesburgh Libraries logo"></a>
-</div>
-<div class="six columns">
-    <p><a href="http://nd.edu/">University of Notre Dame</a> | <a href="http://library.nd.edu">Hesburgh Libraries</a></p>
-    <p class="normal"><a href="http://www.library.nd.edu/about/contacts.shtml">Contact information</a> | <a href="/about/policies.shtml">Library Policies</a> | <a href="https://wiki.nd.edu/display/libintranet/Home">HesNet</a> <img src="/images/lock.gif"> | <a href="http://m.library.nd.edu/">Mobile version</a></p>
-</div>
-<div class="three columns">
-  <a href="/"><img  style="margin-right:10px" src="/images/ndmark.png" alt="University of Notre Dame"></a>
-</div>
-    </div>
-
-<script type="text/javascript">
-  var _gaq = [['_setAccount', 'UA-2118378-23'], ['_trackPageview']];
-  (function(d, t) {
-    var g = d.createElement(t),
-    s = d.getElementsByTagName(t)[0];
-    g.async = true;
-    g.src = '//www.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g, s);
-  })(document, 'script');
-</script>
-
+      </div> <!-- End #content -->
+      <%= responsive_footer() %>
     </div>  <!-- End #container -->
   </body>
 </html>

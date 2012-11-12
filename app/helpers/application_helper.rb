@@ -21,4 +21,20 @@ module ApplicationHelper
   def clean_ssi_js(contents)
     contents.gsub(/^.*(jquery|simplegallery).*$/,"")
   end
+
+  def responsive_header
+    render :partial => "/layouts/header"
+  end
+
+  def responsive_footer
+    render :partial => "/layouts/footer"
+  end
+
+  def google_analytics_account
+    if Rails.env == "production"
+      "UA-2118378-1"
+    else
+      Rails.env
+    end
+  end
 end

@@ -1,0 +1,38 @@
+.sf-menu .sf-sub-indicator {
+  display:none;
+}
+
+#facets h2 {
+  font-size: 15px;
+}
+
+#facets h3 {
+  font-size: 14px;
+}
+
+#facets .label {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 14px;
+  text-shadow: none;
+  white-space: normal;
+}
+
+label {
+  display: inline;
+  margin: 0;
+}
+
+label input, label textarea, label select {
+  display: inline;
+} 
+
+select, input {
+  width: auto;
+}
+
+form {
+  margin: 0;
+}

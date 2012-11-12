@@ -155,7 +155,7 @@
   .row .nine    { width: 73.9%; }
   .row .ten     { width: 82.6%; }
   .row .eleven  { width: 91.3%; }
-  .row .twelve  { width: 100%;}
+  .row .twelve  { width: 100%;float:none; }
   
   .row .offset-by-one   { margin-left: 13.1%;  }
   .row .offset-by-two   { margin-left: 21.8%;  }
@@ -278,7 +278,7 @@
     dl.tabs dt:first-child { padding: 0 9px 0 0; }
     dl.tabs dd { display: block; width: auto; height: 30px; padding: 0; float: left; }
     dl.tabs dd a { display: block; width: auto; height: 29px; padding: 0 9px; line-height: 30px; border: solid 1px #ddd; margin: 0 -1px 0 0; color: #555; background: #eee; }
-    dl.tabs dd a.active { background: #fff; border-width: 1px 1px 0 1px; height: 30px; }
+    dl.tabs dd a.active, .tba .menu_center { background: #fff; border-width: 1px 1px 0 1px; height: 30px; }
 
     .nice.tabs { border-bottom: solid 1px #eee; margin: 0 0 30px 0; height:43px; }
     .nice.tabs dd a { padding: 7px 18px 9px; font-size: 15px; font-size: 1.5rem; color: #555555; background: none; border: none; }

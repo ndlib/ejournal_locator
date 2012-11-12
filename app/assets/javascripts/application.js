@@ -16,4 +16,6 @@
 // Required by Blacklight
 //= require jquery-ui
 //= require blacklight/blacklight
-//= require_tree .
+//
+//= require responsive
+//= require_directory .
