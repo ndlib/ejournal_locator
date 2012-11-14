@@ -18,6 +18,5 @@
  *
  *= require_self
  *= require responsive
- *= require blacklight.custom
- *= require responsive.custom
+ *= require_directory .
 */
