@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class CreateBookmarks < ActiveRecord::Migration
   def self.up
-    create_table :bookmarks do |t|
+    create_table :bookmarks, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
       t.integer :user_id, :null=>false
       t.text :url
       t.string :document_id

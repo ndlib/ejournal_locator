@@ -1,6 +1,6 @@
 class CreateHoldings < ActiveRecord::Migration
   def change
-    create_table :holdings do |t|
+    create_table :holdings, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
       t.integer :journal_id
       t.integer :provider_id
       t.integer :internal_id

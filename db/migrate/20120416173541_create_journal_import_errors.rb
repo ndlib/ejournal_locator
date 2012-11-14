@@ -1,6 +1,6 @@
 class CreateJournalImportErrors < ActiveRecord::Migration
   def change
-    create_table :journal_import_errors do |t|
+    create_table :journal_import_errors, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
       t.integer :journal_import_id
       t.string :error_type
       t.string :exception_message

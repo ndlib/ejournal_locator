@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class CreateSearches < ActiveRecord::Migration
   def self.up
-    create_table :searches do |t|
+    create_table :searches, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
       t.text  :query_params
       t.integer :user_id
 

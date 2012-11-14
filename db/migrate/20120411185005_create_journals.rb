@@ -1,6 +1,6 @@
 class CreateJournals < ActiveRecord::Migration
   def change
-    create_table :journals do |t|
+    create_table :journals, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
       t.string :sfx_id, :limit => 20
       t.string :issn, :limit => 8
       t.string :alternate_issn, :limit => 8
