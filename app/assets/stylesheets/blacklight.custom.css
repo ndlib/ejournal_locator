@@ -44,6 +44,10 @@ body {
   display:none;
 }
 
+#facets {
+  padding: 0;
+}
+
 #facets .twiddle {
   background: url("/assets/icon_open_subMenu.png") no-repeat scroll right 12px transparent;
 }
@@ -63,6 +67,42 @@ body {
   font-weight: normal;
 }
 
+#hd {
+  padding: 0;
+  margin: 0 0 14px 0;
+}
+
 #hd #user_util_links {
   margin-top: 18px;
+}
+
+#bd {
+  margin: 0;
+}
+
+#bd #sidebar {
+  margin: 0;
+  width: 22%;
+}
+
+#bd #main {
+  padding-left: 2%;
+  width: 75%;
+}
+
+#appliedParams {
+  margin-bottom: 0.5em;
+  padding-top: 0.5em;
+}
+
+.appliedFilter {
+  margin-bottom: 0.5em;
+}
+
+.folderTools {
+  display: none;
+}
+
+.pageEntriesInfo:empty, #sortAndPerPage:empty {
+  display: none;
 }

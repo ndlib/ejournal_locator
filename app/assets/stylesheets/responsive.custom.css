@@ -36,3 +36,37 @@ select, input {
 form {
   margin: 0;
 }
+
+.pagination {
+  margin: 0;
+}
+
+dl.defList dt {
+  padding: 2px 2% 2px 0;
+}
+
+dl.defList dd {
+  width: 78%;
+}
+
+input, textarea, select, .uneditable-input {
+  margin-bottom: 0;
+}
+
+#search .submit {
+  height: 28px;
+}
+
+.pagination {
+  height: auto;
+}
+
+.pagination a {
+  border: none;
+  line-height: inherit;
+  float: none;
+}
+
+#hd #logo {
+  width: auto;
+}
