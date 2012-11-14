@@ -63,6 +63,10 @@ body {
   padding: 6px 0;
 }
 
+#facets li a:hover {
+  background: none;
+}
+
 #facets a {
   font-weight: normal;
 }
@@ -102,3 +106,5 @@ body {
 .folderTools {
   display: none;
 }
+
+
