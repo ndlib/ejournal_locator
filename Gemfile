@@ -12,6 +12,7 @@ gem 'mysql2'
 gem 'json'
 
 gem 'blacklight'
+gem 'exception_notification'
 
 # Gems used only for assets and not required
 # in production environments by default.
