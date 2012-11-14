@@ -48,5 +48,6 @@ gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'debugger'
   # gem 'ruby-debug'
 end
