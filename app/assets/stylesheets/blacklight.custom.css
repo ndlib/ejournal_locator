@@ -102,7 +102,3 @@ body {
 .folderTools {
   display: none;
 }
-
-.pageEntriesInfo:empty, #sortAndPerPage:empty {
-  display: none;
-}
