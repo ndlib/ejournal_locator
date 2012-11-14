@@ -33,6 +33,7 @@ class JournalImport < ActiveRecord::Base
 
   def self.run_sfx_import(file)
     import = self.new
+    import.save!
 
     all_categories = {}
     all_subcategories = {}
@@ -168,7 +169,7 @@ class JournalImport < ActiveRecord::Base
 
     import.save!
 
-    import_message("Updating SOLR")
+    import_message("Updating Solr")
     begin
       Journal.update_solr
     rescue Exception => e
@@ -176,7 +177,7 @@ class JournalImport < ActiveRecord::Base
       import.save!
       raise e
     end
-    import_message("SOLR Update Complete")
+    import_message("Solr Update Complete")
   end
 
   def self.each_node(file, import = nil)
