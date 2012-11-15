@@ -154,7 +154,7 @@ ul#nav.sf-menu li.sfHover,
 ul#nav.sf-menu a:focus,
 ul#nav.sf-menu a:hover,
 ul#nav.sf-menu a:active {background:#0e3255; outline:0; }
-ul#nav.sf-menu li p.list{border-right: 1px solid #; }
+ul#nav.sf-menu li p.list{border-right: 1px solid; }
 
 
 /* -----------------------------------------
