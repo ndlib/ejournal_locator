@@ -47,6 +47,8 @@ input, textarea, select, .uneditable-input {
 
 #search .submit {
   height: 28px;
+  padding: 4px;
+  margin: 0;
 }
 
 .pagination {
@@ -59,6 +61,45 @@ input, textarea, select, .uneditable-input {
   float: none;
 }
 
-#hd #logo {
-  width: auto;
+
+@media only screen and (max-width: 685px) {
+  #bd #main {
+    width: calc(100% - 187px);
+  }
+
+  #bd #sidebar {
+    width: 175px;
+  }
+
+  #search #q {
+    width: calc(100% - 150px);
+  }
+
+  #search #q + label {
+    display: none;
+  }
 }
+
+@media only screen and (max-width: 580px) {
+  #bd #main {
+    float: none;
+    width: 100%;
+    padding: 0;
+  }
+
+  #bd #sidebar {
+    float: none;
+    width: 100%;
+    padding: 0;
+  }
+
+  #hd {
+    margin: 0;
+  }
+  #hd #user_util_links {
+    clear: both;
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+}
+

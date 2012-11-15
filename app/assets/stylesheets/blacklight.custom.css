@@ -68,8 +68,12 @@ body {
   padding: 6px 0;
 }
 
+#facets ul {
+  margin-left: 0.5em;
+}
+
 #facets li a:hover {
-  background: none;
+  color: #2E4F81;
 }
 
 #facets a {
@@ -78,25 +82,30 @@ body {
 
 #hd {
   padding: 0;
-  margin: 0 0 14px 0;
+  margin: 0 0 6px 0;
+}
+
+#hd #logo {
+  width: auto;
 }
 
 #hd #user_util_links {
-  margin-top: 18px;
+  margin-top: 15px;
+  width: auto;
 }
 
 #bd {
   margin: 0;
 }
 
-#bd #sidebar {
-  margin: 0;
-  width: 22%;
+#bd #main {
+  padding-left: 0;
+  width: calc(100% - 212px);
 }
 
-#bd #main {
-  padding-left: 2%;
-  width: 75%;
+#bd #sidebar {
+  margin: 0;
+  width: 200px;
 }
 
 #appliedParams {
