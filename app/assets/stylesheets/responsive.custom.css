@@ -64,6 +64,13 @@ input, textarea, select, .uneditable-input {
 
 @media only screen and (max-width: 685px) {
   #bd #main {
+    /* Firefox */
+    width: -moz-calc(100% - 187px);
+    /* WebKit */
+    width: -webkit-calc(100% - 187px);
+    /* Opera */
+    width: -o-calc(100% - 187px);
+    /* Standard */
     width: calc(100% - 187px);
   }
 
@@ -72,6 +79,13 @@ input, textarea, select, .uneditable-input {
   }
 
   #search #q {
+    /* Firefox */
+    width: -moz-calc(100% - 150px);
+    /* WebKit */
+    width: -webkit-calc(100% - 150px);
+    /* Opera */
+    width: -o-calc(100% - 150px);
+    /* Standard */
     width: calc(100% - 150px);
   }
 
