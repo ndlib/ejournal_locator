@@ -56,15 +56,24 @@ body {
   background: url("/assets/icon_close_subMenu.png") no-repeat scroll right 12px transparent;
 }
 
+#facets h2 {
+  font-size: 16px;
+}
+
 #facets h3 {
   border-bottom: 1px solid #CCCCCC;
   font-weight: bold;
+  font-size: 14px;
   margin: 0;
   padding: 6px 0;
 }
 
+#facets ul {
+  margin-left: 0.5em;
+}
+
 #facets li a:hover {
-  background: none;
+  color: #2E4F81;
 }
 
 #facets a {
@@ -73,25 +82,30 @@ body {
 
 #hd {
   padding: 0;
-  margin: 0 0 14px 0;
+  margin: 0 0 6px 0;
+}
+
+#hd #logo {
+  width: auto;
 }
 
 #hd #user_util_links {
-  margin-top: 18px;
+  margin-top: 15px;
+  width: auto;
 }
 
 #bd {
   margin: 0;
 }
 
-#bd #sidebar {
-  margin: 0;
-  width: 22%;
+#bd #main {
+  padding-left: 0;
+  width: calc(100% - 212px);
 }
 
-#bd #main {
-  padding-left: 2%;
-  width: 75%;
+#bd #sidebar {
+  margin: 0;
+  width: 200px;
 }
 
 #appliedParams {
@@ -107,4 +121,30 @@ body {
   display: none;
 }
 
+#spell {
+  margin-top: -1px;
+  border: 1px solid #AAAAAA;
+  border-top-color: #F8F7E9;
+  padding: 0 1em 0.5em 1em;
+}
 
+#spell h4 {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+#spell i {
+  font-style: italic;
+}
+
+#sortAndPerPage:empty, .pageEntriesInfo:empty, #appliedParams:empty {
+  padding: 0;
+}
+
+#documents + .pagination {
+  border-top-width: 1px;
+}
+
+.pageEntriesInfo {
+  margin-top: -1px;
+}

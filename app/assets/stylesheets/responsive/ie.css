@@ -13,7 +13,7 @@
   .lt-ie8 input[type=submit].large.button   { padding: 9px 18px 10px; }
 
    dl.tabs dd a, dl.tabs dd a, li.tbi .menu_center, li.tb .menu_center  {
-    background:url("/local_images/tab.gif") repeat-x scroll;
+    background:url("https://www.library.nd.edu/local_images/tab.gif") repeat-x scroll;
   } 
    dl.tabs dd a.active, li.tba .menu_center {
     background:#fff !important;
