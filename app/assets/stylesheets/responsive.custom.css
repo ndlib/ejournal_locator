@@ -2,14 +2,6 @@
   display:none;
 }
 
-#facets h2 {
-  font-size: 15px;
-}
-
-#facets h3 {
-  font-size: 14px;
-}
-
 #facets .label {
   background: none;
   border-radius: 0;

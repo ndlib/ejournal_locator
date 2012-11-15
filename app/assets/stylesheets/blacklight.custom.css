@@ -56,9 +56,14 @@ body {
   background: url("/assets/icon_close_subMenu.png") no-repeat scroll right 12px transparent;
 }
 
+#facets h2 {
+  font-size: 16px;
+}
+
 #facets h3 {
   border-bottom: 1px solid #CCCCCC;
   font-weight: bold;
+  font-size: 14px;
   margin: 0;
   padding: 6px 0;
 }
@@ -107,4 +112,30 @@ body {
   display: none;
 }
 
+#spell {
+  margin-top: -1px;
+  border: 1px solid #AAAAAA;
+  border-top-color: #F8F7E9;
+  padding: 0 1em 0.5em 1em;
+}
 
+#spell h4 {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+#spell i {
+  font-style: italic;
+}
+
+#sortAndPerPage:empty, .pageEntriesInfo:empty, #appliedParams:empty {
+  padding: 0;
+}
+
+#documents + .pagination {
+  border-top-width: 1px;
+}
+
+.pageEntriesInfo {
+  margin-top: -1px;
+}
