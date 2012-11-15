@@ -99,6 +99,10 @@ body {
 }
 
 #bd #main {
+  width: 74%;
+}
+
+#bd #main {
   padding-left: 0;
   /* Firefox */
   width: -moz-calc(100% - 212px);

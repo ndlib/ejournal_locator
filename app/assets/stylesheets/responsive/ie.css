@@ -27,3 +27,7 @@
    }
 
    .home-page .contained.tabs-content li {width:95%;}
+
+  #bd #sidebar {
+    width: 24%;
+  }
