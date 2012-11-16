@@ -92,6 +92,25 @@ input, textarea, select, .uneditable-input {
   #search #q + label {
     display: none;
   }
+
+  .pageEntriesInfo {
+    text-align: left;
+  }
+
+  .pagination-container .prev_page, .pagination-container .next_page {
+    position: inherit;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pagination-container .next_page {
+    float: right;
+  }
+
+  .page_links {
+    clear: both;
+    margin: 0;
+  }
 }
 
 @media only screen and (max-width: 580px) {
@@ -114,6 +133,10 @@ input, textarea, select, .uneditable-input {
     clear: both;
     margin-top: 0;
     margin-bottom: 6px;
+  }
+
+  #facets h2 {
+    margin-bottom: 0;
   }
 }
 
