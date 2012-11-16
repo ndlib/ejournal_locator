@@ -116,7 +116,18 @@ body {
 
 #bd #sidebar {
   margin: 0;
-  width: 200px;
+  width: 24%;
+}
+
+#bd #sidebar {
+  /* Firefox */
+  width: -moz-calc(200px);
+  /* WebKit */
+  width: -webkit-calc(200px);
+  /* Opera */
+  width: -o-calc(200px);
+  /* Standard */
+  width: calc(200px);
 }
 
 #appliedParams {

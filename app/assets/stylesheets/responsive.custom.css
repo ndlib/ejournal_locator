@@ -75,7 +75,14 @@ input, textarea, select, .uneditable-input {
   }
 
   #bd #sidebar {
-    width: 175px;
+    /* Firefox */
+    width: -moz-calc(175px);
+    /* WebKit */
+    width: -webkit-calc(175px);
+    /* Opera */
+    width: -o-calc(175px);
+    /* Standard */
+    width: calc(175px);
   }
 
   #search #q {
