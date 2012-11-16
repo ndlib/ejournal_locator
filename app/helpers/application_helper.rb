@@ -19,7 +19,11 @@ module ApplicationHelper
 
   # Since we're in the context of a Rails application with its own javascript assets, we want to remove any library site javascripts we don't need
   def clean_ssi_js(contents)
-    contents.gsub(/^.*(jquery|simplegallery).*$/,"")
+    # Remove jquery, but not the colorbox script.
+    cleaned = contents.gsub(/^.*jquery(?!.*colorbox.*).*$/,"")
+    # Remove simplegallery
+    cleaned = cleaned.gsub(/^.*simplegallery.*$/,"")
+    cleaned
   end
 
   def responsive_header
