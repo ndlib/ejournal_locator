@@ -34,12 +34,37 @@ form {
 }
 
 dl.defList dt {
-  padding: 2px 2% 2px 0;
+  padding: 2px 5px 2px 0;
+  width: 20%;
 }
 
 dl.defList dd {
   width: 78%;
 }
+
+dl.defList dt {
+  /* Firefox */
+  width: -moz-calc(75px);
+  /* WebKit */
+  width: -webkit-calc(75px);
+  /* Opera */
+  width: -o-calc(75px);
+  /* Standard */
+  width: calc(75px);
+}
+
+dl.defList dd {
+  /* Firefox */
+  width: -moz-calc(100% - 80px);
+  /* WebKit */
+  width: -webkit-calc(100% - 80px);
+  /* Opera */
+  width: -o-calc(100% - 80px);
+  /* Standard */
+  width: calc(100% - 80px);
+}
+
+
 
 input, textarea, select, .uneditable-input {
   margin-bottom: 0;
@@ -86,6 +111,10 @@ input, textarea, select, .uneditable-input {
   }
 
   #search #q {
+    width: 100px;
+  }
+
+  #search #q {
     /* Firefox */
     width: -moz-calc(100% - 150px);
     /* WebKit */
@@ -95,6 +124,8 @@ input, textarea, select, .uneditable-input {
     /* Standard */
     width: calc(100% - 150px);
   }
+
+
 
   #search #q + label {
     display: none;
@@ -117,6 +148,14 @@ input, textarea, select, .uneditable-input {
   .page_links {
     clear: both;
     margin: 0;
+  }
+
+  /* Hide all but the first two details from the search results */
+  .defList > dt:nth-of-type(n+3) {
+    display: none;
+  }
+  .defList > dd:nth-of-type(n+3) {
+    display: none;
   }
 }
 
@@ -145,5 +184,34 @@ input, textarea, select, .uneditable-input {
   #facets h2 {
     margin-bottom: 0;
   }
-}
 
+  dl.defList dt {
+    width: 25%;
+  }
+
+  dl.defList dd {
+    width: 73%;
+  }
+
+  dl.defList dt {
+    /* Firefox */
+    width: -moz-calc(75px);
+    /* WebKit */
+    width: -webkit-calc(75px);
+    /* Opera */
+    width: -o-calc(75px);
+    /* Standard */
+    width: calc(75px);
+  }
+
+  dl.defList dd {
+    /* Firefox */
+    width: -moz-calc(100% - 80px);
+    /* WebKit */
+    width: -webkit-calc(100% - 80px);
+    /* Opera */
+    width: -o-calc(100% - 80px);
+    /* Standard */
+    width: calc(100% - 80px);
+  }
+}
