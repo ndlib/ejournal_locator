@@ -10,7 +10,7 @@ gem 'nokogiri'
 gem 'mysql2'
 
 gem 'json'
-gem 'devise'
+gem 'devise', '~> 1.4.0'
 gem 'devise_cas_authenticatable'
 gem 'devise-guests'
 gem 'blacklight', '~> 3.8.0'
