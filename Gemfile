@@ -10,8 +10,10 @@ gem 'nokogiri'
 gem 'mysql2'
 
 gem 'json'
-
-gem 'blacklight'
+gem 'devise'
+gem 'devise_cas_authenticatable'
+gem 'devise-guests'
+gem 'blacklight', '~> 3.8.0'
 gem 'exception_notification'
 
 # Gems used only for assets and not required

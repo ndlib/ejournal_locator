@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416173541) do
+ActiveRecord::Schema.define(:version => 20121119222835) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -119,5 +119,13 @@ ActiveRecord::Schema.define(:version => 20120416173541) do
   end
 
   add_index "searches", ["user_id"], :name => "index_searches_on_user_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "username",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "users", ["username"], :name => "index_users_on_username"
 
 end
