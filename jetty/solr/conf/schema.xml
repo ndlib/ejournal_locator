@@ -206,6 +206,15 @@
        </analyzer>
      </fieldType>
 
+     <!-- A text field that does not exclude stop words -->
+    <fieldType name="text_original" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+         <tokenizer class="solr.StandardTokenizerFactory"/>
+         <filter class="solr.ICUFoldingFilterFactory" />
+         <filter class="solr.SnowballPorterFilterFactory" language="English" />
+       </analyzer>
+    </fieldType>
+
     <!-- One can also specify an existing Analyzer class that has a
          default constructor via the class attribute on the analyzer element
     <fieldType name="text_greek" class="solr.TextField">
@@ -586,6 +595,7 @@
    <dynamicField name="*_display" type="string" indexed="false" stored="true" multiValued="true" />
    <dynamicField name="*_facet" type="string" indexed="true" stored="false" multiValued="true" />
    <dynamicField name="*_sort" type="alphaOnlySort" indexed="true" stored="false" multiValued="false" />
+   <dynamicField name="*_original_text" type="text_original" indexed="true" stored="false" multiValued="true" />
    <dynamicField name="*_unstem_search" type="text_general" indexed="true" stored="false" multiValued="true" />
    <dynamicField name="*spell" type="textSpell" indexed="true" stored="false" multiValued="true" />
 
@@ -615,6 +625,7 @@
         
    <!-- unstemmed fields -->
    <copyField source="title_t" dest="title_unstem_search"/>
+   <copyField source="title_t" dest="title_original_text"/>
    <copyField source="subtitle_t" dest="subtitle_unstem_search"/>
    <copyField source="title_addl_t" dest="title_addl_unstem_search"/>
    <copyField source="title_added_entry_t" dest="title_added_entry_unstem_search"/>

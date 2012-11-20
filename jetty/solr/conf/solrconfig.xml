@@ -721,7 +721,7 @@
        <int name="rows">10</int>
 
        <str name="q.alt">*:*</str>
-       <str name="mm">2&lt;-1 5&lt;-2 6&lt;90%</str>
+       <str name="mm">1&lt;-1 5&lt;-2 6&lt;90%</str>
 
        <!-- this qf and pf are used by default, if not otherwise specified by
             client. The default blacklight_config will use these for the
@@ -754,6 +754,7 @@
          title_series_unstem_search^25
          title_series_t^10
          isbn_t
+         title_original_text^1000
          category_facet^1000
          text
        </str>
@@ -778,6 +779,7 @@
          subject_addl_t^500
          title_series_unstem_search^250
          title_series_t^100
+         title_original_text^100000
          text^10
        </str>
        <str name="author_qf">
