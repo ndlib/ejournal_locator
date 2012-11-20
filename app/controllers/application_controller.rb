@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  define_callbacks :logging_in_user
   # Adds a few additional behaviors into the application controller 
   include Blacklight::Controller
   layout 'responsive'
