@@ -215,3 +215,10 @@ input, textarea, select, .uneditable-input {
     width: calc(100% - 80px);
   }
 }
+
+@media only screen and (max-width: 450px) {
+  #hd #user_util_links {
+    font-size: 9px;
+    float: left;
+  }
+}

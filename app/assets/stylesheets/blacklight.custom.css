@@ -92,6 +92,7 @@ body {
 #hd #user_util_links {
   margin-top: 15px;
   width: auto;
+  font-size: 12px;
 }
 
 #bd {
@@ -112,6 +113,10 @@ body {
   width: -o-calc(100% - 212px);
   /* Standard */
   width: calc(100% - 212px);
+}
+
+#bd #main.no_sidebar {
+  width: 100%;
 }
 
 #bd #sidebar {
@@ -169,4 +174,8 @@ body {
 
 .pageEntriesInfo {
   margin-top: -1px;
+}
+
+#main_container table.zebra {
+  width: 100%;
 }
