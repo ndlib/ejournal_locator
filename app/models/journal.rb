@@ -30,17 +30,20 @@ class Journal < ActiveRecord::Base
 
   def as_solr
     provider_titles = providers.collect{|p| p.title}
+    category_titles = categories.collect{|c| c.title_with_parent}
     {
       :id => solr_id,
       :title_display => title,
       :title_t => title,
+      :title_original_text => title,
       :title_sort => title,
       :issn_t => all_issns,
       :provider_facet => provider_titles,
       :provider_t => provider_titles,
       :publisher_t => "#{publisher_name} #{publisher_place}",
       :starts_with_facet => first_character_a_z,
-      :category_facet => categories.collect{|c| c.title_with_parent},
+      :category_facet => category_titles,
+      :category_t => category_titles
     }.reject{|key, value| value.blank?}
   end
 

@@ -6,9 +6,21 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
 
   configure_blacklight do |config|
+    # See http://wiki.apache.org/solr/DisMaxQParserPlugin for parameter descriptions
     config.default_solr_params = { 
       :qt => 'search',
-      :rows => 10 
+      :rows => 10,
+      :mm => "2<-1 5<-2 6<90%",
+      :qf => "issn_t^100000
+              title_unstem_search^100000
+              title_t^25000
+              title_original_text^1000
+              category_t^1000",
+      :pf => "title_unstem_search^1000000
+              title_t^250000
+              title_original_text^100000
+              category_t^100000",
+      :fl =>  "*"
     }
 
     # solr field configuration for search results/index views
