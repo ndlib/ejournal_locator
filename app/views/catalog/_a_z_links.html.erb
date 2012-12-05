@@ -1,6 +1,6 @@
 <p id="a_z_links">
   <strong>eJournal titles:</strong>
   <% (("A".."Z").to_a + ["0-9"]).each do |starts_with| %>
-    <%= link_to(starts_with, catalog_index_path(:f => {:starts_with_facet => [starts_with]})) %>
+    <%= link_to(starts_with, catalog_index_path(:f => {:starts_with_facet => [starts_with]}, :sort => "title_sort asc, score desc")) %>
   <% end %>
 </p>
