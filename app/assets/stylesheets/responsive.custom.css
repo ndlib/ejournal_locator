@@ -90,6 +90,12 @@ input, textarea, select, .uneditable-input {
   float: none;
 }
 
+#a_z_links {
+  font-size: 11px;
+}
+#a_z_links_content {
+  white-space: nowrap;
+}
 
 @media only screen and (max-width: 685px) {
   #bd #main {
@@ -224,5 +230,9 @@ input, textarea, select, .uneditable-input {
   #hd #user_util_links {
     font-size: 9px;
     float: left;
+  }
+
+  #a_z_links {
+    font-size: 9px;
   }
 }

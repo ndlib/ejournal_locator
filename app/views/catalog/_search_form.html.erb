@@ -1,5 +1,5 @@
+<%= journal_a_z_links() %>
 <div id="search" class="search">
-  <%= journal_a_z_links() %>
   <%= form_tag search_action_url, :method => :get do %>
     <h2 class="search"><%= label_tag(:q, t('blacklight.search.form.q')) %></h2>
     <%= text_field_tag :q, params[:q], :class => "q" %>
