@@ -7,4 +7,17 @@ module EjournalHelper
   def journal_a_z_links
     render :partial => "/catalog/a_z_links"
   end
+
+  def journal_catalog_url(search_term = "alldocuments")
+    catalog_params = {
+      :vid => "NDU",
+      :resetConfig => "true",
+      :tab => "nd_campus",
+      :fn => "search",
+      :fctN => "facet_rtype",
+      :fctV => "journals",
+      :"vl(freeText0)" => search_term
+    }
+    "http://onesearch.library.nd.edu/primo_library/libweb/action/search.do?" + catalog_params.to_query
+  end
 end
