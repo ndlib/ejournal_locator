@@ -1,6 +1,4 @@
-$ = jQuery
-
-$ ->
+jQuery ($) ->
   selected_categories = new Object
 
   $('#facets').find('div.blacklight-category_facet li').each ->
