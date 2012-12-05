@@ -10,7 +10,12 @@ class CatalogController < ApplicationController
     config.default_solr_params = { 
       :qt => 'search',
       :rows => 10,
-      :mm => "2<-1 5<-2 6<90%",
+      # Minimum match
+      #  1-2 terms: 100%
+      #  3-5 terms: 1 less than the total number of terms
+      #  6 terms: 2 less than the total number of terms
+      #  7+: 80%
+      :mm => "2<-1 5<-2 6<80%",
       :qf => "issn_t^100000
               title_unstem_search^100000
               title_t^25000
@@ -76,14 +81,14 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field 'issn_t', :label => 'ISSN:'
-    config.add_index_field 'category_facet', :label => 'Categories:'
+    config.add_index_field 'category_t', :label => 'Categories:'
     config.add_index_field 'publisher_t', :label => 'Publisher:'
     config.add_index_field 'provider_t', :label => 'Provider:'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display 
     config.add_show_field 'issn_t', :label => 'ISSN:'
-    config.add_show_field 'category_facet', :label => 'Categories:'
+    config.add_show_field 'category_t', :label => 'Categories:'
     config.add_show_field 'publisher_t', :label => 'Publisher:'
     config.add_show_field 'provider_t', :label => 'Provider:'
 
