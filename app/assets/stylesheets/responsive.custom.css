@@ -1,3 +1,7 @@
+#main {
+  min-height: 250px;
+}
+
 .sf-menu .sf-sub-indicator {
   display:none;
 }
