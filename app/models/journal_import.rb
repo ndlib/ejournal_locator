@@ -67,6 +67,17 @@ class JournalImport < ActiveRecord::Base
         journal.last_import_id = import.id
         
         journal.title = record.xpath("//datafield[@tag=245]").xpath("subfield[@code='a']").first.content
+        
+        journal.alternate_titles = []
+        record.xpath("//datafield[@tag=246]").each do |datafield|
+          journal.alternate_titles << datafield.xpath("subfield[@code='a']").first.content
+        end
+
+        journal.abbreviated_titles = []
+        record.xpath("//datafield[@tag=210]").each do |datafield|
+          journal.abbreviated_titles << datafield.xpath("subfield[@code='a']").first.content
+        end
+
         journal.publisher_place = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='a']").first.content rescue nil
         journal.publisher_name = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='b']").first.content rescue nil
         journal.issn = record.xpath("//datafield[@tag=22]").xpath("subfield[@code='a']").first.content.gsub(/[^0-9]/,"") rescue nil

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119222835) do
+ActiveRecord::Schema.define(:version => 20121205220124) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -84,18 +84,19 @@ ActiveRecord::Schema.define(:version => 20121119222835) do
   end
 
   create_table "journals", :force => true do |t|
-    t.string   "sfx_id",          :limit => 20
-    t.string   "issn",            :limit => 8
-    t.string   "alternate_issn",  :limit => 8
+    t.string   "sfx_id",             :limit => 20
+    t.string   "issn",               :limit => 8
+    t.string   "alternate_issn",     :limit => 8
     t.string   "title"
-    t.string   "alternate_title"
+    t.text     "alternate_titles"
     t.string   "display_title"
     t.string   "publisher_name"
     t.string   "publisher_place"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "first_import_id"
     t.integer  "last_import_id"
+    t.text     "abbreviated_titles"
   end
 
   add_index "journals", ["first_import_id"], :name => "index_journals_on_first_import_id"
