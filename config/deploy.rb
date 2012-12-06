@@ -115,6 +115,12 @@ namespace :deploy do
     run "curl -I http://#{site_url}"
   end
 
+  desc "Reload the Solr configuration"
+  task :reload_solr_core, :roles => :app do
+    solr_config = YAML.load_file("#{RAILS_ROOT}/config/solr.yml")[rails_env]
+    run "curl -I -A \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)\" #{solr_config[:url]}"
+  end
+
   desc "Run the migrate rake task"
   task :migrate, :roles => :app do
     run "cd #{release_path} && #{bundler} exec #{rake} RAILS_ENV=#{rails_env} db:migrate --trace"
@@ -141,5 +147,5 @@ namespace :bundle do
   end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', 'bundle:install', 'deploy:migrate'#, 'deploy:assets:precompile'
+after 'deploy:update_code', 'deploy:symlink_shared', 'bundle:install', 'deploy:migrate', 'deploy:reload_solr_core'#, 'deploy:assets:precompile'
 after 'deploy', 'deploy:cleanup', 'deploy:restart', 'deploy:kickstart'
