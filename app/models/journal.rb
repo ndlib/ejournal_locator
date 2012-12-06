@@ -39,6 +39,8 @@ class Journal < ActiveRecord::Base
       :title_t => title,
       :title_original_text => title,
       :title_sort => title,
+      :alternate_title_t => alternate_titles,
+      :abbreviated_title_t => abbreviated_titles,
       :issn_t => all_issns,
       :provider_facet => provider_titles,
       :provider_t => provider_titles,

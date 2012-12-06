@@ -19,10 +19,14 @@ class CatalogController < ApplicationController
       :qf => "issn_t^100000
               title_unstem_search^100000
               title_t^25000
+              alternate_title_t^10000
+              abbreviated_title_t^5000
               title_original_text^1000
               category_t^1000",
       :pf => "title_unstem_search^1000000
               title_t^250000
+              alternate_title_t^200000
+              abbreviated_title_t^150000
               title_original_text^100000
               category_t^100000",
       :fl =>  "*"
