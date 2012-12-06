@@ -117,7 +117,7 @@ namespace :deploy do
 
   desc "Reload the Solr configuration"
   task :reload_solr_core, :roles => :app do
-    solr_config = YAML.load_file("#{RAILS_ROOT}/config/solr.yml")[rails_env]
+    solr_config = YAML.load_file("#{release_path}/config/solr.yml")[rails_env]
     run "curl -I -A \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)\" #{solr_config[:url]}"
   end
 
