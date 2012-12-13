@@ -19,7 +19,7 @@ set :use_sudo, false
 #############################################################
 
 set :scm, 'git'
-set :scm_command,   '/usr/bin/git'
+set :scm_command,   '/shared/git/bin/git'
 set :repository, "git@git.library.nd.edu:ejournal_locator"
 # Set an environment variable to deploy from a branch other than master
 # branch=beta cap staging deploy
