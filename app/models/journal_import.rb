@@ -31,6 +31,31 @@ class JournalImport < ActiveRecord::Base
     puts "#{Time.now.strftime("%F %T")}: #{message}"
   end
 
+  def self.process_imports()
+    self.import_files.each do |file|
+      self.run_sfx_import(file)
+      self.archive_import_file(file)
+    end
+  end
+
+  def self.import_directory()
+    File.join(Rails.root, "import")
+  end
+
+  def self.archive_directory()
+    File.join(self.import_directory, "archive")
+  end
+
+  def self.import_files()
+    files = Dir.entries(self.import_directory).select {|f| f =~ /[.]xml-marc$/}
+    files.collect{|f| File.join(self.import_directory, f)}.sort{|a,b| File.mtime(a) <=> File.mtime(b)}
+  end
+
+  def self.archive_import_file(file)
+    archive_target = File.join(self.archive_directory, File.basename(file))
+    FileUtils.move(file, archive_target)
+  end
+
   def self.run_sfx_import(file)
     import = self.new
     import.save!
