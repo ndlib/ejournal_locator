@@ -11,10 +11,14 @@ class JournalImport < ActiveRecord::Base
     ActiveRecord::Base.logger = nil
     begin
       result = self.run_sfx_import(file)
+      import_message("Updating Solr")
+      Journal.update_solr
+      import_message("Solr Update Complete")
     rescue Exception => e
       ActiveRecord::Base.logger = original_logger
       raise e
     end
+
     ActiveRecord::Base.logger = original_logger
     result
   end
@@ -36,6 +40,10 @@ class JournalImport < ActiveRecord::Base
       self.run_sfx_import(file)
       self.archive_import_file(file)
     end
+
+    import_message("Updating Solr")
+    Journal.update_solr
+    import_message("Solr Update Complete")
   end
 
   def self.import_directory()
@@ -204,16 +212,6 @@ class JournalImport < ActiveRecord::Base
     import.provider_count = Provider.count
 
     import.save!
-
-    import_message("Updating Solr")
-    begin
-      Journal.update_solr
-    rescue Exception => e
-      import.error_text = e.message
-      import.save!
-      raise e
-    end
-    import_message("Solr Update Complete")
   end
 
   def self.each_node(file, import = nil)
