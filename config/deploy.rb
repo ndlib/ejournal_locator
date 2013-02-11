@@ -7,8 +7,8 @@ require 'lib/deploy/passenger'
 #############################################################
 #  Configuration
 #############################################################
-set :application, 'factotum'
-set :repository,  'git@git.library.nd.edu:factotum'
+set :application, 'ejournal_locator'
+set :repository,  'git@git.library.nd.edu:ejournal_locator'
 ssh_options[:keys] = %w(/shared/jenkins/.ssh/id_dsa)
 
 set :symlink_targets, [
