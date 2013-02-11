@@ -1,5 +1,7 @@
 h1.site_title {
   background: none;
+  font-size: 30px;
+  line-height: 30px;
   height: auto;
   width: auto;
 }
@@ -10,7 +12,6 @@ h1.site_title a {
   width: auto;
 }
 
-
 body {
   color: #333333;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -19,6 +20,12 @@ body {
   margin: 0;
   padding: 0;
   background: #2B5781;
+}
+
+h3 {
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: 18px;
 }
 
 #search {
@@ -178,4 +185,8 @@ body {
 
 #main_container table.zebra {
   width: 100%;
+}
+
+select, input, button, textarea {
+  font: inherit;
 }

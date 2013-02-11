@@ -2,10 +2,6 @@
   min-height: 250px;
 }
 
-.sf-menu .sf-sub-indicator {
-  display:none;
-}
-
 #facets .label {
   background: none;
   border-radius: 0;

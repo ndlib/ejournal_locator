@@ -1,28 +1,28 @@
 @font-face{ font-family: 'icons'; 
-    src: url('https://www.library.nd.edu/font/websymbols-regular-webfont.eot'); 
-    src: url('https://www.library.nd.edu/font/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'), 
-        url('https://www.library.nd.edu/font/websymbols-regular-webfont.woff') format('woff'), 
-        url('https://www.library.nd.edu/font/websymbols-regular-webfont.ttf') format('truetype'), 
-        url('https://www.library.nd.edu/font/websymbols-regular-webfont.svg#webfont') format('svg'); }
+    src: url('/assets/1.0/websymbols-regular-webfont.eot'); 
+    src: url('/assets/1.0/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'), 
+        url('/assets/1.0/websymbols-regular-webfont.woff') format('woff'), 
+        url('/assets/1.0/websymbols-regular-webfont.ttf') format('truetype'), 
+        url('/assets/1.0/websymbols-regular-webfont.svg#webfont') format('svg'); }
 
 /* -----------------------------------------
    Primary Library Template Structure
 ----------------------------------------- */
 body {
-  background-color: #2B5781;
+	background-color: #2B5781;
     color: #304962;
     font-family: "Helvetica Neue",Helvetica,Verdana,Arial,Helvetica,sans-serif;
 }
 
 .container {
-  margin: 0 auto;
+	margin: 0 auto;
 
 }
 
-.header {
-  background:url(https://www.library.nd.edu/local_css/images/header-home.jpg) no-repeat;
-  position:relative;
-  height: 90px;
+div.header {
+	background:url(/assets/1.0/header-home.jpg) no-repeat;
+	position:relative;
+	height: 90px;
 }
 
 .header h4, .header h3 {
@@ -30,7 +30,7 @@ body {
 }
 
 .header h4 a {
-  border: medium none;
+	border: medium none;
     display: block;
     position:absolute;
     left:0;
@@ -43,7 +43,7 @@ body {
 }
 
 .header h3 a {
-  border: medium none;
+	border: medium none;
     display: block;
     position:absolute;
     left:0;
@@ -97,7 +97,7 @@ body {
 }
 
 .breadcrumb, .content, .footer {
-  background:#F8F7E9;
+	background:#F8F7E9;
 }
 
 .footer {
@@ -196,17 +196,17 @@ dl.tabs dd {
 }
 
 dl.tabs dd:first-child {
-  margin-left:0;
+	margin-left:0;
 }
 
 dl.tabs dd a {
     color:#2B5781;
-  border: 1px solid #B1C6D3;
-  border-bottom:none;
-  border-radius:6px 6px 0 0 ;
-  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.7);
-  z-index:2;
-  position: relative;
+	border: 1px solid #B1C6D3;
+	border-bottom:none;
+	border-radius:6px 6px 0 0 ;
+	box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.7);
+	z-index:2;
+	position: relative;
     /*background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2FmY2FlNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjYwJSIgc3RvcC1jb2xvcj0iI2IwY2FlNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjYwJSIgc3RvcC1jb2xvcj0iIzljYmRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiMGNhZTQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);*/
 
     background: -moz-linear-gradient(top, #9bbcdd 0%, #9cbddd 60%, #b0cae4 56%, #b5cde6 100%); /* FF3.6+ */
@@ -218,7 +218,7 @@ dl.tabs dd a {
     font-size:13px;
     font-weight:bold;
     text-decoration:none;
-    behavior: url(https://www.library.nd.edu/js/responsive/PIE.htc);
+    behavior: url(/assets/1.0/PIE.htc);
     margin:0;
 }
 
@@ -236,14 +236,14 @@ ul.contained.tabs-content {
 }
 
 ul.contained.tabs-content > li{
-  background: none repeat scroll 0 0 #FFFFFF;
+ 	background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #B1C6D3;
     border-radius: 0px 14px 14px 14px;
     box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.7);
     padding: 35px 20px 14px;
     z-index:40;
     position: relative;
-    behavior: url(https://www.library.nd.edu/js/responsive/PIE.htc);
+    behavior: url(/assets/1.0/PIE.htc);
     
  }
 
@@ -270,7 +270,7 @@ ul.contained.tabs-content > li{
     Home Page
 ----------------- */
 
-.taupe-bg { background: url(https://www.library.nd.edu/css/images/taupe_bg.png) #f8f7e9 repeat-y top right ;  border-top: 2px solid #f3ede4;  border-bottom: 2px solid #f3ede4;  z-index:10; }
+.taupe-bg { background: url(/assets/1.0/taupe_bg.png) #f8f7e9 repeat-y top right ;  border-top: 2px solid #f3ede4;  border-bottom: 2px solid #f3ede4;  z-index:10; }
 
 #gallery {
     border: 1px solid #F5F3F2;
@@ -370,7 +370,7 @@ ul.contained.tabs-content > li{
 }
 
 .onesearch span {
-    background-image: url("https://www.library.nd.edu/local_images/onesearch.png");
+    background-image: url("/assets/1.0/onesearch.png");
     background-position:0px 0px;
     background-repeat: no-repeat;
     height: 0 !important;
@@ -384,7 +384,7 @@ ul.contained.tabs-content > li{
 
 
 .ndcatalog span {
-    background-image: url("https://www.library.nd.edu/local_images/ndcatalog.png");
+    background-image: url("/assets/1.0/ndcatalog.png");
     background-position:0px 0px;
     background-repeat: no-repeat;
     height: 0 !important;
@@ -428,7 +428,7 @@ ul.contained.tabs-content > li{
 #tab_box fieldset {margin:0; padding:0; border:none;}
 #tab_box form {margin-bottom:1em;}
 #tab_box p.about-tab {margin-bottom:0; text-align:right; position:absolute; bottom: 15px; right: 15px; border:1px solid #DDD; padding: .3em; }
-#tab_box p.about-tab a {padding:3px 6px 3px 20px; background:url('https://www.library.nd.edu/css/images/info.gif') 5px center no-repeat; }
+#tab_box p.about-tab a {padding:3px 6px 3px 20px; background:url('/assets/1.0/info.gif') 5px center no-repeat; }
 #tab_box p.about-tab a:hover {background-color:#e9f0f8;}
 #tab_box select {width:190px;}
 #tab_box input.srch-box {padding:.5em 0; width:230px;}
@@ -472,7 +472,7 @@ li.tb a{
 }
 
 li.tb .menu_center{
-    background:url(https://www.library.nd.edu/css/images/tabs/center_tab_lb.png) repeat-x;
+    background:url(/assets/1.0/center_tab_lb.png) repeat-x;
 
 }
 
@@ -503,11 +503,19 @@ li.tb .menu_center{
     text-decoration: none;
     color: #666;
     padding-right:13px;
-    background: url(https://www.library.nd.edu/local_images/off.gif) no-repeat right;
+    background: url(/assets/1.0/off.gif) no-repeat right;
 }
 
 .default a.on, .default .active {
-    background-image: url(https://www.library.nd.edu/local_images/on.gif);
+    background-image: url(/assets/1.0/on.gif);
+}
+
+.content li a:link {
+    text-decoration: none;
+}
+
+.content a:hover {
+    text-decoration: underline;
 }
 
 /* -----------------------------------------
@@ -525,7 +533,7 @@ li.tb .menu_center{
     -moz-border-radius: 14px;
     border-radius:14px;
     box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.7);
-    behavior: url(https://www.library.nd.edu/js/responsive/PIE.htc);
+    behavior: url(/assets/1.0/PIE.htc);
     padding:14px;
     z-index:20;
     margin-bottom:1.12em;
@@ -572,17 +580,17 @@ li.tb .menu_center{
 .gritter-item-wrapper {
     position:relative;
     margin:0 0 10px 0;
-    background:url('https://www.library.nd.edu/local_images/ie-spacer.gif'); /* ie7/8 fix */ 
+    background:url('/local_images/ie-spacer.gif'); /* ie7/8 fix */ 
 }
 .gritter-top {
-    background:url(https://www.library.nd.edu/local_images/gritter.png) no-repeat left -30px;
+    background:url(/assets/1.0/gritter.png) no-repeat left -30px;
     height:10px;
 }
 .hover .gritter-top {
     background-position:right -30px;
 }
 .gritter-bottom {
-    background:url(https://www.library.nd.edu/local_images/gritter.png) no-repeat left bottom;
+    background:url(/assets/1.0/gritter.png) no-repeat left bottom;
     height:8px;
     margin:0;
 }
@@ -591,7 +599,7 @@ li.tb .menu_center{
 }
 .gritter-item {
     display:block;
-    background:url(https://www.library.nd.edu/local_images/gritter.png) no-repeat left -40px;
+    background:url(/assets/1.0/gritter.png) no-repeat left -40px;
     color:#eee;
     padding:2px 11px 0px 11px;
     font-size: 11px;
@@ -611,7 +619,7 @@ li.tb .menu_center{
     position:absolute;
     top:5px;
     left:3px;
-    background:url(https://www.library.nd.edu/local_images/gritter.png) no-repeat left top;
+    background:url(/assets/1.0/gritter.png) no-repeat left top;
     cursor:pointer;
     width:30px;
     height:30px;
@@ -641,7 +649,7 @@ li.tb .menu_center{
 .gritter-light .gritter-bottom,
 .gritter-light .gritter-top,
 .gritter-light .gritter-close {
-    background-image: url(https://www.library.nd.edu/local_images/gritter-light.png);
+    background-image: url(/assets/1.0/gritter-light.png);
     color: #222;
 }
 .gritter-light .gritter-title {
@@ -792,22 +800,18 @@ td {
         border-width: 1px;
         speak:none;
         padding: 4px 7px;
-        visibility: hidden;
     }
 }
 
 /*Phone Styles */
 
 @media only screen and (max-width: 480px) { 
-    .search-toggle {
-      visibility: visible;
-    }
 
     .container {
-        padding:0 10px;
+        padding:10px 10px 0;
     }
     
-    .header {
+    div.header {
         height:45px;
         background-size:auto 100%;
     }
@@ -927,7 +931,10 @@ td {
 
     
 
-
+    h1 {
+        font-size:20px;
+        line-height: 24px;
+    }
 
 
 
@@ -943,6 +950,10 @@ td {
         -webkit-box-sizing:border-box;
         box-sizing:border-box;
         margin-bottom: 1.12em;
+    }
+
+    table {
+        width:100%;
     }
 
 }

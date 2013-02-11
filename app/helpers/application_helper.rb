@@ -1,37 +1,34 @@
 module ApplicationHelper
-
-  # Includes the relevant library SSI file from http://www.library.nd.edu/ssi/<filename>.shtml
-  def include_ssi(filename)
-    render :partial => "/layouts/include_ssi", :locals => {:filename => filename}
+  def success
+    flash[:success]
   end
 
-  def read_ssi_file(filename)
-    require 'open-uri'
-    ssi_url = "http://www.library.nd.edu/ssi/#{filename}.shtml"
-    f = open(ssi_url, "User-Agent" => "Ruby/#{RUBY_VERSION}")
-    contents = f.read
-    if filename == "js"
-      contents = clean_ssi_js(contents)
+  def display_notices
+    content = raw("")
+    if notice
+      content += content_tag(:div, notice, class: "alert alert-info")
     end
-    contents = contents.gsub(/(href|src)="\//,"\\1=\"https://www.library.nd.edu/")
-    contents
+    if alert
+      content += content_tag(:div, alert, class: "alert")
+    end
+    if success
+      content += content_tag(:div, success, class: "alert alert-success")
+    end
+    content_tag(:div, content, id: "notices")
   end
 
-  # Since we're in the context of a Rails application with its own javascript assets, we want to remove any library site javascripts we don't need
-  def clean_ssi_js(contents)
-    # Remove jquery, but not the colorbox script.
-    cleaned = contents.gsub(/^.*jquery(?!.*colorbox.*).*$/,"")
-    # Remove simplegallery
-    cleaned = cleaned.gsub(/^.*simplegallery.*$/,"")
-    cleaned
+  def content_title(title)
+    content_for(:content_title, content_tag(:h1, title))
   end
 
-  def responsive_header
-    render :partial => "/layouts/header"
+  def content_title_links(*links)
+    content_for(:content_title_links, raw(links.join(" ")))
   end
 
-  def responsive_footer
-    render :partial => "/layouts/footer"
+  def breadcrumb(*crumbs)
+    crumbs.unshift(link_to(application_name, root_path))
+    crumbs.unshift(link_to("Hesburgh Libraries", "https://www.library.nd.edu"))
+    content_for(:breadcrumb, raw(crumbs.join(" &gt; ")))
   end
 
   def google_analytics_account

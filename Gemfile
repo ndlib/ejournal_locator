@@ -12,6 +12,7 @@ gem 'json'
 gem 'jquery-rails', '~> 2.1.4'
 gem 'mysql2'
 gem 'nokogiri'
+gem 'twitter-bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

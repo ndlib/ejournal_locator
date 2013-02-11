@@ -1,36 +1,64 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title><%= "#{@page_title || application_name}".html_safe %> // Hesburgh Libraries // University of Notre Dame</title>
     <meta name="description" content="Information resources and collections of the Hesburgh Libraries, University of Notre Dame." />
-    <link rel="shortcut icon" href="http://www.library.nd.edu/favicon.ico" />
-    <link href="<%= opensearch_catalog_path(:format => 'xml', :only_path => false) %>" title="<%= application_name%>" type="application/opensearchdescription+xml" rel="search"/>
-    <%= include_ssi("css") %>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <%= stylesheet_link_tag    "1.0/index.css", :media => "all" %>
+    <!--[if lte IE 9]>
+      <%= stylesheet_link_tag    "1.0/ie.css", :media => "all" %>
+    <![endif]-->
+    <%= javascript_include_tag "1.0/index.js" %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
-    <%= include_ssi("js") %>
     <%= csrf_meta_tags %>
     <%= raw(render_head_content) %>
   </head>
-  <% onload_text = "$('input#q').focus();" if params[:q].to_s.empty? and params[:f].to_s.empty? and params[:id].nil? %>
-  <body onload="<%= onload_text %>" class="<%= render_body_class.html_safe %>">
-    <div id="wrapper" class="outter">
-      <%= include_ssi("skip-links") %>
-      <div id="header" class="outter">
-        <%= include_ssi("header") %>
-      </div> <!-- End #header -->
-      <div id="main-menu" class="outter">
-        <%= include_ssi("main-menu") %>
-      </div><!-- End main-menu -->
-      <div id="content_wrapper" class="outter">
-        <div id="content" class="container">
-          <div id="crumbs" class="span-24 last"><!-- TemplateBeginEditable name="crumbs" --><a href="/">Hesburgh Libraries</a> &gt; <!-- TemplateEndEditable --> <%= application_name %></div>
-          </div>
+  <body>
+    <div class="container">
+      <div class="row header">
+        <div class="twelve columns">
+          <%= include_ssi("/local_ssi/responsive/header.shtml") %>
+        </div>
+      </div>
+      <div class="row menu">
+        <div class="twelve columns">
+          <%= include_ssi("/ssi/main-menu.shtml") %>
+        </div>
+      </div>
+      <div class="row breadcrumb hide-on-phones">
+        <div class="twelve columns">
+          <%
+          if !content_for?(:breadcrumb)
+            breadcrumb()
+          end
+          %>
+          <p><%= content_for(:breadcrumb) %></p>
+        </div>
       </div>
       <div class="row content">
-        <div class="twelve columns">
-          <div class="container">
+        <div class="container">
+          <% if content_for?(:left_column) %>
+            <div class="three columns">
+              <%= content_for(:left_column) %> 
+            </div>
+          <% end %>
+          <%
+          content_width = 12
+          if content_for?(:left_column)
+            content_width -= 3
+          end
+          if content_for?(:right_column)
+            content_width -= 4
+          end
+          if content_for?(:right_column_wide)
+            content_width -= 5
+          end
+          %>
+          <div class="<%= number_to_word(content_width) %> columns">
             <div id="hd">
               <div id="logo">
                 <h1 class="site_title"><%= link_to "eJournal Locator", "/" %><%= (params[:controller] == "catalog" and !params[:id]) ? "<span id='results_text'>Search Results</span>".html_safe : "" %></h1>
@@ -48,10 +76,20 @@
               </div>
               <div id="sidebar"><%= sidebar_items.join('').html_safe %></div>
             </div>
-
-        </div> <!-- end content-col -->
+          </div>
+          <% if content_for?(:right_column) %>
+            <div class="four columns">
+              <%= content_for(:right_column) %> 
+            </div>
+          <% end %>
+          <% if content_for?(:right_column_wide) %>
+            <div class="five columns">
+              <%= content_for(:right_column_wide) %> 
+            </div>
+          <% end %>
+        </div>
       </div>
-      <%= include_ssi("footer") %>
-    </div><!-- End #wrapper -->
+      <%= include_ssi("/local_ssi/responsive/footer.shtml") %>
+    </div>
   </body>
 </html>
