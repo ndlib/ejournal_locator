@@ -61,6 +61,8 @@ module EjournalLocator
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.cache_store = :memory_store
+
     config.middleware.use ExceptionNotifier,
       :email_prefix => "[Ejournal Locator #{Rails.env}] ",
       :sender_address => %{"Ejournal Locator Notifier" <ejl@library.nd.edu>},
