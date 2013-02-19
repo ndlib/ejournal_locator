@@ -94,7 +94,6 @@ class Journal < ActiveRecord::Base
   def self.update_solr(group_size = 1000)
     current_offset = 0
     journals = self.active
-    journals = self
     journal_count = journals.count
     while current_offset <= journal_count
       journal_hashes = []
