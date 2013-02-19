@@ -84,14 +84,14 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'issn_t', :label => 'ISSN:'
+    config.add_index_field 'issn_display', :label => 'ISSN:'
     config.add_index_field 'category_t', :label => 'Categories:'
     config.add_index_field 'publisher_t', :label => 'Publisher:'
     config.add_index_field 'provider_t', :label => 'Provider:'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display 
-    config.add_show_field 'issn_t', :label => 'ISSN:'
+    config.add_show_field 'issn_display', :label => 'ISSN:'
     config.add_show_field 'category_t', :label => 'Categories:'
     config.add_show_field 'publisher_t', :label => 'Publisher:'
     config.add_show_field 'provider_t', :label => 'Provider:'

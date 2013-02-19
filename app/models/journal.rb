@@ -19,6 +19,14 @@ class Journal < ActiveRecord::Base
     [issn, alternate_issn].reject{|value| value.blank?}
   end
 
+  def search_issns
+    all_issns + display_issns
+  end
+
+  def display_issns
+    all_issns.collect{|i| i.to_s.gsub(/([0-9]{4})([0-9]{4})/,"\\1-\\2")}
+  end
+
   def first_character_a_z
     first_char = title.gsub(/^the /i,"").gsub(/["'()+:;\[\]<>]/,"").mb_chars[0,1].decompose[0,1].upcase
     if first_char =~ /[A-Z]/
@@ -41,13 +49,15 @@ class Journal < ActiveRecord::Base
       :title_sort => title,
       :alternate_title_t => alternate_titles,
       :abbreviated_title_t => abbreviated_titles,
-      :issn_t => all_issns,
+      :issn_t => search_issns,
+      :issn_display => display_issns,
       :provider_facet => provider_titles,
       :provider_t => provider_titles,
       :publisher_t => "#{publisher_name} #{publisher_place}",
       :starts_with_facet => first_character_a_z,
       :category_facet => category_titles,
-      :category_t => category_titles
+      :category_t => category_titles,
+      :last_import_id_i => (last_import_id || 0)
     }.reject{|key, value| value.blank?}
   end
 
@@ -68,12 +78,27 @@ class Journal < ActiveRecord::Base
     Blacklight.solr.commit
   end
 
+  def self.active
+    where(last_import_id: self.last_import_id)
+  end
+
+  def self.last_import_id
+    self.maximum(:last_import_id)
+  end
+
+  def self.delete_inactive_journals_from_solr
+    Blacklight.solr.delete_by_query("last_import_id_i:[* TO #{self.last_import_id.to_i - 1}]")
+    Blacklight.solr.commit
+  end
+
   def self.update_solr(group_size = 1000)
     current_offset = 0
-    journal_count = self.count
+    journals = self.active
+    journals = self
+    journal_count = journals.count
     while current_offset <= journal_count
       journal_hashes = []
-      self.order(:id).includes(:providers, :categories => [:parent]).limit(group_size).offset(current_offset).each do |journal|
+      journals.order(:id).includes(:providers, :categories => [:parent]).limit(group_size).offset(current_offset).each do |journal|
         journal_hashes << journal.as_solr
       end
       Blacklight.solr.add(journal_hashes)
@@ -81,5 +106,7 @@ class Journal < ActiveRecord::Base
     end
 
     Blacklight.solr.commit
+
+    self.delete_inactive_journals_from_solr
   end
 end
