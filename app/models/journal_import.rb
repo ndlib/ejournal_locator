@@ -105,6 +105,10 @@ class JournalImport < ActiveRecord::Base
         record.xpath("//datafield[@tag=246]").each do |datafield|
           journal.alternate_titles << datafield.xpath("subfield[@code='a']").first.content
         end
+        # SFX includes some romanized titles in 945 m
+        record.xpath("//datafield[@tag=945]").each do |datafield|
+          journal.alternate_titles << datafield.xpath("subfield[@code='m']").first.content
+        end
 
         journal.abbreviated_titles = []
         record.xpath("//datafield[@tag=210]").each do |datafield|
