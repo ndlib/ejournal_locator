@@ -131,7 +131,7 @@ Capistrano::Configuration.instance(:must_exist).load do
 
     desc "Spool up Passenger spawner to keep user experience speedy"
     task :kickstart do
-      run "curl -I -A \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)\" http://#{domain}"
+      run "curl -I --user-agent \"DeployKickstart\" http://#{domain}"
     end
 
     desc "Precompile assets"
