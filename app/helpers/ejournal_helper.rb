@@ -23,4 +23,12 @@ module EjournalHelper
     end
     "http://onesearch.library.nd.edu/primo_library/libweb/action/search.do?" + catalog_params.to_query
   end
+
+  # link_to_document(doc, :label=>'VIEW', :counter => 3)
+  # Override the default blacklight link_to_document to create a link to the findtext page for a specific item.
+  def link_to_document(doc, opts={:label=>nil, :counter => nil, :results_view => true})
+    opts[:label] ||= blacklight_config.index.show_link.to_sym
+    label = render_document_index_label doc, opts
+    link_to label, findtext_url(doc), { :'data-counter' => opts[:counter] }.merge(opts.reject { |k,v| [:label, :counter, :results_view].include? k  })
+  end
 end

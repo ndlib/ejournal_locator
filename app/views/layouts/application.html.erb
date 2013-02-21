@@ -70,11 +70,11 @@
             <div id="bd">
               <div id="main">
                 <div id="main_container">
+                  <%= render_search_bar %>
                   <%= render :partial=>'/flash_msg' %>
                   <%= yield %>
                 </div>
               </div>
-              <div id="sidebar"><%= sidebar_items.join('').html_safe %></div>
             </div>
           </div>
           <% if content_for?(:right_column) %>
