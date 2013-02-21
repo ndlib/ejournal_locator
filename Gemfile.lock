@@ -285,6 +285,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   blacklight
+  bootstrap-sass
   capistrano (~> 2.8.0)
   capybara
   coffee-rails (~> 3.2.1)

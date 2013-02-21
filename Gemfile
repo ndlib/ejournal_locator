@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 
 gem 'blacklight'
+gem 'bootstrap-sass' # used by blacklight
 gem 'capistrano', '~> 2.8.0'
 gem 'devise'
 gem 'devise_cas_authenticatable'
@@ -14,7 +15,7 @@ gem 'jquery-rails', '~> 2.1.4'
 gem 'mysql2'
 gem 'nokogiri'
 gem 'twitter-bootstrap-rails'
-gem 'unicode' # used by bootstrap
+gem 'unicode' # used by blacklight
 
 # Gems used only for assets and not required
 # in production environments by default.
