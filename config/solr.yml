@@ -18,6 +18,6 @@ test: &test
 pre_production:
   url: http://solr41pprd.library.nd.edu:8080/solr/ejournal-locator
 production:
-  url: http://solr36prod.library.nd.edu:8080/solr/ejournal-locator
+  url: http://solr41prod.library.nd.edu:8080/solr/ejournal-locator
 cucumber:
   <<: *test
