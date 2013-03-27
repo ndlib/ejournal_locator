@@ -1,0 +1,131 @@
+<!--
+  Generally located in
+  <branch>/local_ssi/search.shtml
+  Branches:
+  main
+-->
+
+  <li class="tab_jou ui-tabs ui-tabs-hide" id="tab_jouTab">
+    <form action="http://ejl.library.nd.edu/catalog" method="get">
+      <fieldset>
+        <span class="legend">Find a specific journal</span>
+        <input id="journals_search" class="srch-box long" type="text" name="q" value="" />
+        <button type="submit" class="searchbtn btn">Search</button>
+
+      </fieldset>
+    </form>
+
+    <ul class="extra-links">
+      <li><a href="http://ejl.library.nd.edu/">Advanced search</a></li>
+      <li><a href="http://eresources.library.nd.edu/ejournals/alljournals">All journals</a></li>
+    </ul>
+    <p class="about-tab">
+      <a href="/expl/expl-jou.shtml">About e-Journals</a>
+    </p>
+  </li>
+
+
+<!--
+  Branches:
+  vrc
+  engineering
+  kkic
+  mathematics
+  medieval
+  radlab
+-->
+
+  <div class="tab_jou">
+    <form action="http://ejl.library.nd.edu/catalog" method="get">
+      <fieldset>
+        <span class="legend">Find a specific journal</span>
+        <input id="journals_search" class="srch-box long" type="text" name="q" value="" />
+        <button type="submit" class="searchbtn btn">Search</button>
+
+      </fieldset>
+    </form>
+
+    <ul class="extra-links">
+      <li><a href="http://ejl.library.nd.edu/">Advanced search</a></li>
+      <li><a href="http://eresources.library.nd.edu/ejournals/alljournals">All journals</a></li>
+    </ul>
+    <p class="about-tab">
+      <a href="/expl/expl-jou.shtml">About e-Journals</a>
+    </p>
+  </div>
+
+<!--
+  Branches:
+  bic
+-->
+
+  <div class="tab_jou">
+    <form action="http://ejl.library.nd.edu/catalog" method="get">
+      <fieldset>
+        <span class="legend">Find a specific journal, magazine, or trade publication</span>
+        <input id="journals_search" class="srch-box long" type="text" name="q" value="" />
+        <button type="submit" class="searchbtn btn">Search</button>
+
+      </fieldset>
+    </form>
+
+    <ul class="extra-links">
+      <li><a href="http://ejl.library.nd.edu/">Advanced search</a></li>
+      <li><a href="http://eresources.library.nd.edu/ejournals/alljournals">All journals</a></li>
+    </ul>
+    <p class="about-tab">
+      <a href="/expl/expl-jou.shtml">About e-Journals</a>
+    </p>
+  </div>
+
+<!--
+  Branches
+  chemistry
+-->
+  <div class="tab_jou">
+    <form action="http://ejl.library.nd.edu/catalog" method="get">
+      <fieldset>
+        <span class="legend">Find a specific journal</span>
+        <input id="journals_search" class="srch-box long" type="text" name="q" value="" />
+        <button type="submit" class="searchbtn btn">Search</button>
+
+      </fieldset>
+    </form>
+    <ul class="extra-links">
+      <li>Chemistry/Physics journals:
+            <span id="atoz">
+                 <a href="http://chemistry.library.nd.edu/resources/web-journals/a.shtml">A</a>
+            <a href="http://chemistry.library.nd.edu/resources/web-journals/b.shtml">B</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/c.shtml">C</a>
+                <a href="http://chemistry.library.nd.edu/resources/web-journals/d.shtml">D</a>
+                <a href="http://chemistry.library.nd.edu/resources/web-journals/e.shtml">E</a>
+                 <a href="http://chemistry.library.nd.edu/resources/web-journals/f.shtml">F</a>
+                <a href="http://chemistry.library.nd.edu/resources/web-journals/g.shtml">G</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/h.shtml">H</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/i.shtml">I</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/j.shtml">J</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/k.shtml">K</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/l.shtml">L</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/m.shtml">M</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/n.shtml">N</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/o.shtml">O</a>
+                  <a href="/resources/web-journals/p2.shtml">P</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/q.shtml">Q</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/r.shtml">R</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/s.shtml">S</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/t.shtml">T</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/u.shtml">U</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/v.shtml">V</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/w.shtml">W</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/x.shtml">X</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/y.shtml">Y</a>
+                  <a href="http://chemistry.library.nd.edu/resources/web-journals/z.shtml">Z</a>
+      </span>
+      </li><br />
+      <li><a href="http://ejl.library.nd.edu/">Advanced search</a></li>
+
+      </ul>
+    <p class="about-tab">
+      <a href="/expl/expl-jou.shtml">About Journals</a>
+      </p>
+  </div>
