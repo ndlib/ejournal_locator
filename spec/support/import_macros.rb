@@ -68,6 +68,14 @@ module ImportMacros
     end
   end
 
+  def import_test_file(contents = nil)
+    test_file = File.join(Rails.root,'tmp','import.xml')
+    if contents.present?
+      File.open(test_file,'w') { |file| file.write(contents)}
+    end
+    test_file
+  end
+
   class JournalToXML
     attr_accessor :journal, :options, :record
 

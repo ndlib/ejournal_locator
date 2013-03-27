@@ -7,20 +7,34 @@ describe JournalImport do
       it "succeeds" do
         expect(Journal.count).to be == 0
         journal = build_journal_xml()
-        import_xml = build_import_xml(journal)
-        test_file = File.join(Rails.root,'tmp','import.xml')
-        File.open(test_file,'w') { |file| file.write(import_xml)}
-        subject.run_sfx_import(test_file)
+        import_test_file(build_import_xml(journal))
+        subject.run_sfx_import(import_test_file)
         expect(Journal.count).to be == 1
       end
 
-      it "sets the title" do
-        journal = FactoryGirl.build(:journal, title: 'Test')
-        import_xml = journal_to_xml(journal)
-        test_file = File.join(Rails.root,'tmp','import.xml')
-        File.open(test_file,'w') { |file| file.write(import_xml)}
-        subject.run_sfx_import(test_file)
-        expect(Journal.first.title).to be == journal.title
+      describe 'sets the value of' do
+        before do
+          @journal = FactoryGirl.build(:journal)
+        end
+
+        def import_journal(journal)
+          import_test_file(journal_to_xml(journal))
+          subject.run_sfx_import(import_test_file)
+        end
+
+        {
+          title: 'Test',
+          issn: '12345678',
+          alternate_issn: '87654321',
+          sfx_id: '12345',
+
+        }.each do |field,value|
+          it field do
+            @journal.send("#{field}=", value)
+            import_journal(@journal)
+            expect(Journal.first.send(field)).to be == @journal.send(field)
+          end
+        end
       end
     end
   end
