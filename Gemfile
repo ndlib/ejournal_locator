@@ -27,7 +27,30 @@ end
 gem "compass-rails", "~> 1.0.0", :group => :assets
 gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
 
+group :development do
+  gem "better_errors"
+end
+
 group :test, :development do
+  gem 'pry-rails' # Debugger replacements.  Use "binding.pry" where you would use "debugger"
   gem 'rspec-rails'
-  gem 'pry-rails'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'factory_girl_rails', :require => false
+
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
+
+  gem 'guard-rspec'
+  gem 'guard-coffeescript'
+  gem 'guard-rails'
+  gem 'guard-bundler'
+  gem 'guard-spork'
+
+  gem 'faker'
+  gem 'growl'
+  gem 'rb-readline'
 end
