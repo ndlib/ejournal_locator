@@ -1,4 +1,6 @@
 module ImportMacros
+  require 'builder'
+
   DEFAULT_OPTIONS = {
     leader: "-----nas-a2200000z--4500",
     controlfield: "121016uuuuuuuuuxx-uu-|------u|----|jpn-d",
@@ -43,11 +45,13 @@ module ImportMacros
     journal
   end
 
-  def build_journal_xml_for_journal(journal = nil)
+  def journal_to_xml(journal = nil)
     if journal.nil?
       journal = FactoryGirl.build(:journal)
     end
-
+    records_xml do |collection|
+      JournalToXML.new(journal).to_xml(collection)
+    end
   end
 
   def build_import_xml(records_string)
@@ -56,68 +60,46 @@ module ImportMacros
     import
   end
 
+  def records_xml
+    xml = Builder::XmlMarkup.new( :indent => 2 )
+    xml.instruct!
+    xml.collection xmlns: "http://www.loc.gov/MARC21/slim" do |collection|
+      yield collection
+    end
+  end
+
   class JournalToXML
-    require 'builder'
-    attr_accessor :journal, :options
+    attr_accessor :journal, :options, :record
 
     def initialize(journal, options = {})
       self.journal = journal
       self.options = options.reverse_merge!(DEFAULT_OPTIONS)
     end
 
-    def to_xml
-      xml = Builder::XmlMarkup.new( :indent => 2 )
-      xml.record do |r|
-        r.leader(options[:leader])
-        r.controlfield(options[:controlfield], tag: "008")
-        datafield(r, "245", a: journal.title)
+    def to_xml(xml = nil)
+      if xml.nil?
+        xml = Builder::XmlMarkup.new( :indent => 2 )
+      end
+      xml.record do |record|
+        self.record = record
+        record.leader(options[:leader])
+        record.controlfield(options[:controlfield], tag: "008")
+        datafield("245", a: journal.title)
         journal.alternate_titles.each do |title|
-          datafield(r, "246", a: title)
+          datafield("246", a: title)
         end
         journal.abbreviated_titles.each do |title|
-          datafield(r,"210", a: title)
+          datafield("210", a: title)
         end
-      end
-    end
-
-    def datafield(xml, tag, subfields)
-      xml.datafield(tag: tag, ind1: '', ind2: '') do |d|
-        subfields.each do |code, value|
-          d.subfield(value, code: code)
+        datafield('260', a: journal.publisher_place, b: journal.publisher_name)
+        datafield('022', a: journal.issn)
+        if journal.alternate_issn
+          datafield('776', x: journal.alternate_issn)
         end
+        datafield('090', a: journal.sfx_id)
       end
+      xml
     end
-
-  #   <leader>LEADER</leader>
-  # <controlfield tag="008">CONTROLFIELD</controlfield>
-  # <datafield tag="245" ind1="" ind2="">
-  #  <subfield code="a">TITLE</subfield>
-  # </datafield>
-  # <datafield tag="246" ind1="" ind2="">
-  #  <subfield code="a">ALTERNATE_TITLE</subfield>
-  # </datafield>
-  # <datafield tag="246" ind1="" ind2="">
-  #  <subfield code="a">ALTERNATE_TITLE_2</subfield>
-  # </datafield>
-  # <datafield tag="210" ind1="" ind2="">
-  #  <subfield code="a">ABBREVIATED_TITLE</subfield>
-  # </datafield>
-  # <datafield tag="210" ind1="" ind2="">
-  #  <subfield code="a">ABBREVIATED_TITLE_2</subfield>
-  # </datafield>
-  # <datafield tag="260" ind1="" ind2="">
-  #  <subfield code="a">PUBLISHER_PLACE</subfield>
-  #  <subfield code="b">PUBLISHER_NAME</subfield>
-  # </datafield>
-  # <datafield tag="022" ind1="" ind2="">
-  #  <subfield code="a">ISSN</subfield>
-  # </datafield>
-  # <datafield tag="776" ind1="" ind2="">
-  #  <subfield code="x">ALTERNATE_ISSN</subfield>
-  # </datafield>
-  # <datafield tag="090" ind1="" ind2="">
-  #  <subfield code="a">SFX_ID</subfield>
-  # </datafield>
   # <datafield tag="945" ind1="" ind2="">
   #  <subfield code="m">ROMANIZED_TITLE</subfield>
   # </datafield>
@@ -140,5 +122,12 @@ module ImportMacros
   #  <subfield code="x">SUBCATEGORY_2</subfield>
   # </datafield>
 
+    def datafield(tag, subfields)
+      self.record.datafield(tag: tag, ind1: '', ind2: '') do |d|
+        subfields.each do |code, value|
+          d.subfield(value, code: code)
+        end
+      end
+    end
   end
 end
