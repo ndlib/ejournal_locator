@@ -1,0 +1,53 @@
+ <record>
+  <leader>LEADER</leader>
+  <controlfield tag="008">CONTROLFIELD</controlfield>
+  <datafield tag="245" ind1="" ind2="">
+   <subfield code="a">TITLE</subfield>
+  </datafield>
+  <datafield tag="246" ind1="" ind2="">
+   <subfield code="a">ALTERNATE_TITLE</subfield>
+  </datafield>
+  <datafield tag="246" ind1="" ind2="">
+   <subfield code="a">ALTERNATE_TITLE_2</subfield>
+  </datafield>
+  <datafield tag="210" ind1="" ind2="">
+   <subfield code="a">ABBREVIATED_TITLE</subfield>
+  </datafield>
+  <datafield tag="210" ind1="" ind2="">
+   <subfield code="a">ABBREVIATED_TITLE_2</subfield>
+  </datafield>
+  <datafield tag="260" ind1="" ind2="">
+   <subfield code="a">PUBLISHER_PLACE</subfield>
+   <subfield code="b">PUBLISHER_NAME</subfield>
+  </datafield>
+  <datafield tag="022" ind1="" ind2="">
+   <subfield code="a">ISSN</subfield>
+  </datafield>
+  <datafield tag="776" ind1="" ind2="">
+   <subfield code="x">ALTERNATE_ISSN</subfield>
+  </datafield>
+  <datafield tag="090" ind1="" ind2="">
+   <subfield code="a">SFX_ID</subfield>
+  </datafield>
+  <datafield tag="945" ind1="" ind2="">
+   <subfield code="m">ROMANIZED_TITLE</subfield>
+  </datafield>
+  <datafield tag="945" ind1="" ind2="">
+   <subfield code="m">ROMANIZED_TITLE_2</subfield>
+  </datafield>
+  <datafield tag="866" ind1="" ind2="">
+   <subfield code="a">AVAILABILITY</subfield>
+   <subfield code="s">1000000000002132</subfield>
+   <subfield code="t">1000000000001480</subfield>
+   <subfield code="x">PROVIDER_NAME:Full Text</subfield>
+   <subfield code="z">AVAILABILITY_ID</subfield>
+  </datafield>
+  <datafield tag="650" ind1="" ind2="4">
+   <subfield code="a">CATEGORY</subfield>
+   <subfield code="x">SUBCATEGORY</subfield>
+  </datafield>
+  <datafield tag="650" ind1="" ind2="4">
+   <subfield code="a">CATEGORY_2</subfield>
+   <subfield code="x">SUBCATEGORY_2</subfield>
+  </datafield>
+ </record>

@@ -44,6 +44,8 @@ Spork.prefork do
     config.include LoginMacros, :type => :view
     config.include Devise::TestHelpers, :type => :helper
     config.include LoginMacros, :type => :helper
+
+    config.include ImportMacros
   end
 end
 
