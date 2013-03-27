@@ -26,14 +26,19 @@ module ImportMacros
     [:alternate_titles, :abbreviated_titles, :romanized_titles].each do |array_key|
       singular_key = array_key.to_s.singularize
       if !options.has_key?(singular_key)
-        options[singular_key] = options[array_key][0]
-        options["#{singular_key}_2"] = options[array_key][1]
+        array = options[array_key]
+        if array[0]
+          options[singular_key] = array[0]
+          if array[1]
+            options["#{singular_key}_2"] = array[1]
+          end
+        end
       end
       options.delete(array_key)
     end
     journal = File.read(File.join(Rails.root,'spec','files','template_journal.xml'))
     options.each do |key,value|
-      journal.gsub!(/(?![a-zA-Z_])#{key.to_s.upcase}(?![a-zA-Z_])/,value)
+      journal.gsub!(/(?<![a-zA-Z_])#{key.to_s.upcase}(?![a-zA-Z_])/,value)
     end
     journal
   end
