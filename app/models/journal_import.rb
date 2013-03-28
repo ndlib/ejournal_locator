@@ -119,9 +119,9 @@ class JournalImport < ActiveRecord::Base
 
         journal.publisher_place = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='a']").first.content rescue nil
         journal.publisher_name = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='b']").first.content rescue nil
-        journal.issn = record.xpath("//datafield[@tag=22]").xpath("subfield[@code='a']").first.content.gsub(/[^0-9]/,"") rescue nil
+        journal.issn = record.xpath("//datafield[@tag=22]").xpath("subfield[@code='a']").first.content.gsub(/[^0-9X]/i,"") rescue nil
         if alt_issn = record.xpath("//datafield[@tag=776]").xpath("subfield[@code='x']").first
-          journal.alternate_issn = alt_issn.content.gsub(/[^0-9]/,"")
+          journal.alternate_issn = alt_issn.content.gsub(/[^0-9X]/i,"")
         end
 
         journal.save!

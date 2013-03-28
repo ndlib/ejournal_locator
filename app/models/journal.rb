@@ -24,7 +24,7 @@ class Journal < ActiveRecord::Base
   end
 
   def display_issns
-    all_issns.collect{|i| i.to_s.gsub(/([0-9]{4})([0-9]{4})/,"\\1-\\2")}
+    all_issns.collect{|i| i.to_s.gsub(/([0-9X]{4})([0-9X]{4})/i,"\\1-\\2")}
   end
 
   def first_character_a_z

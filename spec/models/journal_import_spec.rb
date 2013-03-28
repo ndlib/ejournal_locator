@@ -4,6 +4,11 @@ describe JournalImport do
   describe 'self' do
     subject { JournalImport }
     describe '#run_sfx_import' do
+      def import_journal(journal)
+        import_test_file(journal_to_xml(journal))
+        subject.run_sfx_import(import_test_file)
+      end
+
       it "succeeds" do
         expect(Journal.count).to be == 0
         journal = build_journal_xml()
@@ -15,11 +20,6 @@ describe JournalImport do
       describe 'sets the value of' do
         before do
           @journal = FactoryGirl.build(:journal)
-        end
-
-        def import_journal(journal)
-          import_test_file(journal_to_xml(journal))
-          subject.run_sfx_import(import_test_file)
         end
 
         {
@@ -38,6 +38,12 @@ describe JournalImport do
             expect(Journal.first.send(field)).to be == value
           end
         end
+      end
+
+      it 'imports an ISSN with an X' do
+        journal = FactoryGirl.build(:journal, issn: '1234-567X')
+        import_journal(journal)
+        expect(Journal.first.issn).to be == journal.issn.gsub('-','')
       end
     end
   end
