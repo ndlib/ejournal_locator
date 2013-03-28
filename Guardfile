@@ -17,7 +17,7 @@ guard 'rails', port: rails_server_port do
   watch(%r{^lib/.*})
 end
 
-guard 'spork', aggressive_kill: false, rspec_port: spork_rspec_port do
+guard 'spork', aggressive_kill: false, rspec_env: { 'RAILS_ENV' => 'test' }, rspec_port: spork_rspec_port do
   watch('config/application.rb')
   watch('config/environment.rb')
   watch(%r{^config/environments/.+\.rb$})

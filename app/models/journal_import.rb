@@ -32,7 +32,9 @@ class JournalImport < ActiveRecord::Base
   end
 
   def self.import_message(message)
-    puts "#{Time.now.strftime("%F %T")}: #{message}"
+    if Rails.env != 'test'
+      puts "#{Time.now.strftime("%F %T")}: #{message}"
+    end
   end
 
   def self.process_imports()
@@ -98,9 +100,9 @@ class JournalImport < ActiveRecord::Base
         end
 
         journal.last_import_id = import.id
-        
+
         journal.title = record.xpath("//datafield[@tag=245]").xpath("subfield[@code='a']").first.content
-        
+
         journal.alternate_titles = []
         record.xpath("//datafield[@tag=246]").each do |datafield|
           journal.alternate_titles << datafield.xpath("subfield[@code='a']").first.content
@@ -248,7 +250,7 @@ class JournalImport < ActiveRecord::Base
       else
         percent_ticks = 100
       end
-      
+
       percent_displays = (1..percent_ticks).collect{|a| ((a / percent_ticks.to_f) * expected_journal_count).round}
 
       import_start_time = Time.now

@@ -51,9 +51,9 @@ module EjournalLocator
     config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
-    config.assets.enabled = true    
+    config.assets.enabled = true
     # Default SASS Configuration, check out https://github.com/rails/sass-rails for details
-    
+
     config.assets.precompile += %w( 1.0/index.js 1.0/index.css 1.0/ie.css hours_builder.js hours_builder.css)
 
     config.application_name = "eJournal Locator"
@@ -67,5 +67,10 @@ module EjournalLocator
       :email_prefix => "[Ejournal Locator #{Rails.env}] ",
       :sender_address => %{"Ejournal Locator Notifier" <ejl@library.nd.edu>},
       :exception_recipients => %w{jkennel@nd.edu}
+
+    config.generators do |g|
+      g.test_framework :rspec
+      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+    end
   end
 end
