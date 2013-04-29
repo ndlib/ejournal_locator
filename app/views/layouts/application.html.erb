@@ -59,23 +59,19 @@
           end
           %>
           <div class="<%= number_to_word(content_width) %> columns">
-            <div id="hd">
-              <div id="logo">
-                <h1 class="site_title"><%= link_to "eJournal Locator", "/" %><%= (params[:controller] == "catalog" and !params[:id]) ? "<span id='results_text'>Search Results</span>".html_safe : "" %></h1>
-              </div>
-              <div id="user_util_links">
-                <%= render :partial=>'/user_util_links' %>
+            <h1 class="site_title"><%= link_to "eJournal Locator", "/" %></h1>
+            <div class="util-links">
+              <%= render :partial=>'/user_util_links' %>
+            </div>
+            <%= journal_a_z_links() %>
+            <%= render :partial=>'/flash_msg' %>
+            <div class="row">
+              <div class="three columns"></div>
+              <div class="nine columns">
+                <%= render_search_bar %>
               </div>
             </div>
-            <div id="bd">
-              <div id="main">
-                <div id="main_container">
-                  <%= render_search_bar %>
-                  <%= render :partial=>'/flash_msg' %>
-                  <%= yield %>
-                </div>
-              </div>
-            </div>
+            <%= yield %>
           </div>
           <% if content_for?(:right_column) %>
             <div class="four columns">

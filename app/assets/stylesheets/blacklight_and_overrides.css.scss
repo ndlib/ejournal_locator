@@ -1,29 +1,42 @@
 @import 'bootstrap/variables';
 @import 'bootstrap/mixins';
+@import 'bootstrap/wells';
 @import 'blacklight/blacklight';
 
 body {
   padding: 0;
 }
 
-a {
-  text-decoration: none;
-  color: #0F3255;
+.util-links {
+  float: right;
+
+  div {
+    display: inline-block;
+  }
 }
 
-h1.site_title {
-  background: none;
-  font-size: 30px;
-  line-height: 30px;
-  height: auto;
-  width: auto;
+.search-query-form {
+  margin-bottom: 1em;
+
+  input {
+    width: 206px;
+  }
+
+  select {
+    width: auto;
+  }
+
+  .input-append, .input-prepend {
+    font-size: 0;
+  }
 }
 
-h1.site_title a {
-  text-indent: 0;
-  height: auto;
-  width: auto;
+.documentHeader {
+  h5 {
+    font-size: 18px;
+  }
 }
+
 
 // h3 {
 //   font-size: 18px;
