@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
 gem 'blacklight', '~> 3.8.0'
 gem 'capistrano', '~> 2.8.0'
@@ -8,6 +8,7 @@ gem 'devise', '~> 2.0'
 gem 'devise_cas_authenticatable'
 gem 'devise-guests'
 gem 'exception_notification'
+gem 'hesburgh_assets', :git => 'git@git.library.nd.edu:assets'
 gem 'json'
 gem 'jquery-rails', '~> 2.1.4'
 gem 'mysql2'

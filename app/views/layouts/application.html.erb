@@ -6,12 +6,12 @@
     <meta name="description" content="Information resources and collections of the Hesburgh Libraries, University of Notre Dame." />
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
-    
-    <%= stylesheet_link_tag    "1.0/index.css", :media => "all" %>
+
+    <%= stylesheet_link_tag    "hesburgh_assets/main/1.0/index.css", :media => "all" %>
     <!--[if lte IE 9]>
-      <%= stylesheet_link_tag    "1.0/ie.css", :media => "all" %>
+      <%= stylesheet_link_tag    "hesburgh_assets/main/1.0/ie.css", :media => "all" %>
     <![endif]-->
-    <%= javascript_include_tag "1.0/index.js" %>
+    <%= javascript_include_tag "hesburgh_assets/main/1.0/index.js" %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -43,7 +43,7 @@
         <div class="container">
           <% if content_for?(:left_column) %>
             <div class="three columns">
-              <%= content_for(:left_column) %> 
+              <%= content_for(:left_column) %>
             </div>
           <% end %>
           <%
@@ -79,12 +79,12 @@
           </div>
           <% if content_for?(:right_column) %>
             <div class="four columns">
-              <%= content_for(:right_column) %> 
+              <%= content_for(:right_column) %>
             </div>
           <% end %>
           <% if content_for?(:right_column_wide) %>
             <div class="five columns">
-              <%= content_for(:right_column_wide) %> 
+              <%= content_for(:right_column_wide) %>
             </div>
           <% end %>
         </div>

@@ -1,4 +1,4 @@
-port_offset = 5
+port_offset = 6
 rails_server_port = 3000 + port_offset
 spork_rspec_port = 50000 + port_offset
 

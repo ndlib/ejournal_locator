@@ -54,7 +54,11 @@ module EjournalLocator
     config.assets.enabled = true
     # Default SASS Configuration, check out https://github.com/rails/sass-rails for details
 
-    config.assets.precompile += %w( 1.0/index.js 1.0/index.css 1.0/ie.css hours_builder.js hours_builder.css)
+    config.assets.precompile += %w(
+      hesburgh_assets/main/1.0/index.js
+      hesburgh_assets/main/1.0/index.css
+      hesburgh_assets/main/1.0/ie.css
+    )
 
     config.application_name = "eJournal Locator"
 
