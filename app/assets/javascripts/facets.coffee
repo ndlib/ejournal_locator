@@ -10,7 +10,7 @@ jQuery ($) ->
       selected = true
       full_title = selected_span.text()
       # Strip the number of results from the end of the title
-      full_title = full_title.replace(' '+count_span.text(),'')
+      full_title = full_title.replace(count_span.text(),'').trim()
       console.log(full_title)
     else
       link = li.find('a.facet_select').first()
