@@ -31,4 +31,14 @@ module EjournalHelper
     label = render_document_index_label doc, opts
     link_to label, findtext_url(doc), { :'data-counter' => opts[:counter] }.merge(opts.reject { |k,v| [:label, :counter, :results_view].include? k  })
   end
+
+  def render_selected_facet_value(facet_solr_field, item)
+    #Updated class for Bootstrap Blacklight
+    link_to(content_tag(:i, '', :class => "icon-remove") + content_tag(:span, '[remove]', :class => 'hide-text'), remove_facet_params(facet_solr_field, item, params), :class=>"remove") +
+      content_tag(:span, render_facet_value(facet_solr_field, item, :suppress_link => true), :class => "selected")
+  end
+
+  def render_facet_value(facet_solr_field, item, options ={})
+    (render_facet_count(item.hits) + " " + link_to_unless(options[:suppress_link], facet_display_value(facet_solr_field, item), add_facet_params_and_redirect(facet_solr_field, item), :class=>"facet_select")).html_safe
+  end
 end

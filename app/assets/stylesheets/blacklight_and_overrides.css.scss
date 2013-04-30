@@ -1,6 +1,7 @@
 @import 'bootstrap/variables';
 @import 'bootstrap/mixins';
 @import 'bootstrap/wells';
+@import 'bootstrap/sprites';
 @import 'blacklight/blacklight';
 
 body {
@@ -9,9 +10,9 @@ body {
 
 .util-links {
   float: right;
-
+  margin-left: 8px;
   div {
-    display: inline-block;
+    text-align: right;
   }
 }
 
@@ -34,6 +35,40 @@ body {
 .documentHeader {
   h5 {
     font-size: 18px;
+  }
+}
+
+#facets li {
+  padding-right: 0;
+
+  a.remove {
+    padding: 3px 0;
+  }
+
+  .count {
+    margin-right: 0;
+    margin-left: 8px;
+  }
+}
+
+.css-dropdown {
+  margin: 0;
+}
+
+.flash_messages {
+  clear: both;
+}
+
+.page_links {
+  float: left;
+  margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 580px) {
+  #sortAndPerPage div {
+    display: inline-block;
+    float: none;
+    padding-left: 0;
   }
 }
 

@@ -59,10 +59,11 @@
           end
           %>
           <div class="<%= number_to_word(content_width) %> columns">
-            <h1 class="site_title"><%= link_to "eJournal Locator", "/" %></h1>
             <div class="util-links">
               <%= render :partial=>'/user_util_links' %>
             </div>
+            <h1 class="site_title"><%= link_to "eJournal Locator", "/" %></h1>
+
             <%= journal_a_z_links() %>
             <%= render :partial=>'/flash_msg' %>
             <div class="row">
