@@ -20,7 +20,7 @@ module AssetsHelper
 
   def read_ssi_file(filepath)
     require 'open-uri'
-    ssi_url = "http://www.library.nd.edu/#{filepath}"
+    ssi_url = "http://library.nd.edu/#{filepath}"
     f = open(ssi_url, "User-Agent" => "Ruby/#{RUBY_VERSION}")
     contents = f.read
     contents = contents.gsub(/(href|src)="\//,"\\1=\"https://www.library.nd.edu/")
