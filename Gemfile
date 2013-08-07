@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 
-gem 'blacklight'
+gem 'blacklight', '~> 4.2.0'
 gem 'bootstrap-sass' # used by blacklight
 gem 'capistrano', '~> 2.8.0'
 gem 'devise'
@@ -13,7 +13,7 @@ gem 'hesburgh_assets', :git => 'git@git.library.nd.edu:assets'
 gem 'json'
 gem 'jquery-rails', '~> 2.1.4'
 gem 'mysql2'
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.5.0'
 gem 'twitter-bootstrap-rails'
 gem 'unicode' # used by blacklight
 

@@ -45,11 +45,11 @@ GEM
     better_errors (0.5.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
-    blacklight (4.3.0)
+    blacklight (4.2.2)
       bootstrap-sass (>= 2.2.0, < 2.4)
       kaminari (~> 0.13)
       marc (>= 0.4.3, < 1.1)
-      nokogiri (~> 1.6)
+      nokogiri (~> 1.5)
       rails (>= 3.2.6, < 5)
       rsolr (~> 1.0.6)
       sass-rails
@@ -153,7 +153,6 @@ GEM
     marc (0.5.1)
     method_source (0.8.1)
     mime-types (1.23)
-    mini_portile (0.5.1)
     multi_json (1.7.8)
     multipart-post (1.1.5)
     mysql2 (0.3.11)
@@ -164,8 +163,7 @@ GEM
     net-ssh (2.3.0)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    nokogiri (1.6.0)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.5.10)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     pry (0.9.12)
@@ -283,7 +281,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
-  blacklight
+  blacklight (~> 4.2.0)
   bootstrap-sass
   capistrano (~> 2.8.0)
   capybara
@@ -304,7 +302,7 @@ DEPENDENCIES
   jquery-rails (~> 2.1.4)
   json
   mysql2
-  nokogiri
+  nokogiri (~> 1.5.0)
   pry-rails
   rails (= 3.2.13)
   rb-fchange
