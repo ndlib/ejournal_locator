@@ -1,5 +1,5 @@
 <% if params[:q].present? %>
   <div class="catalog-link">
-    <h5 class="suggest"><%= link_to "Search the Notre Dame Catalog for '#{params[:q]}'", journal_catalog_url(params[:q]) %></h5>
+    <h5 class="suggest"><%= link_to "Search the Notre Dame Catalog for journals matching '#{params[:q]}'", journal_catalog_url(params[:q]) %></h5>
   </div>
 <% end %>
