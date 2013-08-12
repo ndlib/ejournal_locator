@@ -42,4 +42,8 @@ module EjournalHelper
   def render_facet_value(facet_solr_field, item, options ={})
     (render_facet_count(item.hits) + " " + link_to_unless(options[:suppress_link], facet_display_value(facet_solr_field, item), add_facet_params_and_redirect(facet_solr_field, item), :class=>"facet_select")).html_safe
   end
+
+  def render_search_bar
+    render :partial=>'catalog/search_form'
+  end
 end
