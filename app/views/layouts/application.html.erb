@@ -63,15 +63,9 @@
               <%= render :partial=>'/user_util_links' %>
             </div>
             <h1 class="site_title"><%= link_to "eJournal Locator", "/" %></h1>
-
             <%= journal_a_z_links() %>
             <%= render :partial=>'/flash_msg' %>
-            <div class="row">
-              <div class="three columns"></div>
-              <div class="nine columns">
-                <%= render_search_bar %>
-              </div>
-            </div>
+            <%= render_library_search_bar %>
             <%= yield %>
           </div>
           <% if content_for?(:right_column) %>

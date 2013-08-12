@@ -2,5 +2,5 @@
 <ul>
   <li>Find electronic versions of journals, magazines and newspapers available to the Notre Dame Community.</li>
   <li>All versions of journals (print and electronic) can be located using the <%= link_to("Library Catalog", journal_catalog_url()) %>.</li>
-  <li>Systematic downloading of articles or redistribution to non-subscribers is prohibited by licensing agreements. Please read our <%= link_to("Acceptable Use Policy", "http://www.library.nd.edu/eresources/access/acceptable_use.shtml") %>.</li>
+  <li>Systematic downloading of articles or redistribution to non-subscribers is prohibited by licensing agreements. Please read our <%= link_to("Acceptable Use Policy", "http://#{Rails.configuration.library_host}/eresources/access/acceptable_use.shtml") %>.</li>
 </ul>

@@ -36,4 +36,7 @@ EjournalLocator::Application.configure do
   config.active_support.deprecation = :stderr
 
   config.logger = Logger.new(Rails.root.join("log",Rails.env + ".log"),3,5*1024*1024)
+
+  config.library_host = "librarypprd.library.nd.edu"
+  config.display_new_search_bar = true
 end
