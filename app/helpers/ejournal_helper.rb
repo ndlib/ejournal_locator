@@ -43,8 +43,8 @@ module EjournalHelper
     (render_facet_count(item.hits) + " " + link_to_unless(options[:suppress_link], facet_display_value(facet_solr_field, item), add_facet_params_and_redirect(facet_solr_field, item), :class=>"facet_select")).html_safe
   end
 
-  def render_library_search_bar
-    include_ssi "/local_ssi/search.new.shtml"
+  def render_search_appliance
+    render :partial=>'layouts/search_appliance'
   end
 
   def render_search_bar
