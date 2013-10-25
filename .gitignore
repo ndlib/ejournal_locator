@@ -18,3 +18,4 @@
 /config/database.yml
 /.vagrant
 /import/*
+/jetty/jettywrapper.log
