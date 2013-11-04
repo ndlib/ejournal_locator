@@ -1,0 +1,24 @@
+@import "hesburgh_assets/main/1.0/mixins.css.scss";
+
+.search-appliance {
+  .pull-left .btn,
+  .pull-left + .pull-left {
+    margin-left: 4px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .search-appliance {
+    @include search-appliance-tabs-small;
+
+    ul.contained.tabs-content > li input.srch-box.long {
+      width: 206px;
+      margin-right: 0;
+    }
+
+    .pull-left .btn,
+    .pull-left + .pull-left {
+      margin-left: 0;
+    }
+  }
+}
