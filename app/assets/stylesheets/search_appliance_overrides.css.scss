@@ -1,9 +1,21 @@
 @import "hesburgh_assets/main/1.0/mixins.css.scss";
 
+#tab_box select.search_field {
+  width: 100px;
+}
+
 .search-appliance {
+  max-width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+
   .pull-left .btn,
   .pull-left + .pull-left {
     margin-left: 4px;
+  }
+
+  input.srch-box.long {
+    width: 400px;
   }
 }
 
