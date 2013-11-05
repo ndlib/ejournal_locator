@@ -8,6 +8,12 @@ body {
   padding: 0;
 }
 
+.sf-menu {
+  [class^="icon-"], [class*=" icon-"] {
+    margin-top: 0;
+  }
+}
+
 .util-links {
   float: right;
   margin-left: 8px;
