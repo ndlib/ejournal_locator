@@ -4,39 +4,43 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title><%= "#{@page_title || application_name}".html_safe %> // Hesburgh Libraries // University of Notre Dame</title>
     <meta name="description" content="Information resources and collections of the Hesburgh Libraries, University of Notre Dame." />
-    <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
 
-    <%= stylesheet_link_tag    "hesburgh_assets/main/1.0/index.css", :media => "all" %>
+    <%= favicon_link_tag hesburgh_asset_path(:main, "favicon-152.png"), rel: 'shortcut icon', sizes: '128x128', type: 'image/png' %>
+    <%= hesburgh_stylesheet_link_tag active_branch_code, "index.css", :media => "all" %>
     <!--[if lte IE 9]>
-      <%= stylesheet_link_tag    "hesburgh_assets/main/1.0/ie.css", :media => "all" %>
+      <%= hesburgh_stylesheet_link_tag :main, "ie.css", :media => "all" %>
     <![endif]-->
-    <%= javascript_include_tag "hesburgh_assets/main/1.0/index.js" %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= hesburgh_javascript_include_tag :main, "index.js" %>
+    <% if branch_site? %>
+      <%= hesburgh_javascript_include_tag active_branch_code, "index.js" %>
+    <% end %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= raw(render_head_content) %>
   </head>
-  <body>
+  <body <%= body_class %>>
     <div class="container">
       <div class="row header">
         <div class="twelve columns">
+          <%= preheader_content %>
           <%= include_ssi("/local_ssi/responsive/header.shtml") %>
         </div>
       </div>
       <div class="row menu">
         <div class="twelve columns">
-          <%= include_ssi("/ssi/main-menu.shtml") %>
+          <%= include_branch_ssi("/ssi/main-menu.shtml") %>
         </div>
       </div>
       <div class="row breadcrumb hide-on-phones">
+        <%
+        if !content_for?(:breadcrumb)
+          breadcrumb()
+        end
+        %>
         <div class="twelve columns">
-          <%
-          if !content_for?(:breadcrumb)
-            breadcrumb()
-          end
-          %>
-          <p><%= content_for(:breadcrumb) %></p>
+          <%= content_for(:breadcrumb) %>
         </div>
       </div>
       <div class="row content">
@@ -70,6 +74,7 @@
             <% else %>
               <%= render_search_bar %>
             <% end %>
+            <%= display_notices %>
             <%= yield %>
           </div>
           <% if content_for?(:right_column) %>
@@ -84,7 +89,12 @@
           <% end %>
         </div>
       </div>
-      <%= include_ssi("/local_ssi/responsive/footer.shtml") %>
+      <% if branch_site? %>
+        <%= include_branch_ssi("/local_ssi/footer.shtml") %>
+      <% else %>
+        <%= include_ssi("/local_ssi/responsive/footer.shtml") %>
+      <% end %>
     </div>
+    <%= content_for(:body_bottom) %>
   </body>
 </html>
