@@ -6,6 +6,7 @@
     <meta name="description" content="Information resources and collections of the Hesburgh Libraries, University of Notre Dame." />
     <meta name="viewport" content="width=device-width" />
 
+    <%= favicon_link_tag hesburgh_asset_path(:main, "favicon.ico"), rel: 'shortcut icon', type: 'image/x-icon' %>
     <%= favicon_link_tag hesburgh_asset_path(:main, "favicon-152.png"), rel: 'shortcut icon', sizes: '128x128', type: 'image/png' %>
     <%= hesburgh_stylesheet_link_tag active_branch_code, "index.css", :media => "all" %>
     <!--[if lte IE 9]>
