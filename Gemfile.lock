@@ -1,6 +1,6 @@
 GIT
   remote: git@git.library.nd.edu:assets
-  revision: 2db78106524b1da06fac2f5bcb8fe75dbf77342d
+  revision: 787e6c8f6d38a981d8face7c2b4ada1910ea0291
   specs:
     hesburgh_assets (0.0.1)
       coffee-rails (>= 3.2.1)
@@ -181,7 +181,7 @@ GEM
     marc (0.5.1)
     mediashelf-loggable (0.4.9)
     method_source (0.8.2)
-    mime-types (1.25)
+    mime-types (1.25.1)
     multi_json (1.8.2)
     multipart-post (1.1.5)
     mysql2 (0.3.11)

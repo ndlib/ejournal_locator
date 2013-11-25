@@ -33,4 +33,10 @@
       margin-left: 0;
     }
   }
+
+  html[data-useragent*='MSIE 10.0'] {
+    .search-appliance {
+      @include search-appliance-ie-tabs-small;
+    }
+  }
 }
