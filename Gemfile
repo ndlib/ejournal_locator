@@ -16,6 +16,7 @@ gem 'mysql2'
 gem 'nokogiri', '~> 1.5.0'
 gem 'twitter-bootstrap-rails'
 gem 'unicode' # used by blacklight
+gem "whenever", :require => false
 
 # Gems used only for assets and not required
 # in production environments by default.
