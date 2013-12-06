@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205220124) do
+ActiveRecord::Schema.define(:version => 20131206151838) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20121205220124) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "users", ["created_at"], :name => "index_users_on_created_at"
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["username"], :name => "index_users_on_username"
 
