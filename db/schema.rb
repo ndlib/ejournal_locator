@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140214180736) do
+ActiveRecord::Schema.define(:version => 20140214182616) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20140214180736) do
   create_table "holdings", :force => true do |t|
     t.integer  "journal_id"
     t.integer  "provider_id"
-    t.integer  "internal_id"
+    t.string   "internal_id"
     t.string   "additional_availability"
     t.string   "original_availability"
     t.integer  "start_year",              :limit => 2

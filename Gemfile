@@ -14,6 +14,7 @@ gem 'json'
 gem 'jquery-rails', '~> 2.1.4'
 gem 'mysql2'
 gem 'nokogiri', '~> 1.5.0'
+gem "rb-readline"
 gem 'twitter-bootstrap-rails'
 gem 'unicode' # used by blacklight
 gem "whenever", :require => false
@@ -46,6 +47,5 @@ group :development, :test do
   gem "guard-rspec"
   gem "guard-spork"
   gem "guard-jetty"
-  gem "rb-readline"
   gem "growl"
 end
