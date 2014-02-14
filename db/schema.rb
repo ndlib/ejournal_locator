@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131206151838) do
+ActiveRecord::Schema.define(:version => 20140214180736) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20131206151838) do
   create_table "journal_import_errors", :force => true do |t|
     t.integer  "journal_import_id"
     t.string   "error_type"
-    t.string   "exception_message"
+    t.text     "exception_message"
     t.text     "exception_backtrace"
     t.text     "journal_xml"
     t.datetime "created_at",          :null => false
