@@ -16,7 +16,7 @@ development:
 test: &test
   url: http://127.0.0.1:8888/solr
 pre_production:
-  url: http://solr41pprd.library.nd.edu:8080/solr/ejournal-locator
+  url: http://127.0.0.1:8080/solr/ejournal-locator
 production:
   url: http://solr41prod.library.nd.edu:8080/solr/ejournal-locator
 cucumber:
