@@ -17,27 +17,15 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-if environment == 'pre_production'
-  set :bundler, "/shared/ruby_pprd/ruby/1.9.3/bin/bundle"
-elsif environment == 'production'
-  set :bundler, "/shared/ruby_prod/ruby/1.9.3/bin/bundle"
-else
-  set :bundler, "bundle"
-end
-
+set :bundler, "bundle"
 
 if environment == 'pre_production' || environment == 'production'
   set :rails_exec, 'vendor/bundle/bin/rails'
-else
-  set :rails_exec, 'rails'
-end
-
-if environment == 'pre_production' || environment == 'production'
   set :rake_exec, 'vendor/bundle/bin/rake'
 else
+  set :rails_exec, 'rails'
   set :rake_exec, 'rake'
 end
-
 
 job_type :runner, "cd :path && :bundler exec :rails_exec runner -e :environment ':task' :output"
 job_type :rake,   "cd :path && :environment_variable=:environment :bundler exec :rake_exec :task --silent :output"
@@ -47,4 +35,8 @@ job_type :rake,   "cd :path && :environment_variable=:environment :bundler exec 
 every '0 12 * * *' do
   runner "User.destroy_temporary_users()"
   rake "blacklight:delete_old_searches[7]"
+end
+
+every '0 4 * * *' do
+  rake "journals:import"
 end
