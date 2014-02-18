@@ -78,7 +78,7 @@ class JournalImport < ActiveRecord::Base
   def self.import_files(directory = nil)
     directory ||= self.import_directory
     files = Dir.entries(directory).select {|f| f =~ /[.]xml-marc$/}
-    files.collect{|f| File.join(self.import_directory, f)}.sort{|a,b| File.mtime(a) <=> File.mtime(b)}
+    files.collect{|f| File.join(directory, f)}.sort{|a,b| File.mtime(a) <=> File.mtime(b)}
   end
 
   def self.archive_import_file(file)
