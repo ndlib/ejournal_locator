@@ -1,4 +1,5 @@
 class JournalImport < ActiveRecord::Base
+  SHARED_IMPORT_DIRECTORY = "/global/data/sfx"
   has_many :journal_import_errors
 
   TEST_FILES = {
@@ -37,7 +38,25 @@ class JournalImport < ActiveRecord::Base
     end
   end
 
+  def self.copy_import_file
+    if Dir.exists?(SHARED_IMPORT_DIRECTORY)
+      latest_file = import_files(SHARED_IMPORT_DIRECTORY).last
+      if latest_file
+        filename = File.basename(latest_file)
+        archive_target = File.join(self.archive_directory, filename)
+        if File.exists?(archive_target)
+          import_message("Already copied #{latest_file}")
+        else
+          copy_target = File.join(self.import_directory, File.basename(latest_file))
+          import_message("Copying #{latest_file} to #{copy_target}")
+          FileUtils.cp(latest_file, copy_target)
+        end
+      end
+    end
+  end
+
   def self.process_imports()
+    self.copy_import_file
     self.import_files.each do |file|
       self.run_sfx_import(file)
       self.archive_import_file(file)
@@ -56,8 +75,9 @@ class JournalImport < ActiveRecord::Base
     File.join(self.import_directory, "archive")
   end
 
-  def self.import_files()
-    files = Dir.entries(self.import_directory).select {|f| f =~ /[.]xml-marc$/}
+  def self.import_files(directory = nil)
+    directory ||= self.import_directory
+    files = Dir.entries(directory).select {|f| f =~ /[.]xml-marc$/}
     files.collect{|f| File.join(self.import_directory, f)}.sort{|a,b| File.mtime(a) <=> File.mtime(b)}
   end
 
