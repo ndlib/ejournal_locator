@@ -37,6 +37,6 @@ every '0 12 * * *' do
   rake "blacklight:delete_old_searches[7]"
 end
 
-every '0 4 * * *' do
+every '0 6 * * *' do
   rake "journals:import"
 end
