@@ -52,13 +52,14 @@ class JournalImport < ActiveRecord::Base
           FileUtils.cp(latest_file, copy_target)
         end
       end
+      remove_old_import_files(SHARED_IMPORT_DIRECTORY)
     end
   end
 
-  def self.remove_old_archives
-    archived_files = self.import_files(archive_directory)
-    if archived_files.length > 5
-      old_files = archived_files[0, archived_files.length - 5]
+  def self.remove_old_import_files(directory)
+    files = self.import_files(directory)
+    if files.length > 5
+      old_files = files[0, files.length - 5]
       old_files.each do |file|
         import_message("Removing old import file #{file}")
         File.delete(file)
@@ -72,7 +73,7 @@ class JournalImport < ActiveRecord::Base
       self.run_sfx_import(file)
       self.archive_import_file(file)
     end
-    self.remove_old_archives
+    self.remove_old_import_files(archive_directory)
 
     import_message("Updating Solr")
     Journal.update_solr
