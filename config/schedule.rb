@@ -17,18 +17,8 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-set :bundler, "bundle"
-
-if environment == 'pre_production' || environment == 'production'
-  set :rails_exec, 'vendor/bundle/bin/rails'
-  set :rake_exec, 'vendor/bundle/bin/rake'
-else
-  set :rails_exec, 'rails'
-  set :rake_exec, 'rake'
-end
-
-job_type :runner, "cd :path && :bundler exec :rails_exec runner -e :environment ':task' :output"
-job_type :rake,   "cd :path && :environment_variable=:environment :bundler exec :rake_exec :task --silent :output"
+job_type :runner, "cd :path && bundle exec rails runner -e :environment ':task' :output"
+job_type :rake,   "cd :path && :environment_variable=:environment bundle exec rake :task --silent :output"
 
 # Learn more: http://github.com/javan/whenever
 
