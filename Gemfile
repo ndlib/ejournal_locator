@@ -13,11 +13,13 @@ gem 'hesburgh_infrastructure', :git => 'git@git.library.nd.edu:hesburgh_infrastr
 gem 'json'
 gem 'jquery-rails', '~> 2.1.4'
 gem 'mysql2'
-gem 'nokogiri', '~> 1.5.0'
+gem 'nokogiri'
 gem "rb-readline"
 gem 'twitter-bootstrap-rails'
 gem 'unicode' # used by blacklight
 gem "whenever", :require => false
+
+gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
 # in production environments by default.
