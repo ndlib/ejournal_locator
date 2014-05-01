@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '~> 3.2.13'
 
 gem 'blacklight', '~> 4.2.0'
 gem 'bootstrap-sass' # used by blacklight
