@@ -21,6 +21,7 @@ set :application_symlinks, ["/import"]
 
 # Defaults are set in lib/hesburgh_infrastructure/capistrano/environments.rb
 
+set :scm, 'git'
 set :scm_command, '/usr/bin/git'
 
 set :user, 'app'
