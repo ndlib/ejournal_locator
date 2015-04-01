@@ -1,4 +1,5 @@
 class JournalImport < ActiveRecord::Base
+  SHARED_IMPORT_DIRECTORY = "/global/data/sfx"
   has_many :journal_import_errors
 
   TEST_FILES = {
@@ -37,11 +38,42 @@ class JournalImport < ActiveRecord::Base
     end
   end
 
+  def self.copy_import_file
+    if Dir.exists?(SHARED_IMPORT_DIRECTORY)
+      latest_file = import_files(SHARED_IMPORT_DIRECTORY).last
+      if latest_file
+        filename = File.basename(latest_file)
+        archive_target = File.join(self.archive_directory, filename)
+        if File.exists?(archive_target)
+          import_message("Already copied #{latest_file}")
+        else
+          copy_target = File.join(self.import_directory, File.basename(latest_file))
+          import_message("Copying #{latest_file} to #{copy_target}")
+          FileUtils.cp(latest_file, copy_target)
+        end
+      end
+      remove_old_import_files(SHARED_IMPORT_DIRECTORY)
+    end
+  end
+
+  def self.remove_old_import_files(directory)
+    files = self.import_files(directory)
+    if files.length > 5
+      old_files = files[0, files.length - 5]
+      old_files.each do |file|
+        import_message("Removing old import file #{file}")
+        File.delete(file)
+      end
+    end
+  end
+
   def self.process_imports()
+    self.copy_import_file
     self.import_files.each do |file|
       self.run_sfx_import(file)
       self.archive_import_file(file)
     end
+    self.remove_old_import_files(archive_directory)
 
     import_message("Updating Solr")
     Journal.update_solr
@@ -56,9 +88,10 @@ class JournalImport < ActiveRecord::Base
     File.join(self.import_directory, "archive")
   end
 
-  def self.import_files()
-    files = Dir.entries(self.import_directory).select {|f| f =~ /[.]xml-marc$/}
-    files.collect{|f| File.join(self.import_directory, f)}.sort{|a,b| File.mtime(a) <=> File.mtime(b)}
+  def self.import_files(directory = nil)
+    directory ||= self.import_directory
+    files = Dir.entries(directory).select {|f| f =~ /[.]xml-marc$/}
+    files.collect{|f| File.join(directory, f)}.sort{|a,b| File.mtime(a) <=> File.mtime(b)}
   end
 
   def self.archive_import_file(file)

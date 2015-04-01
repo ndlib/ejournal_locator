@@ -29,7 +29,7 @@
         <Set name="lowThreads">20</Set>
       </New>
 
-      <!-- Optional Java 5 bounded threadpool with job queue 
+      <!-- Optional Java 5 bounded threadpool with job queue
       <New class="org.mortbay.thread.concurrent.ThreadPool">
         <Set name="corePoolSize">50</Set>
         <Set name="maximumPoolSize">50</Set>
@@ -47,7 +47,7 @@
 
     <!-- Use this connector for many frequently idle connections
          and for threadless continuations.
-    -->    
+    -->
   <!--
     <Call name="addConnector">
       <Arg>
@@ -72,7 +72,7 @@
       <Arg>
           <New class="org.mortbay.jetty.bio.SocketConnector">
             <Set name="host"><SystemProperty name="jetty.host" /></Set>
-            <Set name="port"><SystemProperty name="jetty.port" default="8983"/></Set>
+            <Set name="port"><SystemProperty name="jetty.port" default="8006"/></Set>
             <Set name="maxIdleTime">50000</Set>
             <Set name="lowResourceMaxIdleTime">1500</Set>
             <Set name="statsOn">false</Set>
@@ -93,7 +93,7 @@
     <!--                                                                 -->
     <!-- See jetty-xinetd.xml for further instructions.                  -->
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-    
+
     <!-- =========================================================== -->
     <!-- Set up global session ID manager                            -->
     <!-- =========================================================== -->
@@ -106,7 +106,7 @@
     -->
 
     <!-- =========================================================== -->
-    <!-- Set handler Collection Structure                            --> 
+    <!-- Set handler Collection Structure                            -->
     <!-- =========================================================== -->
     <Set name="handler">
       <New id="Handlers" class="org.mortbay.jetty.handler.HandlerCollection">
@@ -125,7 +125,7 @@
         </Set>
       </New>
     </Set>
-    
+
     <!-- =========================================================== -->
     <!-- Configure the context deployer                              -->
     <!-- A context deployer will deploy contexts described in        -->

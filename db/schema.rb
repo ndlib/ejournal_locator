@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205220124) do
+ActiveRecord::Schema.define(:version => 20140214182616) do
 
   create_table "bookmarks", :force => true do |t|
     t.integer  "user_id",     :null => false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20121205220124) do
   create_table "holdings", :force => true do |t|
     t.integer  "journal_id"
     t.integer  "provider_id"
-    t.integer  "internal_id"
+    t.string   "internal_id"
     t.string   "additional_availability"
     t.string   "original_availability"
     t.integer  "start_year",              :limit => 2
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20121205220124) do
   create_table "journal_import_errors", :force => true do |t|
     t.integer  "journal_import_id"
     t.string   "error_type"
-    t.string   "exception_message"
+    t.text     "exception_message"
     t.text     "exception_backtrace"
     t.text     "journal_xml"
     t.datetime "created_at",          :null => false
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20121205220124) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "users", ["created_at"], :name => "index_users_on_created_at"
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["username"], :name => "index_users_on_username"
 

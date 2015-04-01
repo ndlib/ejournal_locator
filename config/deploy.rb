@@ -1,65 +1,59 @@
-require 'lib/deploy/passenger'
-# List all tasks from RAILS_ROOT using: cap -T
-
-# NOTE: The SCM command expects to be at the same path on both the local and
-# remote machines. The default git path is: '/shared/git/bin/git'.
-
-#############################################################
-#  Configuration
-#############################################################
+# Set the name of the application.  This is used to determine directory paths and domains
 set :application, 'ejournal_locator'
-set :repository,  'git@git.library.nd.edu:ejournal_locator'
-ssh_options[:keys] = %w(/shared/jenkins/.ssh/id_dsa)
-
-set :symlink_targets, [
-  { '/bundle/config' => '/.bundle/config' },
-  '/log',
-  '/vendor/bundle',
-  '/config/database.yml',
-  '/import'
-]
 
 #############################################################
-#  Environments
+#  Application settings
 #############################################################
+
+# Defaults are set in lib/hesburgh_infrastructure/capistrano/common.rb
+
+# Repository defaults to "git@git.library.nd.edu:#{application}"
+# set :repository, "git@git.library.nd.edu:myrepository"
+
+# Define symlinks for files or directories that need to persist between deploys.
+# /log, /vendor/bundle, and /config/database.yml are automatically symlinked
+# set :application_symlinks, ["/path/to/file"]
+set :application_symlinks, ["/import"]
+
+#############################################################
+#  Environment settings
+#############################################################
+
+# Defaults are set in lib/hesburgh_infrastructure/capistrano/environments.rb
+
+set :scm, 'git'
+set :scm_command, '/usr/bin/git'
+
+set :user, 'app'
+set :ruby_bin, "/opt/ruby/current/bin"
 
 desc "Setup for the Pre-Production environment"
 task :pre_production do
-  set :rails_env, 'pre_production'
-  set :deploy_to, "/shared/ruby_pprd/data/app_home/#{application}"
-  set :ruby_bin,  '/shared/ruby_pprd/ruby/1.9.3/bin'
-
-  set :user,      'rbpprd'
-  set :domain,    'ejlpprd.library.nd.edu'
-
-  server "#{user}@#{domain}", :app, :web, :db, :primary => true
+  # Customize pre_production configuration
+  set :deploy_to, "/home/app/#{application}"
+  set :domain, "ejlpprd-vm.library.nd.edu"
 end
 
-desc "Setup for the Production environment"
+desc "Setup for the production environment"
 task :production do
-  set :rails_env, 'production'
-  set :deploy_to, "/shared/ruby_prod/data/app_home/#{application}"
-  set :ruby_bin,  '/shared/ruby_prod/ruby/1.9.3/bin'
-
-  set :user,      'rbprod'
-  set :domain,    'rprod.library.nd.edu'
-
-  server "#{user}@#{domain}", :app, :web, :db, :primary => true
+  # Customize production configuration
+  set :deploy_to, "/home/app/#{application}"
+  set :domain, "ejlprod-vm.library.nd.edu"
 end
 
 #############################################################
-#  Deploy
+#  Additional callbacks and tasks
 #############################################################
+
+# Define any addional tasks or callbacks here
+
+require 'deploy/whenever'
 
 namespace :deploy do
-  desc "Prepare symlink_shared"
-  task :prepare_symlink_shared, :roles => :app do
-    run "rm -rf #{release_path}/import"
-  end
 
   desc "Reload the Solr configuration"
   task :reload_solr_core, :roles => :app do
-    solr_config = YAML.load_file("#{release_path}/config/solr.yml")[rails_env.to_s]
+    solr_config = YAML.load_file("config/solr.yml")[rails_env.to_s]
     core_url = solr_config["url"]
     core_regex = /[^\/]+$/
     core_name = core_url.match(core_regex)[0]
@@ -70,5 +64,4 @@ namespace :deploy do
   end
 end
 
-after 'deploy:symlink_shared', 'deploy:reload_solr_core'
-before 'deploy:symlink_shared', 'deploy:prepare_symlink_shared'
+after 'restart_passenger', 'deploy:reload_solr_core'

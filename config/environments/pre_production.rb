@@ -66,5 +66,5 @@ EjournalLocator::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.library_host = "librarypprd.library.nd.edu"
-  config.display_new_search_bar = true
+  config.cas_base = 'https://login.nd.edu/cas'
 end

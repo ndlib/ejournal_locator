@@ -1,11 +1,11 @@
 <div id="tab_box" class="search-appliance">
   <dl class="tabs contained">
-    <dd><a tabindex="1" href="http://<%= Rails.configuration.library_host %>/search/onesearch" id="tab_primo_l" class="onesearch tab"><span>OneSearch</span></a></dd>
-    <dd><a tabindex="2" href="http://<%= Rails.configuration.library_host %>/search/catalog" id="tab_cat_l" class="ndcatalog tab"><span>ND Catalog</span></a></dd>
-    <dd><a tabindex="3" href="http://<%= Rails.configuration.library_host %>/search/articles" id="tab_art_l" class="tab">Articles</a></dd>
+    <dd><a tabindex="1" href="http://<%= Rails.configuration.library_host %>/utilities/search/ndu/onesearch" id="tab_primo_l" class="onesearch tab"><span>OneSearch</span></a></dd>
+    <dd><a tabindex="2" href="http://<%= Rails.configuration.library_host %>/utilities/search/ndu/nd_campus" id="tab_cat_l" class="ndcatalog tab"><span>ND Catalog</span></a></dd>
+    <dd><a tabindex="3" href="http://<%= Rails.configuration.library_host %>/utilities/search/articles" id="tab_art_l" class="tab">Articles</a></dd>
     <dd><a tabindex="4" href="#tab_jou" id="tab_jou_l" class="active tab">eJournals</a></dd>
-    <dd><a tabindex="5" href="http://<%= Rails.configuration.library_host %>/search/databases" id="tab_dat_l" class="tab">Databases</a></dd>
-    <dd><a tabindex="6" href="http://<%= Rails.configuration.library_host %>/search/ebooks" id="tab_boo_l" class="tab">eBooks</a></dd>
+    <dd><a tabindex="5" href="http://<%= Rails.configuration.library_host %>/utilities/search/databases" id="tab_dat_l" class="tab">Databases</a></dd>
+    <dd><a tabindex="6" href="http://<%= Rails.configuration.library_host %>/utilities/search/ndu/ebooks" id="tab_boo_l" class="tab">eBooks</a></dd>
   </dl>
 
   <div id="search_box">
@@ -16,7 +16,19 @@
         <ul class="extra-links">
           <li><a href="http://library.nd.edu/eresources/ejournals/alljournals">All journals</a></li>
         </ul>
+        <p class="about-tab">
+          <a data-reveal-id="about-ejournals">About eJournals</a>
+        </p>
       </li>
     </ul>
   </div>
+</div>
+<div id="about-ejournals" class="reveal-modal large" style="top: 100px; opacity: 1; visibility: hidden;">
+  <h2>About finding eJournals</h2>
+  <p>Find eJournals by all or part of the eJournal's title. The eJournal search lets you:</p>
+  <ul>
+    <li>browse for eJournals' titles by letter of the alphabet or by category</li>
+    <li>search for all journals (not just electronic journals)</li>
+    <li>find eJournals in eJournal collections, which group eJournals by subject or provider</li>
+  </ul>
 </div>
