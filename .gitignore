@@ -14,6 +14,9 @@
 /log/*.log
 /tmp
 
+# Ignore locally installed gems
+/vendor/bundle
+
 # Custom Application ignores
 /config/database.yml
 /.vagrant
