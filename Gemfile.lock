@@ -323,6 +323,7 @@ DEPENDENCIES
   better_errors
   blacklight (~> 4.2.0)
   bootstrap-sass
+  capistrano (= 2.15.5)
   capybara
   coffee-rails (~> 3.2.1)
   debugger

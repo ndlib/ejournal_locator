@@ -20,6 +20,8 @@ group :application do
   gem 'unicode' # used by blacklight
 end
 
+gem "capistrano", "2.15.5"
+
 gem 'newrelic_rpm'
 
 # For Errbit
