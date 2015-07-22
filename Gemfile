@@ -1,28 +1,31 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.13'
+group :application do
+  gem 'rails', '~> 3.2.13'
 
-gem 'blacklight', '~> 4.2.0'
-gem 'bootstrap-sass' # used by blacklight
-gem 'devise'
-gem 'devise_cas_authenticatable'
-gem 'devise-guests'
-gem 'exception_notification'
-gem 'hesburgh_assets', :git => 'git@git.library.nd.edu:assets'
-gem 'hesburgh_infrastructure', :git => 'git@git.library.nd.edu:hesburgh_infrastructure'
-gem 'json'
-gem 'jquery-rails', '~> 2.1.4'
-gem 'mysql2'
-gem 'nokogiri', '~> 1.6.6'
-gem "rb-readline"
-gem 'twitter-bootstrap-rails'
-gem 'unicode' # used by blacklight
-gem "whenever", :require => false
+  gem 'blacklight', '~> 4.2.0'
+  gem 'bootstrap-sass' # used by blacklight
+  gem 'devise'
+  gem 'devise_cas_authenticatable'
+  gem 'devise-guests'
+  gem 'exception_notification'
+  gem 'hesburgh_assets', :git => 'git@git.library.nd.edu:assets'
+  gem 'hesburgh_infrastructure', :git => 'git@git.library.nd.edu:hesburgh_infrastructure'
+  gem 'json'
+  gem 'jquery-rails', '~> 2.1.4'
+  gem 'mysql2'
+  gem 'nokogiri', '~> 1.6.6'
+  gem "rb-readline"
+  gem 'twitter-bootstrap-rails'
+  gem 'unicode' # used by blacklight
+end
 
 gem 'newrelic_rpm'
 
 # For Errbit
 gem "airbrake"
+
+gem "whenever", :require => false
 
 # Gems used only for assets and not required
 # in production environments by default.
