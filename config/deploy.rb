@@ -3,6 +3,9 @@ set :application, 'ejournal_locator'
 
 begin
   require 'airbrake/capistrano'
+  require 'new_relic/recipes'
+
+  after "deploy:update", "newrelic:notice_deployment"
 rescue LoadError
 end
 
