@@ -48,6 +48,9 @@ GEM
     activesupport (3.2.18)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    airbrake (4.3.0)
+      builder
+      multi_json
     arel (3.0.3)
     bcrypt-ruby (3.0.1)
     better_errors (1.0.1)
@@ -316,6 +319,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
   better_errors
   blacklight (~> 4.2.0)
   bootstrap-sass
