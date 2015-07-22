@@ -1,6 +1,11 @@
 # Set the name of the application.  This is used to determine directory paths and domains
 set :application, 'ejournal_locator'
 
+begin
+  require 'airbrake/capistrano'
+rescue LoadError
+end
+
 #############################################################
 #  Application settings
 #############################################################
