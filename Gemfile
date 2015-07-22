@@ -13,7 +13,7 @@ gem 'hesburgh_infrastructure', :git => 'git@git.library.nd.edu:hesburgh_infrastr
 gem 'json'
 gem 'jquery-rails', '~> 2.1.4'
 gem 'mysql2'
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.6.6'
 gem "rb-readline"
 gem 'twitter-bootstrap-rails'
 gem 'unicode' # used by blacklight
