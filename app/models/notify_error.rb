@@ -1,5 +1,9 @@
 module NotifyError
   def self.call(exception, args = {})
-    Airbrake.notify(exception, parameters: { args: args })
+    if args.present?
+      Airbrake.notify(exception, parameters: { args: args })
+    else
+      Airbrake.notify(exception)
+    end
   end
 end
