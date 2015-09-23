@@ -33,3 +33,11 @@ Searching can be done from http://localhost:3006/
 ## Deploy
 
 Deployed via Jenkins: https://jenkins-vm.library.nd.edu/jenkins/job/eJournal%20Locator/
+
+## Cron tasks
+
+Cron tasks are configured in `config/schedule.rb`
+
+### rake journals:import
+The import task reads files from `import/*.xml-marc`
+In pre_production and production environments, an external cron task (managed by Tom Hanstra) copies exports from SFX to the ejournal locator import folder for processing.
