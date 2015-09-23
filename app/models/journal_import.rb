@@ -3,8 +3,8 @@ class JournalImport < ActiveRecord::Base
   has_many :journal_import_errors
 
   TEST_FILES = {
-    :psycarticles => File.join(Rails.root, "test", "files", "ebscohost_psycarticles.xml"),
-    :jst_journal_archive => File.join(Rails.root, "test", "files", "jst_journal_archive_full.xml"),
+    :psycarticles => File.join(Rails.root, "spec", "files", "ebscohost_psycarticles.xml"),
+    :jst_journal_archive => File.join(Rails.root, "spec", "files", "jst_journal_archive_full.xml"),
   }
 
   def self.test(file = TEST_FILES[:psycarticles])
