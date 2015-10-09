@@ -66,7 +66,7 @@ module EjournalLocator
     config.middleware.use ExceptionNotifier,
       :email_prefix => "[Ejournal Locator #{Rails.env}] ",
       :sender_address => %{"Ejournal Locator Notifier" <ejl@library.nd.edu>},
-      :exception_recipients => %w{jkennel@nd.edu}
+      :exception_recipients => %w{jhartzle@nd.edu lajamie@nd.edu}
 
     config.generators do |g|
       g.test_framework :rspec
