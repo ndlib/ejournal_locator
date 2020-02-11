@@ -52,7 +52,7 @@ class JournalImport < ActiveRecord::Base
           FileUtils.cp(latest_file, copy_target)
         end
       end
-      remove_old_import_files(SHARED_IMPORT_DIRECTORY)
+      remove_old_import_files(self.import_directory)
     end
   end
 
@@ -134,6 +134,8 @@ class JournalImport < ActiveRecord::Base
 
         journal.last_import_id = import.id
 
+	# puts record.xpath("//datafield[@tag=245]").first.content + "\n"
+	# puts record.xpath("//datafield[@tag=245]").xpath("subfield[@code='a']").first.content
         journal.title = record.xpath("//datafield[@tag=245]").xpath("subfield[@code='a']").first.content
 
         journal.alternate_titles = []
