@@ -5,6 +5,8 @@ Search tool for the Hesburgh Library's collection of electronic journals
 https://ejl.library.nd.edu/
 https://ejlpprd.library.nd.edu/
 
+Note: See [Docker Readme](docker/README.md) for alternate instructions on running with Docker
+
 ## Installation
 
 ```sh

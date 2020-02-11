@@ -56,6 +56,9 @@ module EjournalLocator
 
     # config.assets.precompile += %w()
 
+    # Don't initialize on precompile. In a Docker env, the database may not be available yet when precompiling
+    config.assets.initialize_on_precompile = false
+
     config.application_name = "eJournal Locator"
 
     # Version of your assets, change this if you want to expire all your assets

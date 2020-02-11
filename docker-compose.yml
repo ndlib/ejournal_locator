@@ -1,0 +1,51 @@
+version: '3.2'
+services:
+  mysql:
+    build:
+      cache_from:
+        - ${DOCKER_CACHE}
+      context: .
+      dockerfile: ./docker/Dockerfile.mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    healthcheck:
+        interval: 30s
+        timeout: 10s
+        retries: 5
+  rails:
+    build:
+      cache_from:
+        - ${DOCKER_CACHE}
+      context: .
+      dockerfile: docker/Dockerfile.rails
+    command: bash docker/rails_entry.sh
+    environment:
+      RAILS_ENV: development
+      DB_HOST: mysql
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_HOST: mysql
+      SOLR_HOST: solr
+      SOLR_URL: http://solr:8983/solr
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+      - solr
+  solr:
+    build:
+      cache_from:
+        - ${DOCKER_CACHE}
+      context: .
+      dockerfile: docker/Dockerfile.solr
+    command: bash /solr/jetty.sh start
+    environment:
+      JETTY_HOME: "/jetty"
+    ports:
+      - "8983:8983"
