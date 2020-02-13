@@ -1,6 +1,7 @@
 GIT
-  remote: git@git.library.nd.edu:assets
+  remote: https://github.com/ndlib/assets.git
   revision: 787e6c8f6d38a981d8face7c2b4ada1910ea0291
+  ref: 787e6c8f6d38a981d8face7c2b4ada1910ea0291
   specs:
     hesburgh_assets (0.0.1)
       coffee-rails (>= 3.2.1)
@@ -11,11 +12,10 @@ GIT
       uglifier (>= 1.0.3)
 
 GIT
-  remote: git@git.library.nd.edu:hesburgh_infrastructure
-  revision: f3b3c58c56bfd1a2c1b16caa309f9890c6604aa1
+  remote: https://github.com/ndlib/hesburgh_infrastructure
+  revision: 3ca3bc3b9df36b9bfb2abed248ea5e79773346f2
   specs:
-    hesburgh_infrastructure (0.1.0)
-      capistrano (~> 2.15.0)
+    hesburgh_infrastructure (0.2.5)
       rails
 
 GEM
@@ -359,4 +359,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
