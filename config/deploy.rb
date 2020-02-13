@@ -16,7 +16,7 @@ end
 # Defaults are set in lib/hesburgh_infrastructure/capistrano/common.rb
 
 # Repository defaults to "git@git.library.nd.edu:#{application}"
-# set :repository, "git@git.library.nd.edu:myrepository"
+set :repository, "https://github.com/ndlib/ejournal_locator.git"
 
 # Define symlinks for files or directories that need to persist between deploys.
 # /log, /vendor/bundle, and /config/database.yml are automatically symlinked
