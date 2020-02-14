@@ -40,6 +40,5 @@ docker-compose exec rails bundle exec rake journals:import
 This will import the current daily data from SFX into the running rails container.
 
 ```sh
-docker-compose exec rails curl https://findtext.library.nd.edu/ndu_local/cgi/public/get_file.cgi?file=EJournal_Locator_Daily.xml -o import/ejl-full-e-collection-ALL.xml-marc
-docker-compose exec rails bundle exec rake journals:import
+docker-compose exec rails /project_root/docker/rails_import.sh
 ```
