@@ -14,7 +14,7 @@ group :application do
   gem 'json'
   gem 'jquery-rails', '~> 2.1.4'
   gem 'mysql2', '0.3.21'
-  gem 'nokogiri', '1.7'
+  gem 'nokogiri', '1.10.4'
   gem "rb-readline"
   gem 'twitter-bootstrap-rails'
   gem 'unicode' # used by blacklight
