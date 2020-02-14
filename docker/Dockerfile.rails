@@ -1,4 +1,4 @@
-FROM ruby:2.0.0
+FROM ruby:2.1
 
 
 # Put the installed gems outside of project_root so that the sync volume won't interfere

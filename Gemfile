@@ -13,8 +13,8 @@ group :application do
   gem 'hesburgh_infrastructure', :git => 'https://github.com/ndlib/hesburgh_infrastructure'
   gem 'json'
   gem 'jquery-rails', '~> 2.1.4'
-  gem 'mysql2'
-  gem 'nokogiri', '~> 1.6.6'
+  gem 'mysql2', '0.3.21'
+  gem 'nokogiri', '1.7'
   gem "rb-readline"
   gem 'twitter-bootstrap-rails'
   gem 'unicode' # used by blacklight
