@@ -33,6 +33,7 @@ When running in this mode, you will want to hit the web service at http://localh
 ```sh
 docker-compose exec rails cp spec/files/jst_journal_archive_full.xml import/jst_journal_archive_full.xml-marc
 docker-compose exec rails bundle exec rake journals:import
+docker-compose exec rails bundle exec rake journals:index
 ```
 
 ## Importing data

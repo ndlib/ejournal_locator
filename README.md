@@ -26,6 +26,7 @@ bundle exec guard
 ```sh
 cp spec/files/jst_journal_archive_full.xml import/jst_journal_archive_full.xml-marc
 bundle exec rake journals:import
+bundle exec rake journals:index
 ```
 
 ## Searching
