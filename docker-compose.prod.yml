@@ -3,6 +3,7 @@ services:
   rails:
     environment:
       RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "true"
     volumes:
       - static-content:/project_root/public/assets
   nginx:
