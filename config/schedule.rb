@@ -31,4 +31,5 @@ end
 
 every '0 6 * * *' do
   rake "journals:import"
+  rake "journals:index"
 end

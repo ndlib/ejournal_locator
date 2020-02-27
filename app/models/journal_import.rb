@@ -74,10 +74,6 @@ class JournalImport < ActiveRecord::Base
       self.archive_import_file(file)
     end
     self.remove_old_import_files(archive_directory)
-
-    import_message("Updating Solr")
-    Journal.update_solr
-    import_message("Solr Update Complete")
   end
 
   def self.import_directory()
