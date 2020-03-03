@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "a63f2d45-1a77-44f2-a6b3-3129385737d2",
+		"name": "Ejournal Locator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Smoke",
+			"item": [
+				{
+					"name": "Get Root",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "832a0c4c-6933-4d20-8397-78991231b773",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 30s\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(30000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}/",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Starts With Facet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ccb94a3a-3929-4ea8-8411-1d36fdd52f80",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 30s\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(30000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}/catalog?f%5Bstarts_with_facet%5D%5B%5D=A",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog"
+							],
+							"query": [
+								{
+									"key": "f%5Bstarts_with_facet%5D%5B%5D",
+									"value": "A"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category Facet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ccb94a3a-3929-4ea8-8411-1d36fdd52f80",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 30s\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(30000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}/catalog?f%5Bcategory_facet%5D%5B%5D=Arts+and+Humanities",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog"
+							],
+							"query": [
+								{
+									"key": "f%5Bcategory_facet%5D%5B%5D",
+									"value": "Arts+and+Humanities"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Provider Facet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ccb94a3a-3929-4ea8-8411-1d36fdd52f80",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 30s\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(30000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{host}}/catalog?f%5Bprovider_facet%5D%5B%5D=EBSCOhost+Business+Source+Complete",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog"
+							],
+							"query": [
+								{
+									"key": "f%5Bprovider_facet%5D%5B%5D",
+									"value": "EBSCOhost+Business+Source+Complete"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c8fa619f-970e-4f27-8b92-76107aa48825",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3330b8c3-5c22-4c19-80a3-d9d3109297af",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "cbf795cc-e141-4e09-b4b3-0f2d5bac73f5",
+			"key": "host",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
