@@ -121,41 +121,46 @@ class JournalImport < ActiveRecord::Base
         record.remove_namespaces!
 
         sfx_id = record.xpath("//datafield[@tag=090]").xpath("subfield[@code='a']").first.content
-        journal = Journal.where(:sfx_id => sfx_id).first
-        if journal.nil?
-          journal = Journal.new
-          journal.first_import_id = import.id
-          journal.sfx_id = sfx_id
+        begin
+          journal = Journal.where(:sfx_id => sfx_id).first
+          if journal.nil?
+            journal = Journal.new
+            journal.first_import_id = import.id
+            journal.sfx_id = sfx_id
+          end
+
+          journal.last_import_id = import.id
+
+          journal.title = record.xpath("//datafield[@tag=245]").xpath("subfield[@code='a']").first.content
+
+          journal.alternate_titles = []
+          record.xpath("//datafield[@tag=246]").each do |datafield|
+            journal.alternate_titles << datafield.xpath("subfield[@code='a']").first.content
+          end
+          # SFX includes some romanized titles in 945 m
+          record.xpath("//datafield[@tag=945]").each do |datafield|
+            journal.alternate_titles << datafield.xpath("subfield[@code='m']").first.content
+          end
+
+          journal.abbreviated_titles = []
+          record.xpath("//datafield[@tag=210]").each do |datafield|
+            journal.abbreviated_titles << datafield.xpath("subfield[@code='a']").first.content
+          end
+
+          journal.publisher_place = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='a']").first.content rescue nil
+          journal.publisher_name = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='b']").first.content rescue nil
+          journal.issn = record.xpath("//datafield[@tag=22]").xpath("subfield[@code='a']").first.content.gsub(/[^0-9X]/i,"") rescue nil
+          if alt_issn = record.xpath("//datafield[@tag=776]").xpath("subfield[@code='x']").first
+            journal.alternate_issn = alt_issn.content.gsub(/[^0-9X]/i,"")
+          end
+
+          journal.save!
+
+        rescue Exception => e
+          error = import.journal_import_errors.build(:error_type => 'Journals', :exception_message => e.message, :exception_backtrace => e.backtrace, :journal_xml => node.outer_xml)
+          error.save!
+          next
         end
-
-        journal.last_import_id = import.id
-
-	# puts record.xpath("//datafield[@tag=245]").first.content + "\n"
-	# puts record.xpath("//datafield[@tag=245]").xpath("subfield[@code='a']").first.content
-        journal.title = record.xpath("//datafield[@tag=245]").xpath("subfield[@code='a']").first.content
-
-        journal.alternate_titles = []
-        record.xpath("//datafield[@tag=246]").each do |datafield|
-          journal.alternate_titles << datafield.xpath("subfield[@code='a']").first.content
-        end
-        # SFX includes some romanized titles in 945 m
-        record.xpath("//datafield[@tag=945]").each do |datafield|
-          journal.alternate_titles << datafield.xpath("subfield[@code='m']").first.content
-        end
-
-        journal.abbreviated_titles = []
-        record.xpath("//datafield[@tag=210]").each do |datafield|
-          journal.abbreviated_titles << datafield.xpath("subfield[@code='a']").first.content
-        end
-
-        journal.publisher_place = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='a']").first.content rescue nil
-        journal.publisher_name = record.xpath("//datafield[@tag=260]").xpath("subfield[@code='b']").first.content rescue nil
-        journal.issn = record.xpath("//datafield[@tag=22]").xpath("subfield[@code='a']").first.content.gsub(/[^0-9X]/i,"") rescue nil
-        if alt_issn = record.xpath("//datafield[@tag=776]").xpath("subfield[@code='x']").first
-          journal.alternate_issn = alt_issn.content.gsub(/[^0-9X]/i,"")
-        end
-
-        journal.save!
 
         category_titles = {}
 
