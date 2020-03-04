@@ -44,3 +44,12 @@ Cron tasks are configured in `config/schedule.rb`
 ### rake journals:import
 The import task reads files from `import/*.xml-marc`
 In pre_production and production environments, an external cron task (managed by Tom Hanstra) copies exports from SFX to the ejournal locator import folder for processing.
+
+## Smoke Tests
+
+Requires [Newman cli](https://github.com/postmanlabs/newman)
+
+```sh
+newman run spec/postman/collection.json --folder Smoke \
+  --env-var host=<hostname>
+```

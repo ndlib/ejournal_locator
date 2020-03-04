@@ -6,6 +6,7 @@ namespace :journals do
   end
 
   task :index => :environment do
+    Airbrake.configuration.rescue_rake_exceptions = true
     puts "#{Time.now.strftime("%F %T")}: Updating Solr"
     Journal.update_solr
     puts "#{Time.now.strftime("%F %T")}: Solr Update Complete"
