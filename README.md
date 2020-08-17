@@ -1,11 +1,14 @@
-# Architecture Drawings
+# eJournal Locator
 
 Search tool for the Hesburgh Library's collection of electronic journals
 
 https://ejl.library.nd.edu/
-https://ejlpprd.library.nd.edu/
+https://ejl-test.library.nd.edu/
 
 Note: See [Docker Readme](docker/README.md) for alternate instructions on running with Docker
+
+Visit the Service Runbook: [eJournal Locator](https://github.com/ndlib/TechnologistsPlaybook/tree/master/run-books/ejournal-locator.md)
+
 
 ## Installation
 
