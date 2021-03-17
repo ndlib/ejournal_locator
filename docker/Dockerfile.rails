@@ -17,3 +17,4 @@ COPY docker/solr.yml /project_root/config/solr.yml
 COPY docker/jetty.yml /project_root/config/jetty.yml
 
 RUN bundle exec rake assets:precompile
+VOLUME /project_root/public
