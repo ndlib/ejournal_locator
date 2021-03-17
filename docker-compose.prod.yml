@@ -4,8 +4,6 @@ services:
     environment:
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: "true"
-    volumes:
-      - static-content:/project_root/public/assets
   nginx:
     build:
       cache_from:
@@ -17,7 +15,5 @@ services:
       RAILS_HOST: rails
     ports:
       - "80:80"
-    volumes:
-      - static-content:/project_root/assets
-volumes:
-  static-content:
+    volumes_from:
+      - rails:ro
